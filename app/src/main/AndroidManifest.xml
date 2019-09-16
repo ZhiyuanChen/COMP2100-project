@@ -10,6 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Fullscreen"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_fullscreen"
+            android:theme="@style/FullscreenTheme"></activity>
+        <activity android:name=".ManualInput" />
+        <activity
+            android:name=".ui.login.ANULogin"
+            android:label="@string/title_activity_anulogin" />
+        <activity android:name=".LoginOptions" />
+        <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
