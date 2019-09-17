@@ -9,16 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".BackgroundActivity"></activity>
+        <activity android:name=".ManageActivity" />
+        <activity android:name=".TutorialActivity" />
+        <activity android:name=".CourseActivity" />
         <activity
-            android:name=".Fullscreen"
+            android:name=".AddActivity"
+            android:label="@string/title_activity_add"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AboutActivity" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity
+            android:name=".FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_fullscreen"
-            android:theme="@style/FullscreenTheme"></activity>
-        <activity android:name=".ManualInput" />
+            android:screenOrientation="landscape"
+            android:theme="@style/FullscreenTheme" />
+        <activity android:name=".ManualinputActivity" />
         <activity
             android:name=".ui.login.ANULogin"
             android:label="@string/title_activity_anulogin" />
-        <activity android:name=".LoginOptions" />
+        <activity android:name=".LoginActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"

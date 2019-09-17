@@ -28,7 +28,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:onClick="fullScreen"
         app:backgroundTint="#76A9D6"
         app:srcCompat="@drawable/ic_fullscreen" />
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
