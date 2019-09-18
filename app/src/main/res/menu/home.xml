@@ -7,8 +7,8 @@
         android:id="@+id/home"
         android:icon="@drawable/ic_home"
         android:orderInCategory="100"
-        app:showAsAction="always"
-        android:title="HOME" />
+        android:title="HOME"
+        app:showAsAction="always" />
 
 
 </menu>

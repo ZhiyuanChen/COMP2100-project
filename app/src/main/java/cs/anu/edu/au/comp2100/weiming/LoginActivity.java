@@ -16,32 +16,42 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_options);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+        //Return button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void loginPress(View view) {
         Intent intent = new Intent(this, ANULogin.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
     public void manualPress(View view) {
         Intent intent = new Intent(this, ManualinputActivity.class);
         startActivity(intent);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the home; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent infoIntent = new Intent(this, MainActivity.class);
-        startActivity(infoIntent);
+        if(item.getItemId() == android.R.id.home){
+            finish();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
+
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

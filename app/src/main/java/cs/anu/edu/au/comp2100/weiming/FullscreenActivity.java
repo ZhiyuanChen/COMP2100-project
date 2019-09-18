@@ -163,4 +163,10 @@ public class FullscreenActivity extends AppCompatActivity {
         Intent infoIntent = new Intent(this, MainActivity.class);
         startActivity(infoIntent);
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
 }

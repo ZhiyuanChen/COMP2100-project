@@ -9,18 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BackgroundActivity"></activity>
-        <activity android:name=".ManageActivity" />
-        <activity android:name=".TutorialActivity" />
-        <activity android:name=".CourseActivity" />
-        <activity
-            android:name=".AddActivity"
-            android:label="@string/title_activity_add"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AboutActivity" />
+        <activity android:name=".AppintroActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:label="App_Intro" />
+        <activity android:name=".AddActivity" />
+        <activity android:name=".BackgroundActivity" />
+        <activity android:name=".ThemeActivity" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
+        <activity android:name=".ManageActivity" />
+        <activity android:name=".TutorialActivity" />
+        <activity android:name=".CourseActivity" />
+        <activity android:name=".AboutActivity" />
         <activity
             android:name=".FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

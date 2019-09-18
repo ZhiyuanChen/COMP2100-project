@@ -2,12 +2,10 @@ package cs.anu.edu.au.comp2100.weiming;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.NumberPicker;
-import android.widget.Toast;
 
 public class ManualinputActivity extends AppCompatActivity {
 
@@ -34,27 +32,36 @@ public class ManualinputActivity extends AppCompatActivity {
         majorPicker.setOnValueChangedListener(onValueChangeListener);
         majorPicker.setMinValue(0);
         majorPicker.setMaxValue(20);
-    }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the home; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
+        //Return button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent infoIntent = new Intent(this, MainActivity.class);
-        startActivity(infoIntent);
+        if(item.getItemId() == android.R.id.home){
+            finish();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
+
 
     NumberPicker.OnValueChangeListener onValueChangeListener = new NumberPicker.OnValueChangeListener(){
         @Override
         public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
         }
     };
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
 }
