@@ -49,4 +49,14 @@
         <item>120 minutes</item>
     </string-array>
 
+
+    <string-array name="All_ANU_colleges">
+        <item>College of Arts and Social Sciences</item>
+        <item>College of Asia and the Pacific</item>
+        <item>College of Business and Economies</item>
+        <item>College of Engineering and Computer Science</item>
+        <item>College of Law</item>
+        <item>Joint Colleges of Science</item>
+    </string-array>
+
 </resources>

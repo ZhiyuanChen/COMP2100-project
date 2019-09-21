@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cs.anu.edu.au.comp2100.weiming.MainActivity;
 import cs.anu.edu.au.comp2100.weiming.R;
 import cs.anu.edu.au.comp2100.weiming.ui.login.LoginViewModel;
 import cs.anu.edu.au.comp2100.weiming.ui.login.LoginViewModelFactory;
@@ -134,15 +136,20 @@ public class ANULogin extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+        switch (id){
+            case (android.R.id.home):
+                finish();
+                return true;
+            case (R.id.home):
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+        }        return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bar_home, menu);
         return true;
     }
 

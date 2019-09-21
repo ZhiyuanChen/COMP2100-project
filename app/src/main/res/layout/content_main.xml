@@ -6,4 +6,29 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
-    tools:showIn="@layout/app_bar_name"/>
+    tools:showIn="@layout/app_bar_main">
+
+    <com.alamkanak.weekview.WeekView
+        android:id="@+id/weekView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:eventTextColor="@android:color/white"
+        app:textSize="12sp"
+        app:hourHeight="60dp"
+        app:headerColumnPadding="8dp"
+        app:headerColumnTextColor="@color/black_overlay"
+        app:headerRowPadding="12dp"
+        app:columnGap="8dp"
+        app:noOfVisibleDays="3"
+        app:headerRowBackgroundColor="@android:color/white"
+        app:dayBackgroundColor="#05000000"
+        app:todayBackgroundColor="#1848adff"
+        app:headerColumnBackground="#ffffffff"
+        app:todayHeaderTextColor="@color/black_overlay"
+        app:firstDayOfWeek="sunday"
+        app:showNowLine="true"
+        app:nowLineColor="@color/colorAccent"
+        app:showDistinctPastFutureColor="true" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

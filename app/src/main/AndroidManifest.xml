@@ -9,12 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AppintroActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:label="App_Intro" />
-        <activity android:name=".AddActivity" />
+        <activity
+            android:name=".AppintroActivity"
+            android:label="App_Intro"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".BackgroundActivity" />
-        <activity android:name=".ThemeActivity" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
@@ -28,7 +27,8 @@
             android:label="@string/title_activity_fullscreen"
             android:screenOrientation="landscape"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name=".ManualinputActivity" />
+        <activity android:name=".ManualinputActivity"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.login.ANULogin"
             android:label="@string/title_activity_anulogin" />

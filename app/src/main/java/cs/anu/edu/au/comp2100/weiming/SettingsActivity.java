@@ -31,9 +31,14 @@ public class SettingsActivity extends AppCompatActivity{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            finish();
-            return true;
+        int id = item.getItemId();
+        switch (id){
+            case (android.R.id.home):
+                finish();
+                return true;
+            case (R.id.home):
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -10,5 +10,4 @@
         android:title="HOME"
         app:showAsAction="always" />
 
-
 </menu>

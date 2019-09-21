@@ -6,7 +6,7 @@
     <color name="colorAccent">#802B15</color>
     <color name="black_overlay">#CC000000</color>
 
-    <color name="slide1">#AA6F39</color>
+    <color name="slide1">#8D8D8D</color>
     <color name="slide2">#0E464E</color>
     <color name="slide3">#AA3F39</color>
     <color name="slide4">#D8B356</color>
@@ -14,4 +14,8 @@
     <color name="slide6">#B15983</color>
     <color name="slide7">#63AA68</color>
 
+    <color name="yellow">#FFBB33</color>
+    <color name="pink">#B5C97B7B</color>
+    <color name="green">#B570C273</color>
+    <color name="gray_background">#757575</color>
 </resources>

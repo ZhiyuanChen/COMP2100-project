@@ -1,87 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ManualinputActivity">
 
-    <TextView
-        android:id="@+id/degree"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="Degree"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="166dp"
-        tools:layout_editor_absoluteY="33dp"
-        android:layout_centerHorizontal="true"/>
-
-    <NumberPicker
-        android:id="@+id/college_picker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/degree"
-        android:layout_marginTop="14dp"
-        android:layout_marginRight="0dp"
-        android:layout_toLeftOf="@+id/tx1" />
 
     <TextView
-        android:id="@+id/tx1"
-        android:layout_width="wrap_content"
+        android:id="@+id/info_college_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="     "
-        android:layout_alignTop="@+id/college_picker"
-        android:layout_toLeftOf="@+id/degree_picker"
-        android:layout_below="@+id/degree"
-        />
+        android:layout_marginLeft="10dp"
+        android:paddingTop="12dp"
+        android:text="My colloge"
+        android:textSize="18sp" />
 
-    <NumberPicker
-        android:id="@+id/degree_picker"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/info_college_spinner"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/degree"
-        android:layout_alignTop="@+id/college_picker"
-        android:layout_centerHorizontal="true"
-        />
+        android:layout_marginLeft="20dp"
+        android:paddingTop="12dp" />
 
     <TextView
-        android:id="@+id/tx2"
-        android:layout_width="wrap_content"
+        android:id="@+id/info_degree_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="     "
-        android:layout_alignTop="@+id/degree_picker"
-        android:layout_toRightOf="@+id/degree_picker"
-        android:layout_below="@+id/degree"
-        />
+        android:text="My degree"
+        android:textSize="18sp"
+        android:layout_marginLeft="10dp"
+        android:paddingTop="12dp" />
 
-    <NumberPicker
-        android:id="@+id/major_picker"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/info_degree_spinner"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tx2"
-        android:layout_alignTop="@+id/college_picker"
-        android:layout_below="@+id/degree" />
+        android:layout_marginLeft="20dp"
+        android:paddingTop="12dp" />
 
     <TextView
-        android:id="@+id/courses"
-        android:layout_width="wrap_content"
+        android:id="@+id/info_course_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/college_picker"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
         android:text="Courses Taken"
-        android:textSize="20sp" />
+        android:textSize="18sp"
+        android:layout_marginLeft="10dp"
+        android:paddingTop="12dp" />
 
-    <EditText
-        android:id="@+id/courses_taken"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/courses"
-        android:layout_marginTop="14dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Input course"
-        android:layout_centerHorizontal="true"/>
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal">
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/input_courses"
+            android:hint="Enter course taken"
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/addCourse_btn"
+            android:text="add"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/added_courses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:orientation="vertical"
+        android:padding="5dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </ListView>
+
+</LinearLayout>
