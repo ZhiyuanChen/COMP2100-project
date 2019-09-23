@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/pick_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="14dp"
+        android:text="Select event start time and end time"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@android:color/black"
+        android:textSize="17sp" />
+
+    <LinearLayout
+        android:id="@+id/pick_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pick_title"
+        android:layout_weight="1"
+        android:padding="14dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/pick_name_title"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/pick_name_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Enter Name"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/pick_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pick_name"
+        android:padding="14dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/pick_location_title"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="Location"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/pick_location_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Enter Location"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/pick_start"
+        android:layout_below="@+id/pick_location"
+        android:padding="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/pick_start_title"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="Start Time"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/pick_start_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="hint"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pick_start"
+        android:id="@+id/pick_end"
+        android:padding="14dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="End Time"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/pick_end_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pick_end"
+        android:padding="14dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Color"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/pick_color_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:background="@color/yellow"
+            android:shadowColor="@android:color/transparent"
+            android:ems="10"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

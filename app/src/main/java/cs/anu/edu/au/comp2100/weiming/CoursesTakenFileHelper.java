@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 
 //Hint by github.com/BradTeachesCode/TodoList
-public class ListFileHelper {
+public class CoursesTakenFileHelper {
 
-    public static final String FILENAME = "listinfo.dat";
+    public static final String FILENAME = "courseTakenInfo.dat";
 
     public static void writeData(ArrayList<String> items, Context context){
         try {
