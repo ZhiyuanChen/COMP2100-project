@@ -1,15 +1,18 @@
 package cs.anu.edu.au.comp2100.weiming;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.RectF;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
@@ -32,7 +35,6 @@ import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
@@ -49,6 +51,9 @@ public class MainActivity extends AppCompatActivity
     private static final int TYPE_WEEK_VIEW = 3;
     private int mWeekViewType = TYPE_THREE_DAY_VIEW;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private ArrayList<WeekViewEvent> events = new ArrayList<>();
+
+    LayoutInflater inflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +85,7 @@ public class MainActivity extends AppCompatActivity
 
 
         //timetable
+        events = EventsFileHelper.readData(this);
         mWeekView = findViewById(R.id.weekView);
         // Set an action when any event is clicked.
         mWeekView.setOnEventClickListener(this);
@@ -90,6 +96,8 @@ public class MainActivity extends AppCompatActivity
         mWeekView.setEmptyViewLongPressListener(this);
         // Set long press listener for events.
         mWeekView.setEventLongPressListener(this);
+
+        inflater = getLayoutInflater();
     }
 
 
@@ -174,38 +182,124 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
-        // Populate the week view with some events.
-        List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
-
-        Calendar startTime = Calendar.getInstance();
-        startTime.set(Calendar.HOUR_OF_DAY, 3);
-        startTime.set(Calendar.MINUTE, 0);
-        startTime.set(Calendar.MONTH, newMonth-1);
-        startTime.set(Calendar.YEAR, newYear);
-        Calendar endTime = (Calendar) startTime.clone();
-        endTime.add(Calendar.HOUR, 1);
-        endTime.set(Calendar.MONTH, newMonth-1);
-        WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime), startTime, endTime);
-        event.setColor(getResources().getColor(R.color.pink));
-        events.add(event);
-
-        return events;
+        // Populate the week view with some events
+        if (newMonth == Calendar.getInstance().get(Calendar.MONTH))
+            return events;
+        else {
+            return new ArrayList<>();
+        }
     }
 
+
+    // Add event
+    public void addEvent(final Calendar startTime){
+        Toast.makeText(this, "Add Clicked: Add event?", Toast.LENGTH_SHORT).show();
+
+        // initialize
+        View dialog = inflater.inflate(R.layout.dialog_add_event, null);
+        final EditText enterStart = dialog.findViewById(R.id.pick_start_txt);
+        System.out.println(startTime.toString());
+        System.out.println(enterStart.getHint());
+        enterStart.setHint("WHY?");
+        System.out.println(enterStart.getHint());
+        enterStart.invalidate();
+
+        // Build a alert dialog
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setCancelable(true);
+        builder.setTitle("Add an event");
+        builder.setView(inflater.inflate(R.layout.dialog_add_event, null));
+
+        //messages
+        int endYear, endMonth, endDate, endHour, endMin;
+
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                System.out.println(events.size());
+
+                Calendar endTime = Calendar.getInstance();
+                endTime.set(2019, 8, 22, 20, 00);
+                WeekViewEvent event2 = new WeekViewEvent(0,"try",startTime, endTime);
+                event2.setColor(getResources().getColor(R.color.yellow));
+                events.add(event2);
+
+                onMonthChange(2019, 9);
+                mWeekView.notifyDatasetChanged();
+
+                //file_helper
+                EventsFileHelper.writeData(events, getApplicationContext());
+//                Toast toast = Toast.makeText(getApplicationContext(), "Course Deleted", Toast.LENGTH_SHORT);
+//                View toastView = toast.getView();
+//                toastView.getBackground().setColorFilter(getResources().getColor(R.color.pink), PorterDuff.Mode.SRC_IN);
+//                toast.show();
+            }
+        });
+
+        builder.show();
+
+    }
+
+
+    // Click event to show detail
     @Override
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
         Toast.makeText(this, "Event Clicked: Detail?" + event.getName(), Toast.LENGTH_SHORT).show();
-
     }
 
+
+    // Long press event to delete
     @Override
-    public void onEventLongPress(WeekViewEvent event, RectF eventRect) {
+    public void onEventLongPress(final WeekViewEvent event, RectF eventRect) {
         Toast.makeText(this, "Event Long pressed: Edit? " + event.getName(), Toast.LENGTH_SHORT).show();
+
+        String eventStr = event.getName();
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setCancelable(true);
+        builder.setTitle("Delete");
+        builder.setMessage("Delete event "+ eventStr +" ?");
+
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        builder.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                events.remove(event);
+                System.out.println(events.size());
+                mWeekView.notifyDatasetChanged();
+
+                //file_helper
+                EventsFileHelper.writeData(events, getApplicationContext());
+//                Toast toast = Toast.makeText(getApplicationContext(), "Course Deleted", Toast.LENGTH_SHORT);
+//                View toastView = toast.getView();
+//                toastView.getBackground().setColorFilter(getResources().getColor(R.color.pink), PorterDuff.Mode.SRC_IN);
+//                toast.show();
+            }
+        });
+
+        builder.show();
     }
 
+
+    // Long press empty view to add an event
+    // Set start time as where it is pressed
     @Override
     public void onEmptyViewLongPress(Calendar time) {
         Toast.makeText(this, "Empty place Long pressed: Add?" + getEventTitle(time), Toast.LENGTH_SHORT).show();
+        addEvent(time);
     }
 
 
@@ -268,9 +362,16 @@ public class MainActivity extends AppCompatActivity
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
 
-                //pop up a calendar
+                //pop up a calendar picker
                 final DatePickerDialog dialog = new DatePickerDialog(MainActivity.this, mDateSetListener,
                         year, month, day);
+
+                //set a listener
+                mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                    }
+                };
 
                 dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
                     @Override
@@ -288,14 +389,6 @@ public class MainActivity extends AppCompatActivity
                         mWeekView.goToDate(calNew);
                     }
                 });
-
-                //set a listener
-                mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        month = month + 1;
-                    }
-                };
 
                 dialog.show();
 
