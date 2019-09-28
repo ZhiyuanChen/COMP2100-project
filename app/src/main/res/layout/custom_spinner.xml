@@ -5,6 +5,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="10dip"
-    android:textColor="@color/black_overlay"
+    android:textColor="@color/my_black"
     android:textSize="16sp"
     app:fontFamily="sans-serif" />

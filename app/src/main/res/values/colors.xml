@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1976d2</color>
-    <color name="colorPrimaryDark">#004ba0</color>
-    <color name="colorPrimaryLight">#63a4ff</color>
-    <color name="colorAccent">#802B15</color>
-    <color name="black_overlay">#CC000000</color>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1565C0</color>
+    <color name="colorPrimaryLight">#90CAF9</color>
+    <color name="colorAccent">#B00020</color>
+    <color name="my_black">#CC000000</color>
 
     <color name="slide1">#8D8D8D</color>
     <color name="slide2">#0E464E</color>
