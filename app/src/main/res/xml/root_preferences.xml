@@ -18,24 +18,47 @@
 
     <PreferenceCategory app:title="Appearance">
 
-        <SwitchPreferenceCompat
-            app:key="dark_mode"
-            app:title="Dark Mode" />
+        <Preference
+            app:title="Timetable background"
+            app:summary="Default"
+            app:key="background" />
 
-        <ListPreference
-            app:defaultValue="standard"
-            app:entries="@array/themes_entries"
-            app:entryValues="@array/themes"
-            app:key="themes"
-            app:title="Theme"
-            app:useSimpleSummaryProvider="true" />
+        <SwitchPreferenceCompat
+            app:key="now_line"
+            app:defaultValue="true"
+            app:title="Show Now-line" />
+
+        <Preference
+            app:title="Now-line Color"
+            app:summary="Default"
+            app:key="line_color" />
 
     </PreferenceCategory>
 
     <PreferenceCategory app:title="General">
 
+        <SwitchPreferenceCompat
+            app:key="AMPM_Mode"
+            app:title="AM/PM Mode" />
+
         <ListPreference
-            app:defaultValue="sunday"
+            app:defaultValue="3"
+            app:entries="@array/dayviews_entries"
+            app:entryValues="@array/dayviews"
+            app:key="dayviews"
+            app:title="Default Timetable View"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="1"
+            app:entries="@array/starthr_entries"
+            app:entryValues="@array/starthr"
+            app:key="starthr"
+            app:title="Default Start Hour"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="0"
             app:entries="@array/day_entries"
             app:entryValues="@array/day"
             app:key="Start of the week"
@@ -46,12 +69,9 @@
             app:defaultValue="60 minutes"
             app:entries="@array/duration_entries"
             app:entryValues="@array/duration"
-            app:key="Default event duration"
+            app:key="default_event_duration"
             app:title="Default event duration"
             app:useSimpleSummaryProvider="true" />
-
-
-
     </PreferenceCategory>
 
 </androidx.preference.PreferenceScreen>

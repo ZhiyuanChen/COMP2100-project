@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.alamkanak.weekview.DateTimeInterpreter;
 import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
@@ -33,9 +34,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.preference.PreferenceManager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import petrov.kristiyan.colorpicker.ColorPicker;
 
@@ -47,14 +50,14 @@ public class MainActivity extends AppCompatActivity
         WeekView.EmptyViewLongPressListener
 {
 
-    private WeekView mWeekView;
+    public static WeekView mWeekView;
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 2;
     private static final int TYPE_WEEK_VIEW = 3;
-    private int mWeekViewType = TYPE_THREE_DAY_VIEW;
+    public int mWeekViewType = TYPE_THREE_DAY_VIEW;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private ArrayList<WeekViewEvent> events = new ArrayList<>();
-    private int defaultEventLength = 60;
+    public int defaultEventLength = 60;
 
     LayoutInflater inflater;
 
@@ -99,8 +102,10 @@ public class MainActivity extends AppCompatActivity
         mWeekView.setEmptyViewLongPressListener(this);
         // Set long press listener for events.
         mWeekView.setEventLongPressListener(this);
-
+        mWeekView.setFirstDayOfWeek(Calendar.MONDAY);
         inflater = getLayoutInflater();
+
+        setupDateTimeInterpreter(false);
     }
 
 
@@ -513,5 +518,27 @@ public class MainActivity extends AppCompatActivity
     public void addPressed(View view) {
         Calendar now = Calendar.getInstance();
         addEvent(now);
+    }
+
+    private void setupDateTimeInterpreter(final boolean shortDate) {
+        mWeekView.setDateTimeInterpreter(new DateTimeInterpreter() {
+            @Override
+            public String interpretDate(Calendar date) {
+                SimpleDateFormat weekdayNameFormat = new SimpleDateFormat("EEE", Locale.getDefault());
+                String weekday = weekdayNameFormat.format(date.getTime());
+                SimpleDateFormat format = new SimpleDateFormat(" d/M", Locale.getDefault());
+
+                if (shortDate)
+                    weekday = String.valueOf(weekday.charAt(0));
+                return weekday.toUpperCase() + format.format(date.getTime());
+            }
+
+            @Override
+            public String interpretTime(int hour) {
+                if (hour == 24) hour = 0;
+                if (hour == 0) hour = 0;
+                return hour + ":00";
+            }
+        });
     }
 }

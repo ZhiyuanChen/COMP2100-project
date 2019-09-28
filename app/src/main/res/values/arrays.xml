@@ -1,14 +1,26 @@
 <resources>
-    <string-array name="themes_entries">
-        <item>Standard</item>
-        <item>Modern</item>
-        <item>Autumn</item>
+    <string-array name="dayviews_entries">
+        <item>Day View</item>
+        <item>Three Days View</item>
+        <item>Week View</item>
     </string-array>
 
-    <string-array name="themes">
-        <item>standard</item>
-        <item>Modern</item>
-        <item>autumn</item>
+    <string-array name="dayviews">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="starthr_entries">
+        <item>Midnight</item>
+        <item>Now</item>
+        <item>Working hour (8am)</item>
+    </string-array>
+
+    <string-array name="starthr">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
     <string-array name="day_entries">
@@ -22,13 +34,13 @@
     </string-array>
 
     <string-array name="day">
-        <item>sunday</item>
-        <item>monday</item>
-        <item>tuesday</item>
-        <item>wednesday</item>
-        <item>thursday</item>
-        <item>friday</item>
-        <item>saturday</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
     </string-array>
 
     <string-array name="duration_entries">
@@ -58,5 +70,24 @@
         <item>College of Law</item>
         <item>Joint Colleges of Science</item>
     </string-array>
+
+    <array name="light_colors">
+        <item>#F2E6E6</item>
+        <item>#F2DED5</item>
+        <item>#F2ECD5</item>
+        <item>#E2D8D2</item>
+        <item>#DFEFDA</item>
+        <item>#DFDCD6</item>
+        <item>#D7D5E1</item>
+        <item>#F9F9DE</item>
+        <item>#DEEDF9</item>
+        <item>#D2D5DB</item>
+        <item>#D1D1D5</item>
+        <item>#D3DFE7</item>
+        <item>#FDFBFB</item>
+        <item>#FDF2FA</item>
+        <item>#EBE3DF</item>
+
+    </array>
 
 </resources>
