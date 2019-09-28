@@ -21,12 +21,6 @@
         <activity android:name=".TutorialActivity" />
         <activity android:name=".CourseActivity" />
         <activity android:name=".AboutActivity" />
-        <activity
-            android:name=".FullscreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_fullscreen"
-            android:screenOrientation="landscape"
-            android:theme="@style/FullscreenTheme" />
         <activity android:name=".ManualinputActivity"
             android:theme="@style/AppTheme" />
         <activity

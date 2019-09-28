@@ -7,20 +7,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.RectF;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.alamkanak.weekview.MonthLoader;
@@ -37,6 +37,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import petrov.kristiyan.colorpicker.ColorPicker;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         MonthLoader.MonthChangeListener,
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity
     private int mWeekViewType = TYPE_THREE_DAY_VIEW;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private ArrayList<WeekViewEvent> events = new ArrayList<>();
+    private int defaultEventLength = 60;
 
     LayoutInflater inflater;
 
@@ -134,14 +137,11 @@ public class MainActivity extends AppCompatActivity
             Intent infoIntent = new Intent(this, ManageActivity.class);
             startActivity(infoIntent);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        } else if (id == R.id.nav_add) {
         } else if (id == R.id.nav_settings) {
             Intent infoIntent = new Intent(this, SettingsActivity.class);
             startActivity(infoIntent);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        }else if (id == R.id.nav_export) {
-
-        }else if (id == R.id.nav_help) {
+        } else if (id == R.id.nav_help) {
             Intent intent = new Intent(MainActivity.this, AppintroActivity.class); // Call the AppIntro java class
             startActivity(intent);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -163,11 +163,6 @@ public class MainActivity extends AppCompatActivity
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
-
-    public void fullScreen(View view) {
-        Intent infoIntent = new Intent(this, FullscreenActivity.class);
-        startActivity(infoIntent);
-    }
 
     @Override
     public void finish() {
@@ -193,26 +188,149 @@ public class MainActivity extends AppCompatActivity
 
     // Add event
     public void addEvent(final Calendar startTime){
-        Toast.makeText(this, "Add Clicked: Add event?", Toast.LENGTH_SHORT).show();
+        final Calendar endTime = Calendar.getInstance();
 
-        // initialize
-        View dialog = inflater.inflate(R.layout.dialog_add_event, null);
-        final EditText enterStart = dialog.findViewById(R.id.pick_start_txt);
-        System.out.println(startTime.toString());
-        System.out.println(enterStart.getHint());
-        enterStart.setHint("WHY?");
-        System.out.println(enterStart.getHint());
-        enterStart.invalidate();
+        //time info
+        final int startHr = startTime.get(Calendar.HOUR_OF_DAY);
+        final int startMin = startTime.get(Calendar.MINUTE);
+        final int startMon = startTime.get(Calendar.MONTH);
+        final int startDt = startTime.get(Calendar.DATE);
+        final int startYr = startTime.get(Calendar.YEAR);
+        String startTimeStr = (startHr < 10 ? "0" : "") + startHr + ":" + (startMin < 10 ? "0" : "") + startMin;
+        String startDateStr = (startDt < 10 ? "0" : "") + startDt + "/" + (startMon < 10 ? "0" : "") + startMon + "/" + startYr;
+
+        endTime.set(startYr, startMon, startDt, startHr, startMin);
+        endTime.add(Calendar.MINUTE, defaultEventLength);
+        final int endHr = endTime.get(Calendar.HOUR_OF_DAY);
+        final int endMin = endTime.get(Calendar.MINUTE);
+        final int endMon = endTime.get(Calendar.MONTH);
+        final int endDt = endTime.get(Calendar.DATE);
+        final int endYr = endTime.get(Calendar.YEAR);
+        String endTimeStr = (endHr < 10 ? "0" : "") + endHr + ":" + (endMin < 10 ? "0" : "") + endMin;
+        String endDateStr = (endDt < 10 ? "0" : "") + endDt + "/" + (endMon < 10 ? "0" : "") + endMon + "/" + endYr;
+
 
         // Build a alert dialog
-
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setCancelable(true);
         builder.setTitle("Add an event");
-        builder.setView(inflater.inflate(R.layout.dialog_add_event, null));
 
-        //messages
-        int endYear, endMonth, endDate, endHour, endMin;
+
+        //start and end time hint
+        View view = inflater.inflate(R.layout.dialog_add_event, null);
+        final EditText enterName = view.findViewById(R.id.pick_name_txt);
+        final EditText enterLocation = view.findViewById(R.id.pick_location_txt);
+
+        final TextView enterStartTime = view.findViewById(R.id.pick_starttime_txt);
+        enterStartTime.setHint(startTimeStr);
+        final TextView enterStartDate = view.findViewById(R.id.pick_startdate_txt);
+        enterStartDate.setHint(startDateStr);
+
+        final TextView enterEndTime = view.findViewById(R.id.pick_endtime_txt);
+        enterEndTime.setHint(endTimeStr);
+        final TextView enterEndDate = view.findViewById(R.id.pick_enddate_txt);
+        enterEndDate.setHint(endDateStr);
+
+        //select time
+        enterStartTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog mTimePicker = new TimePickerDialog(MainActivity.this, TimePickerDialog.THEME_DEVICE_DEFAULT_LIGHT, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        String selectedHrStr = (selectedHour < 10 ? "0" : "") + selectedHour;
+                        String selectedMinStr = (selectedMinute < 10 ? "0" : "") + selectedMinute;
+                        enterStartTime.setText(selectedHrStr + ":" + selectedMinStr);
+                        startTime.set(Calendar.HOUR_OF_DAY, selectedHour);
+                        startTime.set(Calendar.MINUTE, selectedMinute);
+                    }}, startHr, startMin, true);
+                mTimePicker.setTitle("Select Start Time");
+                mTimePicker.show();
+            }
+        });
+
+        enterEndTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog mTimePicker = new TimePickerDialog(MainActivity.this, TimePickerDialog.THEME_DEVICE_DEFAULT_LIGHT, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        String selectedHrStr = (selectedHour < 10 ? "0" : "") + selectedHour;
+                        String selectedMinStr = (selectedMinute < 10 ? "0" : "") + selectedMinute;
+                        enterEndTime.setText(selectedHrStr + ":" + selectedMinStr);
+                        endTime.set(Calendar.HOUR_OF_DAY, selectedHour);
+                        endTime.set(Calendar.MINUTE, selectedMinute);
+                    }}, endHr, endMin, true);
+                mTimePicker.setTitle("Select End Time");
+                mTimePicker.show();
+            }
+        });
+
+        //select date
+        enterStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog mDatePicker = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        String selectedMonth = (month < 10 ? "0" : "") + month;
+                        String selectedDate = (dayOfMonth < 10 ? "0" : "") + dayOfMonth;
+                        enterStartDate.setText(selectedDate + "/" + selectedMonth + "/" + year);
+                        startTime.set(year, month, dayOfMonth);
+                    }
+                }, startYr, startMon, startDt);
+                mDatePicker.show();
+            }
+        });
+
+        enterEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog mDatePicker = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        String selectedMonth = (month < 10 ? "0" : "") + month;
+                        String selectedDate = (dayOfMonth < 10 ? "0" : "") + dayOfMonth;
+                        enterEndDate.setText(selectedDate + "/" + selectedMonth + "/" + year);
+                        endTime.set(year, month, dayOfMonth);
+                    }
+                }, endYr, endMon, endDt);
+                mDatePicker.show();
+            }
+        });
+
+
+        //color
+        final Button colorbtn = view.findViewById(R.id.event_color_picker);
+        final int[] eventColor = {getResources().getColor(R.color.colorAccent)};
+        colorbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ColorPicker colorPicker = new ColorPicker(MainActivity.this);
+                colorPicker.setRoundColorButton(true)
+                        .setTitle("Choose Event Color")
+                        .disableDefaultButtons(false)
+                        .setColorButtonMargin(10,7,10,7)
+                        .setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
+                            @Override
+                            public void onChooseColor(int position, int color) {
+                                // put code
+                                if(color != 0){
+                                    eventColor[0] = color;
+                                    colorbtn.setBackgroundColor(color);
+                                }
+                            }
+
+                            @Override
+                            public void onCancel(){
+                            }
+                        });
+                colorPicker.show();
+            }
+        });
+
+        //dialog settings
+        builder.setView(view);
 
         builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
@@ -224,28 +342,20 @@ public class MainActivity extends AppCompatActivity
         builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                System.out.println(events.size());
+                WeekViewEvent event = new WeekViewEvent(0, enterName.getText().toString(), enterLocation.getText().toString(), startTime, endTime);
+                event.setColor(eventColor[0]);
+                events.add(event);
 
-                Calendar endTime = Calendar.getInstance();
-                endTime.set(2019, 8, 22, 20, 00);
-                WeekViewEvent event2 = new WeekViewEvent(0,"try",startTime, endTime);
-                event2.setColor(getResources().getColor(R.color.yellow));
-                events.add(event2);
-
-                onMonthChange(2019, 9);
+                onMonthChange(startYr, startMon);
                 mWeekView.notifyDatasetChanged();
 
                 //file_helper
                 EventsFileHelper.writeData(events, getApplicationContext());
-//                Toast toast = Toast.makeText(getApplicationContext(), "Course Deleted", Toast.LENGTH_SHORT);
-//                View toastView = toast.getView();
-//                toastView.getBackground().setColorFilter(getResources().getColor(R.color.pink), PorterDuff.Mode.SRC_IN);
-//                toast.show();
             }
         });
 
-        builder.show();
 
+        builder.show();
     }
 
 
@@ -283,10 +393,6 @@ public class MainActivity extends AppCompatActivity
 
                 //file_helper
                 EventsFileHelper.writeData(events, getApplicationContext());
-//                Toast toast = Toast.makeText(getApplicationContext(), "Course Deleted", Toast.LENGTH_SHORT);
-//                View toastView = toast.getView();
-//                toastView.getBackground().setColorFilter(getResources().getColor(R.color.pink), PorterDuff.Mode.SRC_IN);
-//                toast.show();
             }
         });
 
@@ -404,4 +510,8 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    public void addPressed(View view) {
+        Calendar now = Calendar.getInstance();
+        addEvent(now);
+    }
 }
