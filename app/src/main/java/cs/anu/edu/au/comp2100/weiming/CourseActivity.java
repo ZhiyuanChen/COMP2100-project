@@ -6,13 +6,30 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 public class CourseActivity extends AppCompatActivity {
+
+    Spinner collegeSpinner;
+    Spinner fieldSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
+
+        //select college
+        collegeSpinner = findViewById(R.id.input_college_spinner);
+        ArrayAdapter<CharSequence> colleges = ArrayAdapter.createFromResource(this, R.array.All_ANU_colleges, R.layout.custom_spinner);
+        colleges.setDropDownViewResource(R.layout.custom_spinner);
+        collegeSpinner.setAdapter(colleges);
+
+        //corresponding field e.g COMP MATH
+        fieldSpinner = findViewById(R.id.info_degree_spinner);
+
+
+
 
         //Return button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

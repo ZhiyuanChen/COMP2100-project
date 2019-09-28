@@ -30,10 +30,6 @@
             app:title="Theme"
             app:useSimpleSummaryProvider="true" />
 
-        <Preference
-            app:title="Background"
-            app:key="background" />
-
     </PreferenceCategory>
 
     <PreferenceCategory app:title="General">
