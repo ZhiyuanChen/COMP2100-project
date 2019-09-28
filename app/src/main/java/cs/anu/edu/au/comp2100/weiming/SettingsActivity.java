@@ -58,13 +58,6 @@ public class SettingsActivity extends AppCompatActivity{
         @Override
         public boolean onPreferenceTreeClick(androidx.preference.Preference preference) {
             String key = preference.getKey();
-            if(key.equals("background")){
-                // do your work
-                Intent infoIntent = new Intent(this.getContext(), BackgroundActivity.class);
-                startActivity(infoIntent);
-                ((Activity) getContext()).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                return true;
-            }
             return super.onPreferenceTreeClick(preference);
         }
     }

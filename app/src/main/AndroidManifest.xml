@@ -13,7 +13,6 @@
             android:name=".AppintroActivity"
             android:label="App_Intro"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".BackgroundActivity" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />

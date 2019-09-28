@@ -43,8 +43,9 @@ public class ManualinputActivity extends AppCompatActivity implements
         ArrayAdapter<CharSequence> colleges = ArrayAdapter.createFromResource(this, R.array.All_ANU_colleges, R.layout.custom_spinner);
         colleges.setDropDownViewResource(R.layout.custom_spinner);
         collegeSpinner.setAdapter(colleges);
+
         degreeSpinner = findViewById(R.id.info_degree_spinner);
-        degreeSpinner.setOnItemSelectedListener(this);
+        //degreeSpinner.setOnItemSelectedListener(this);
 
 
         //add a course
