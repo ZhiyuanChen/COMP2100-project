@@ -20,56 +20,55 @@
 
         <Preference
             app:title="Timetable background"
-            app:summary="Default"
             app:key="background" />
 
         <SwitchPreferenceCompat
-            app:key="now_line"
+            app:key="nowLine"
             app:defaultValue="true"
             app:title="Show Now-line" />
 
         <Preference
-            app:title="Now-line Color"
-            app:summary="Default"
-            app:key="line_color" />
+            app:key="eventColor"
+            app:title="Default Event Color" />
+
+        <ListPreference
+            app:key="dayViews"
+            app:defaultValue="3"
+            app:entries="@array/dayviews_entries"
+            app:entryValues="@array/dayviews"
+            app:title="Default Timetable View"
+            app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
 
     <PreferenceCategory app:title="General">
 
         <SwitchPreferenceCompat
-            app:key="AMPM_Mode"
+            app:key="ampmMode"
+            app:defaultValue="false"
             app:title="AM/PM Mode" />
 
         <ListPreference
-            app:defaultValue="3"
-            app:entries="@array/dayviews_entries"
-            app:entryValues="@array/dayviews"
-            app:key="dayviews"
-            app:title="Default Timetable View"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            app:defaultValue="1"
+            app:key="startHr"
+            app:defaultValue="midnight"
             app:entries="@array/starthr_entries"
             app:entryValues="@array/starthr"
-            app:key="starthr"
-            app:title="Default Start Hour"
+            app:title="Start of the day"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
+            app:key="weekStart"
             app:defaultValue="0"
             app:entries="@array/day_entries"
             app:entryValues="@array/day"
-            app:key="Start of the week"
             app:title="Start of the week"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            app:defaultValue="60 minutes"
+            app:key="eventDuration"
+            app:defaultValue="60"
             app:entries="@array/duration_entries"
             app:entryValues="@array/duration"
-            app:key="default_event_duration"
             app:title="Default event duration"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>

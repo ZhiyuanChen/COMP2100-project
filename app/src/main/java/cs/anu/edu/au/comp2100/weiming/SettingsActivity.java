@@ -1,27 +1,26 @@
 package cs.anu.edu.au.comp2100.weiming;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreferenceCompat;
-
-import java.util.ArrayList;
 
 import petrov.kristiyan.colorpicker.ColorPicker;
 
 public class SettingsActivity extends AppCompatActivity{
 
-    public static ArrayList<String> settings = new ArrayList<>();
+
+    public static SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,25 +31,9 @@ public class SettingsActivity extends AppCompatActivity{
                 .beginTransaction()
                 .replace(R.id.settings, new SettingsFragment())
                 .commit();
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ArrayList<String> temp = DefaultSettingFileHelper.readData(this);
-        if(temp.size() == 8){
-            settings = temp;
-        } else{
-            settings.add("" +getResources().getColor(android.R.color.background_light));
-            settings.add("true");
-            settings.add("" + getResources().getColor(R.color.colorAccent));
-            settings.add("true");
-            settings.add("3");
-            settings.add("1");
-            settings.add("0");
-            settings.add("60");
-        }
     }
 
 
@@ -70,6 +53,7 @@ public class SettingsActivity extends AppCompatActivity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bar_home, menu);
         return true;
     }
 
@@ -77,16 +61,38 @@ public class SettingsActivity extends AppCompatActivity{
     public static class SettingsFragment extends PreferenceFragmentCompat {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
+
+            //background color summary set
+            Preference background = findPreference("background");
+            int backgroundColor = preferences.getInt("background", 0);
+            Spannable summary1 = new SpannableString("Current color  (" + backgroundColor +")");
+            summary1.setSpan(0, 0, summary1.length(), 0);
+            background.setSummary(summary1);
+
+            //default event color summary set
+            Preference nowLine = findPreference("eventColor");
+            int lineColor = preferences.getInt("eventColor", getResources().getColor(R.color.colorAccent));
+            Spannable summary2 = new SpannableString("Current color  (" + lineColor +")");
+            summary2.setSpan(0, 0, summary2.length(), 0);
+            nowLine.setSummary(summary2);
+
+
+            ListPreference startHr = findPreference("startHr");
+            startHr.setValue("midnight");
+            ListPreference eventDuration = findPreference("eventDuration");
+            eventDuration.setValue("60");
         }
 
+
         @Override
-        public boolean onPreferenceTreeClick(final androidx.preference.Preference preference) {
+        public boolean onPreferenceTreeClick(final Preference preference) {
             String key = preference.getKey();
 
             if(key.equals("background")){
                 ColorPicker colorPicker = new ColorPicker(getActivity());
-                colorPicker.setRoundColorButton(true)
+                colorPicker
                         .setTitle("Choose Event Color")
                         .setColorButtonMargin(10,7,10,7)
                         .setColors(R.array.light_colors)
@@ -94,9 +100,10 @@ public class SettingsActivity extends AppCompatActivity{
                             @Override
                             public void onChooseColor(int position, int color) {
                                 if(color != 0){
-                                    Spannable summary = new SpannableString("Current color " + position);
-                                    summary.setSpan(new ForegroundColorSpan(color), 0, summary.length(), 0);
+                                    Spannable summary = new SpannableString("Current color (" + color +")");
+                                    summary.setSpan(0, 0, summary.length(), 0);
                                     preference.setSummary(summary);
+                                    preferences.edit().putInt("background", color).apply();
                                     MainActivity.mWeekView.setBackgroundColor(color);
                                 }
                             }
@@ -107,31 +114,27 @@ public class SettingsActivity extends AppCompatActivity{
                 colorPicker.show();
             }
 
-            if (key.equals("now_line")) {
+            if (key.equals("nowLine")) {
                 SwitchPreferenceCompat switchPreference = (SwitchPreferenceCompat) preference;
-                boolean on = switchPreference.isChecked();
-                if (on) {
-                    settings.set(1, "true");
-                } else {
-                    settings.set(1, "false");
-                }
-                DefaultSettingFileHelper.writeData(settings, getContext());
+                MainActivity.mWeekView.setShowNowLine(switchPreference.isChecked());
+                MainActivity.mWeekView.setShowDistinctPastFutureColor(switchPreference.isChecked());
             }
 
-            if(key.equals("line_color")){
+            if(key.equals("eventColor")){
                 ColorPicker colorPicker = new ColorPicker(getActivity());
                 colorPicker.setRoundColorButton(true)
-                        .setTitle("Choose Event Color")
+                        .setTitle("Choose Default Event Color")
                         .disableDefaultButtons(false)
                         .setColorButtonMargin(10,7,10,7)
                         .setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
                             @Override
                             public void onChooseColor(int position, int color) {
                                 if(color != 0){
-                                    Spannable summary = new SpannableString("Current color " + position);
-                                    summary.setSpan(new ForegroundColorSpan(color), 0, summary.length(), 0);
+                                    Spannable summary = new SpannableString("Current color (" + color + ")");
+                                    summary.setSpan(0, 0, summary.length(), 0);
                                     preference.setSummary(summary);
-                                    MainActivity.mWeekView.setNowLineColor(color);
+                                    preferences.edit().putInt("eventColor", color).apply();
+                                    MainActivity.defaultEventColor = color;
                                 }
                             }
                             @Override
@@ -141,56 +144,51 @@ public class SettingsActivity extends AppCompatActivity{
                 colorPicker.show();
             }
 
-            if (key.equals("AMPM_Mode")) {
+            if (key.equals("ampmMode")) {
                 SwitchPreferenceCompat switchPreference = (SwitchPreferenceCompat) preference;
-                MainActivity.mWeekView.setShowNowLine(switchPreference.isChecked());
+                MainActivity.setupDateTimeInterpreter(switchPreference.isChecked());
             }
 
-            if (key.equals("dayviews")) {
-                ListPreference dayviewsPre = (ListPreference) preference;
-                dayviewsPre.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            if(key.equals("dayViews")) {
+                ListPreference dayViews = (ListPreference) preference;
+                dayViews.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                     @Override
                     public boolean onPreferenceChange(Preference preference, Object newValue) {
-                        String value = newValue.toString();
+                        int value = Integer.parseInt((String) newValue);
+                        MainActivity.changeView(value);
                         return true;
                     }
                 });
             }
 
-            if (key.equals("starthr")) {
-                ListPreference dayviewsPre = (ListPreference) preference;
-                dayviewsPre.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+            if (key.equals("startHr")) {
+                final ListPreference startHr = (ListPreference) preference;
+                startHr.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                     @Override
                     public boolean onPreferenceChange(Preference preference, Object newValue) {
-                        String value = newValue.toString();
-                        settings.set(5, value);
-                        DefaultSettingFileHelper.writeData(settings, getContext());
+                        MainActivity.goTo(newValue.toString());
                         return true;
                     }
                 });
             }
 
-            if (key.equals("startWeek")) {
-                ListPreference dayviewsPre = (ListPreference) preference;
-                dayviewsPre.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            if (key.equals("weekStart")) {
+                final ListPreference weekStart = (ListPreference) preference;
+                weekStart.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                     @Override
                     public boolean onPreferenceChange(Preference preference, Object newValue) {
-                        String value = newValue.toString();
-                        settings.set(6, value);
-                        DefaultSettingFileHelper.writeData(settings, getContext());
+                        MainActivity.mWeekView.setFirstDayOfWeek(Integer.parseInt(weekStart.getValue()));
                         return true;
                     }
                 });
             }
 
-            if (key.equals("default_event_duration")) {
-                ListPreference dayviewsPre = (ListPreference) preference;
-                dayviewsPre.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            if (key.equals("eventDuration")) {
+                ListPreference eventDuration = (ListPreference) preference;
+                eventDuration.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                     @Override
                     public boolean onPreferenceChange(Preference preference, Object newValue) {
-                        String value = newValue.toString();
-                        settings.set(7, value);
-                        DefaultSettingFileHelper.writeData(settings, getContext());
                         return true;
                     }
                 });
