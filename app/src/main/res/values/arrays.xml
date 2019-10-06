@@ -7,8 +7,8 @@
 
     <string-array name="dayviews">
         <item>1</item>
-        <item>2</item>
         <item>3</item>
+        <item>7</item>
     </string-array>
 
     <string-array name="starthr_entries">
@@ -18,9 +18,9 @@
     </string-array>
 
     <string-array name="starthr">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
+        <item>midnight</item>
+        <item>now</item>
+        <item>workingHr</item>
     </string-array>
 
     <string-array name="day_entries">
@@ -44,7 +44,6 @@
     </string-array>
 
     <string-array name="duration_entries">
-        <item>No end time</item>
         <item>15 minutes</item>
         <item>30 minutes</item>
         <item>60 minutes</item>
@@ -53,12 +52,11 @@
     </string-array>
 
     <string-array name="duration">
-        <item>No end time</item>
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>60 minutes</item>
-        <item>90 minutes</item>
-        <item>120 minutes</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>90</item>
+        <item>120</item>
     </string-array>
 
 
@@ -72,21 +70,21 @@
     </string-array>
 
     <array name="light_colors">
-        <item>#F2E6E6</item>
-        <item>#F2DED5</item>
+        <item>#80F2E6E6</item>
+        <item>#80F2DED5</item>
         <item>#F2ECD5</item>
-        <item>#E2D8D2</item>
-        <item>#DFEFDA</item>
-        <item>#DFDCD6</item>
-        <item>#D7D5E1</item>
-        <item>#F9F9DE</item>
-        <item>#DEEDF9</item>
-        <item>#D2D5DB</item>
-        <item>#D1D1D5</item>
-        <item>#D3DFE7</item>
-        <item>#FDFBFB</item>
-        <item>#FDF2FA</item>
-        <item>#EBE3DF</item>
+        <item>#80E2D8D2</item>
+        <item>#80DFEFDA</item>
+        <item>#80DFDCD6</item>
+        <item>#80D7D5E1</item>
+        <item>#80F9F9DE</item>
+        <item>#80DEEDF9</item>
+        <item>#80D2D5DB</item>
+        <item>#80D1D1D5</item>
+        <item>#80D3DFE7</item>
+        <item>#80FDFBFB</item>
+        <item>#80FDF2FA</item>
+        <item>#80EBE3DF</item>
 
     </array>
 

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.RectF;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -21,7 +20,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.alamkanak.weekview.DateTimeInterpreter;
 import com.alamkanak.weekview.MonthLoader;
@@ -34,11 +32,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.preference.PreferenceManager;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 import petrov.kristiyan.colorpicker.ColorPicker;
 
@@ -50,35 +46,41 @@ public class MainActivity extends AppCompatActivity
         WeekView.EmptyViewLongPressListener
 {
 
+
+    //global variables
     public static WeekView mWeekView;
+    public static int defaultEventColor;
+    public static int mWeekViewType;
+    public static int defaultEventLength;
+    public static ArrayList<WeekViewEvent> events;
+
     private static final int TYPE_DAY_VIEW = 1;
-    private static final int TYPE_THREE_DAY_VIEW = 2;
-    private static final int TYPE_WEEK_VIEW = 3;
-    public int mWeekViewType = TYPE_THREE_DAY_VIEW;
+    private static final int TYPE_THREE_DAY_VIEW = 3;
+    private static final int TYPE_WEEK_VIEW = 7;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-    private ArrayList<WeekViewEvent> events = new ArrayList<>();
-    public int defaultEventLength = 60;
 
     LayoutInflater inflater;
 
+
+    //initialize
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         //Pop intro slides if first started
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        boolean isFirstStart = sp.getBoolean("firstStart", true);
+        boolean isFirstStart = preferences.getBoolean("firstStart", true);
         if (isFirstStart) {
             Intent intent = new Intent(MainActivity.this, AppintroActivity.class); // Call the AppIntro java class
             startActivity(intent);
-            SharedPreferences.Editor e = sp.edit();
+            SharedPreferences.Editor e = preferences.edit();
             e.putBoolean("firstStart", false);
             e.apply();
         }
 
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         //navigator setup
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -102,83 +104,38 @@ public class MainActivity extends AppCompatActivity
         mWeekView.setEmptyViewLongPressListener(this);
         // Set long press listener for events.
         mWeekView.setEventLongPressListener(this);
-        mWeekView.setFirstDayOfWeek(Calendar.MONDAY);
         inflater = getLayoutInflater();
 
-        setupDateTimeInterpreter(false);
+
+        //set default values
+        //SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int backgroundColor = preferences.getInt("background", 0);
+        mWeekView.setBackgroundColor(backgroundColor);
+
+        boolean nowLine = preferences.getBoolean("nowLine", true);
+        mWeekView.setShowNowLine(nowLine);
+        mWeekView.setShowDistinctPastFutureColor(nowLine);
+
+        int dayView = Integer.parseInt(preferences.getString("dayViews", "3"));
+        mWeekView.setNumberOfVisibleDays(dayView);
+
+        int eventColor = preferences.getInt("eventColor", getResources().getColor(R.color.colorAccent));
+        defaultEventColor = eventColor;
+
+        boolean ampmMode = preferences.getBoolean("ampmMode", false);
+        setupDateTimeInterpreter(ampmMode);
+
+        String startHr = preferences.getString("startHr", "now");
+        goTo(startHr);
+
+        int weekStart = Integer.parseInt(preferences.getString("weekStart", "0"));
+        mWeekView.setFirstDayOfWeek(weekStart);
+
+        int eventDuration = Integer.parseInt(preferences.getString("eventDuration", "60"));
+        defaultEventLength = eventDuration;
     }
 
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_edit) {
-            Intent infoIntent = new Intent(this, LoginActivity.class);
-            startActivity(infoIntent);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        } else if (id == R.id.nav_course) {
-            Intent infoIntent = new Intent(this, CourseActivity.class);
-            startActivity(infoIntent);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        } else if (id == R.id.nav_tutorial) {
-            Intent infoIntent = new Intent(this, TutorialActivity.class);
-            startActivity(infoIntent);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        } else if (id == R.id.nav_manage) {
-            Intent infoIntent = new Intent(this, ManageActivity.class);
-            startActivity(infoIntent);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        } else if (id == R.id.nav_settings) {
-            Intent infoIntent = new Intent(this, SettingsActivity.class);
-            startActivity(infoIntent);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        } else if (id == R.id.nav_help) {
-            Intent intent = new Intent(MainActivity.this, AppintroActivity.class); // Call the AppIntro java class
-            startActivity(intent);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        }else if (id == R.id.nav_about) {
-            Intent infoIntent = new Intent(this, AboutActivity.class);
-            startActivity(infoIntent);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-
-    public void imgbtnPress(View view){
-        Intent infoIntent = new Intent(this, LoginActivity.class);
-        startActivity(infoIntent);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-    }
-
-
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-    }
-
-
-    public String getEventTitle(Calendar time) {
-        return String.format("Event of %02d:%02d %s/%d", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), time.get(Calendar.MONTH)+1, time.get(Calendar.DAY_OF_MONTH));
-    }
 
     @Override
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
@@ -190,6 +147,9 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
+
+    // Event Handling
 
     // Add event
     public void addEvent(final Calendar startTime){
@@ -307,7 +267,8 @@ public class MainActivity extends AppCompatActivity
 
         //color
         final Button colorbtn = view.findViewById(R.id.event_color_picker);
-        final int[] eventColor = {getResources().getColor(R.color.colorAccent)};
+        colorbtn.setBackgroundColor(defaultEventColor);
+        final int[] eventColor = {defaultEventColor};
         colorbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -367,15 +328,12 @@ public class MainActivity extends AppCompatActivity
     // Click event to show detail
     @Override
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
-        Toast.makeText(this, "Event Clicked: Detail?" + event.getName(), Toast.LENGTH_SHORT).show();
     }
 
 
     // Long press event to delete
     @Override
     public void onEventLongPress(final WeekViewEvent event, RectF eventRect) {
-        Toast.makeText(this, "Event Long pressed: Edit? " + event.getName(), Toast.LENGTH_SHORT).show();
-
         String eventStr = event.getName();
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setCancelable(true);
@@ -409,10 +367,12 @@ public class MainActivity extends AppCompatActivity
     // Set start time as where it is pressed
     @Override
     public void onEmptyViewLongPress(Calendar time) {
-        Toast.makeText(this, "Empty place Long pressed: Add?" + getEventTitle(time), Toast.LENGTH_SHORT).show();
         addEvent(time);
     }
 
+
+
+    //Action bar set up
 
     //Different View-options
     @Override
@@ -420,49 +380,27 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         switch (id){
             case R.id.action_now:
-                Calendar calendar = Calendar.getInstance();
-                int hour = calendar.get(Calendar.HOUR_OF_DAY);
-                mWeekView.goToHour(hour);
-                mWeekView.goToToday();
-                System.out.println(hour);
+                goTo("now");
                 return true;
 
             case R.id.action_day_view:
                 if (mWeekViewType != TYPE_DAY_VIEW) {
                     item.setChecked(!item.isChecked());
-                    mWeekViewType = TYPE_DAY_VIEW;
-                    mWeekView.setNumberOfVisibleDays(1);
-
-                    // Lets change some dimensions to best fit the view.
-                    mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
-                    mWeekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
-                    mWeekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
+                    changeView(TYPE_DAY_VIEW);
                 }
                 return true;
 
             case R.id.action_three_day_view:
                 if (mWeekViewType != TYPE_THREE_DAY_VIEW) {
                     item.setChecked(!item.isChecked());
-                    mWeekViewType = TYPE_THREE_DAY_VIEW;
-                    mWeekView.setNumberOfVisibleDays(3);
-
-                    // Lets change some dimensions to best fit the view.
-                    mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
-                    mWeekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
-                    mWeekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
+                    changeView(3);
                 }
                 return true;
 
             case R.id.action_week_view:
                 if (mWeekViewType != TYPE_WEEK_VIEW) {
                     item.setChecked(!item.isChecked());
-                    mWeekViewType = TYPE_WEEK_VIEW;
-                    mWeekView.setNumberOfVisibleDays(7);
-
-                    // Lets change some dimensions to best fit the view.
-                    mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
-                    mWeekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
-                    mWeekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
+                    changeView(7);
                 }
                 return true;
 
@@ -509,6 +447,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.bar_weekview, menu);
@@ -520,25 +459,126 @@ public class MainActivity extends AppCompatActivity
         addEvent(now);
     }
 
-    private void setupDateTimeInterpreter(final boolean shortDate) {
+
+
+
+    // Extended functions for weekView
+    public static void changeView(int visibleDays){
+        mWeekView.setNumberOfVisibleDays(visibleDays);
+        mWeekViewType = visibleDays;
+    }
+
+
+    public static void goTo(String value){
+        switch (value){
+            case "midnight":
+                mWeekView.goToHour(0.01);
+                break;
+            case "now":
+                Calendar calendar = Calendar.getInstance();
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                mWeekView.goToHour(hour);
+                mWeekView.goToToday();
+                break;
+            case "workingHr":
+                mWeekView.goToHour(8);
+                break;
+        }
+    }
+
+
+    public static void setupDateTimeInterpreter(final boolean ampmMode) {
+        final DateTimeInterpreter temp = mWeekView.getDateTimeInterpreter();
         mWeekView.setDateTimeInterpreter(new DateTimeInterpreter() {
             @Override
             public String interpretDate(Calendar date) {
-                SimpleDateFormat weekdayNameFormat = new SimpleDateFormat("EEE", Locale.getDefault());
-                String weekday = weekdayNameFormat.format(date.getTime());
-                SimpleDateFormat format = new SimpleDateFormat(" d/M", Locale.getDefault());
-
-                if (shortDate)
-                    weekday = String.valueOf(weekday.charAt(0));
-                return weekday.toUpperCase() + format.format(date.getTime());
+                return temp.interpretDate(date);
             }
 
             @Override
             public String interpretTime(int hour) {
-                if (hour == 24) hour = 0;
-                if (hour == 0) hour = 0;
-                return hour + ":00";
+                if(ampmMode){
+                    if(hour <= 12){
+                        return hour + " " + "AM";
+                    }
+                    else{
+                        return (hour-12) + " " + "PM";
+                    }
+                }
+                else{
+                    return hour + ":00";
+                }
             }
         });
+    }
+
+
+
+    //navigator set up
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_edit) {
+            Intent infoIntent = new Intent(this, LoginActivity.class);
+            startActivity(infoIntent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        } else if (id == R.id.nav_course) {
+            Intent infoIntent = new Intent(this, CourseActivity.class);
+            startActivity(infoIntent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        } else if (id == R.id.nav_tutorial) {
+            Intent infoIntent = new Intent(this, TutorialActivity.class);
+            startActivity(infoIntent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        } else if (id == R.id.nav_manage) {
+            Intent infoIntent = new Intent(this, ManageActivity.class);
+            startActivity(infoIntent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        } else if (id == R.id.nav_settings) {
+            Intent infoIntent = new Intent(this, SettingsActivity.class);
+            startActivity(infoIntent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        } else if (id == R.id.nav_help) {
+            Intent intent = new Intent(MainActivity.this, AppintroActivity.class); // Call the AppIntro java class
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        }else if (id == R.id.nav_about) {
+            Intent infoIntent = new Intent(this, AboutActivity.class);
+            startActivity(infoIntent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        }
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+
+    public void imgbtnPress(View view){
+        Intent infoIntent = new Intent(this, LoginActivity.class);
+        startActivity(infoIntent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

@@ -28,9 +28,6 @@ public class CourseActivity extends AppCompatActivity {
         //corresponding field e.g COMP MATH
         fieldSpinner = findViewById(R.id.info_degree_spinner);
 
-
-
-
         //Return button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
