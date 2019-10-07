@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".AboutActivity">
 
     <ScrollView
@@ -14,7 +13,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -23,61 +34,19 @@
                 android:padding="20dp">
 
                 <ImageView
-                    android:id="@+id/person1_img"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    tools:srcCompat="@drawable/ready" />
-
-                <TextView
-                    android:id="@+id/person1"
+                    android:id="@+id/imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="20dp"
-                    android:text="person1" />
+                    app:srcCompat="@drawable/icon" />
             </LinearLayout>
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="20dp">
-
-                <ImageView
-                    android:id="@+id/person2_img"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    tools:srcCompat="@drawable/ready" />
-
-                <TextView
-                    android:id="@+id/person2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="20dp"
-                    android:text="person2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="20dp">
-
-                <ImageView
-                    android:id="@+id/person3_img"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    app:srcCompat="@drawable/ready" />
-
-                <TextView
-                    android:id="@+id/person3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="20dp"
-                    android:text="person3" />
-            </LinearLayout>
+                android:text="                                       Time-tabling assistant"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <TextView
                 android:id="@+id/version"
@@ -106,6 +75,12 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="Plugin Resources\ngithub.com/AppIntro/AppIntro\ngithub.com/alamkanak/Android-Week-View\ngithub.com/kristiyanP/colorpicker" />
+
+            <TextView
+                android:id="@+id/Team"
+                android:layout_width="match_parent"
+                android:layout_height="99dp"
+                android:text="   team" />
 
 
         </LinearLayout>
