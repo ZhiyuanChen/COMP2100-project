@@ -79,8 +79,14 @@
             <TextView
                 android:id="@+id/Team"
                 android:layout_width="match_parent"
-                android:layout_height="99dp"
+                android:layout_height="wrap_content"
                 android:text="   team" />
+
+            <TextView
+                android:id="@+id/Teamname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="   Zhiyuan Chen, Junming Zhao and Yijia Chen" />
 
 
         </LinearLayout>
