@@ -11,15 +11,15 @@ import com.github.paolorotolo.appintro.AppIntroFragment;
 
 public class AppintroActivity extends AppIntro {
 
-    String[] Headings = {
-            "Welcome to WeiMing Timetable",
-            "Designed for ANU Students",
-            "Course/Tutorial Enrolment",
-            "Easy Management",
-            "Quick Add",
-            "Smart Recommendations",
-            "Ready"};
-
+  String[] Headings = {
+    "Welcome to WeiMing Timetable",
+    "Designed by ANU Students for ANU Students",
+    "Course/Tutorial Enrolment",
+    "Easy Management",
+    "Quick Add",
+    "Smart Recommendations",
+    "Ready"
+  };
 
     int[] Images = {
             R.drawable.ready,
