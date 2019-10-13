@@ -2,7 +2,13 @@ package cs.anu.edu.au.comp2100.weiming.object;
 
 import android.location.Location;
 
+import androidx.annotation.NonNull;
+
+import com.alamkanak.weekview.WeekViewEvent;
+
 import java.util.Calendar;
+
+import cs.anu.edu.au.comp2100.weiming.MainActivity;
 
 public class Schedule {
   private Course course;
@@ -70,6 +76,28 @@ public class Schedule {
     this.end_time.setTimeInMillis(this.start_time.getTimeInMillis() + interval * 60000);
     this.location = null;
     this.description = description;
+  }
+
+  @NonNull
+  @Override
+  public String toString() {
+    String courseCode = this.course.getCode();
+    String category = this.category.getName();
+    return courseCode + " " + category;
+  }
+
+  public WeekViewEvent toEvent(){
+    WeekViewEvent event = new WeekViewEvent();
+    event.setName(this.toString());
+    event.setLocation(this.location.toString());
+    event.setStartTime(this.start_time);
+    event.setEndTime(this.end_time);
+    return event;
+  }
+
+  public void addToEventsList(){
+    WeekViewEvent event = this.toEvent();
+    MainActivity.addEvent(event);
   }
 }
 

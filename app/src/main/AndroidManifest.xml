@@ -17,7 +17,6 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity android:name=".ManageActivity" />
-        <activity android:name=".TutorialActivity" />
         <activity android:name=".CourseActivity" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".ManualinputActivity"

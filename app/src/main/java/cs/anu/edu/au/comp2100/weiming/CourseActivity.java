@@ -12,12 +12,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import androidx.preference.PreferenceManager;
 
+import java.util.ArrayList;
+
 public class CourseActivity extends AppCompatActivity {
 
-    Spinner collegeSpinner;
-    Spinner fieldSpinner;
-    SharedPreferences preferences;
-    LinearLayout layout;
+    public Spinner collegeSpinner;
+    public Spinner fieldSpinner;
+    public SharedPreferences preferences;
+    public LinearLayout layout;
+    public ArrayList<String> selectedCourses;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

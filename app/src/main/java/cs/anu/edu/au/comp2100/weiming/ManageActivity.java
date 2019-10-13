@@ -14,6 +14,7 @@ public class ManageActivity extends AppCompatActivity {
 
     public static SharedPreferences preferences;
     public static LinearLayout layout;
+    public LinearLayout courses;
 
 
     @Override

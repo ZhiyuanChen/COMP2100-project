@@ -13,13 +13,9 @@
             android:icon="@drawable/ic_menu_course"
             android:title="Course enrolment" />
         <item
-            android:id="@+id/nav_tutorial"
-            android:icon="@drawable/ic_menu_tutorial"
-            android:title="Tutorial enrolment" />
-        <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Manage events" />
+            android:title="Manage" />
     </group>
 
     <item android:title="Tools">

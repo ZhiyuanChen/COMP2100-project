@@ -21,4 +21,8 @@ public class Course {
     this.description = description;
     this.prerequisite_list = null;
   }
+
+  public String getCode(){
+    return this.code;
+  }
 }

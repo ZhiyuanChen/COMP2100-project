@@ -39,6 +39,7 @@
         android:layout_marginLeft="20dp"
         android:paddingTop="12dp"/>
 
+
     <TextView
         android:id="@+id/input_courses"
         android:layout_width="match_parent"
@@ -48,55 +49,62 @@
         android:text="Select Courses"
         android:textSize="18sp"/>
 
-    <RadioGroup
-        android:id="@+id/current_courses"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="6dp">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/course1"
+        <ScrollView
+            android:layout_width="124dp"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/selected_courses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/your_courses_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:paddingTop="12dp"
+                    android:text="Your courses"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            android:background="@color/gray_background" />
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="course1: Empty"/>
+            android:layout_height="match_parent">
 
-        <RadioButton
-            android:id="@+id/course2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="course2: Empty"/>
+            <LinearLayout
+                android:id="@+id/course_options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/course3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="course3: Empty"/>
+                <TextView
+                    android:id="@+id/course_option_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:paddingTop="12dp"
+                    android:text="Course Options"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </ScrollView>
 
-        <RadioButton
-            android:id="@+id/course4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="course4: Empty"/>
-    </RadioGroup>
+    </LinearLayout>
 
-
-    <ScrollView
-        android:id="@+id/courses_options"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
-    </ScrollView>
 
 </LinearLayout>

@@ -2,6 +2,7 @@ package cs.anu.edu.au.comp2100.weiming;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity
     private static final int TYPE_THREE_DAY_VIEW = 3;
     private static final int TYPE_WEEK_VIEW = 7;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private static Context context;
 
     LayoutInflater inflater;
 
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        context = getApplicationContext();
 
         //navigator setup
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -310,13 +313,12 @@ public class MainActivity extends AppCompatActivity
             public void onClick(DialogInterface dialogInterface, int i) {
                 WeekViewEvent event = new WeekViewEvent(0, enterName.getText().toString(), enterLocation.getText().toString(), startTime, endTime);
                 event.setColor(eventColor[0]);
-                events.add(event);
 
                 onMonthChange(startYr, startMon);
                 mWeekView.notifyDatasetChanged();
 
                 //file_helper
-                EventsFileHelper.writeData(events, getApplicationContext());
+                addEvent(event);
             }
         });
 
@@ -350,12 +352,10 @@ public class MainActivity extends AppCompatActivity
         builder.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                events.remove(event);
                 System.out.println(events.size());
                 mWeekView.notifyDatasetChanged();
 
-                //file_helper
-                EventsFileHelper.writeData(events, getApplicationContext());
+                removeEvent(event);
             }
         });
 
@@ -540,10 +540,6 @@ public class MainActivity extends AppCompatActivity
             Intent infoIntent = new Intent(this, CourseActivity.class);
             startActivity(infoIntent);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        } else if (id == R.id.nav_tutorial) {
-            Intent infoIntent = new Intent(this, TutorialActivity.class);
-            startActivity(infoIntent);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         } else if (id == R.id.nav_manage) {
             Intent infoIntent = new Intent(this, ManageActivity.class);
             startActivity(infoIntent);
@@ -575,10 +571,23 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
     @Override
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+    public static void addEvent(WeekViewEvent event){
+        events.add(event);
+        EventsFileHelper.writeData(events, context);
+    }
+
+    public static void removeEvent(WeekViewEvent event){
+        events.remove(event);
+        EventsFileHelper.writeData(events, context);
+    }
+
+    public static ArrayList<WeekViewEvent> getEvents() {
+        return events;
     }
 }

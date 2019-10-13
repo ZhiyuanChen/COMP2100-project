@@ -4,6 +4,8 @@ import android.app.Activity;
 
 import android.content.SharedPreferences;
 import android.widget.*;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -32,7 +34,7 @@ public class ANULogin extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     public static SharedPreferences preferences;
-    public static LinearLayout layout;
+    public static ConstraintLayout layout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -135,6 +137,8 @@ public class ANULogin extends AppCompatActivity {
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
+
+
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
@@ -142,6 +146,8 @@ public class ANULogin extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 
+
+    //tool bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

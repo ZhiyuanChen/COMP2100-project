@@ -2,10 +2,11 @@ package cs.anu.edu.au.comp2100.weiming.server;
 
 import cs.anu.edu.au.comp2100.weiming.object.Course;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-import OkHttpClient;
+import cs.anu.edu.au.comp2100.weiming.object.Course;
+import okhttp3.OkHttpClient;
 
 public class ISISimpl {
 

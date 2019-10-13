@@ -30,7 +30,7 @@ public class ManualinputActivity extends AppCompatActivity implements
     private Button btn;
     private ListView itemsList;
 
-    private ArrayList<String> items;
+    private ArrayList<String> takenCourses;
     private ArrayAdapter<String> adapter;
 
     @Override
@@ -54,12 +54,12 @@ public class ManualinputActivity extends AppCompatActivity implements
         itemET = findViewById(R.id.input_courses);
         btn = findViewById(R.id.addCourse_btn);
 
-        items = CoursesTakenFileHelper.readData(this);
+        takenCourses = CoursesTakenFileHelper.readData(this);
         itemsList = findViewById(R.id.added_courses);
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, takenCourses);
 
-        //individual items
+        //individual takenCourses
         itemsList.setAdapter(adapter);
         itemsList.setLongClickable(true);
         setDeleteIndividual();
@@ -107,7 +107,7 @@ public class ManualinputActivity extends AppCompatActivity implements
             itemET.setText("");
 
             //file_helper
-            CoursesTakenFileHelper.writeData(items, this);
+            CoursesTakenFileHelper.writeData(takenCourses, this);
             Toast toast = Toast.makeText(getApplicationContext(), "Course Added", Toast.LENGTH_SHORT);
             View toastView = toast.getView();
             toastView.getBackground().setColorFilter(getResources().getColor(R.color.green), PorterDuff.Mode.SRC_IN);
@@ -133,7 +133,7 @@ public class ManualinputActivity extends AppCompatActivity implements
     public void setDeleteIndividual(){
         itemsList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View v, final int position, long id) {
-                String course = items.get(position);
+                String course = takenCourses.get(position);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(ManualinputActivity.this);
                 builder.setCancelable(true);
@@ -150,11 +150,11 @@ public class ManualinputActivity extends AppCompatActivity implements
                 builder.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        items.remove(position);
+                        takenCourses.remove(position);
                         adapter.notifyDataSetChanged();
 
                         //file_helper
-                        CoursesTakenFileHelper.writeData(items, getApplicationContext());
+                        CoursesTakenFileHelper.writeData(takenCourses, getApplicationContext());
                         Toast toast = Toast.makeText(getApplicationContext(), "Course Deleted", Toast.LENGTH_SHORT);
                         View toastView = toast.getView();
                         toastView.getBackground().setColorFilter(getResources().getColor(R.color.pink), PorterDuff.Mode.SRC_IN);
@@ -169,6 +169,9 @@ public class ManualinputActivity extends AppCompatActivity implements
     }
 
     public void setDeleteAll(){
+    }
 
+    public ArrayList<String> getTakenCourses() {
+        return takenCourses;
     }
 }
