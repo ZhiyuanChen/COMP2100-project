@@ -7,37 +7,37 @@
               android:layout_height="match_parent"
               android:orientation="vertical" tools:context=".CourseActivity">
 
-<!--    <TextView-->
-<!--        android:id="@+id/input_college_title"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginLeft="10dp"-->
-<!--        android:paddingTop="12dp"-->
-<!--        android:text="Select College"-->
-<!--        android:textSize="18sp"/>-->
-
-<!--    <Spinner-->
-<!--        android:id="@+id/input_college_spinner"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginLeft="20dp"-->
-<!--        android:paddingTop="12dp"/>-->
-
     <TextView
-        android:id="@+id/input_degree_title"
+        android:id="@+id/input_college_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:paddingTop="12dp"
+        android:text="Select College"
+        android:textSize="18sp"/>
+
+    <Spinner
+        android:id="@+id/input_college_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:paddingTop="6dp"/>
+
+    <TextView
+        android:id="@+id/input_field_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:paddingTop="6dp"
         android:text="Select Field"
         android:textSize="18sp"/>
 
     <Spinner
-        android:id="@+id/input_degree_spinner"
+        android:id="@+id/input_field_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:paddingTop="12dp"/>
+        android:paddingTop="6dp"/>
 
 
     <TextView
@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:paddingTop="12dp"
+        android:paddingTop="6dp"
         android:text="Select Courses"
         android:textSize="18sp"/>
 

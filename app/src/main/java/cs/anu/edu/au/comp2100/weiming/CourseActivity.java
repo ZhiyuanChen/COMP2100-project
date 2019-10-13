@@ -31,13 +31,16 @@ public class CourseActivity extends AppCompatActivity {
         layout = findViewById(R.id.course_layout);
 
         //select college
-//        collegeSpinner = findViewById(R.id.input_college_spinner);
-//        ArrayAdapter<CharSequence> colleges = ArrayAdapter.createFromResource(this, R.array.All_ANU_colleges, R.layout.custom_spinner);
-//        colleges.setDropDownViewResource(R.layout.custom_spinner);
-//        collegeSpinner.setAdapter(colleges);
+        collegeSpinner = findViewById(R.id.input_college_spinner);
+        ArrayAdapter<CharSequence> colleges = ArrayAdapter.createFromResource(this, R.array.All_ANU_colleges, R.layout.custom_spinner);
+        colleges.setDropDownViewResource(R.layout.custom_spinner);
+        collegeSpinner.setAdapter(colleges);
 
         //corresponding field e.g COMP MATH
-        fieldSpinner = findViewById(R.id.info_degree_spinner);
+        fieldSpinner = findViewById(R.id.input_field_spinner);
+        ArrayAdapter<CharSequence> fields = ArrayAdapter.createFromResource(this, R.array.ANU_curse_fields, R.layout.custom_spinner);
+        fields.setDropDownViewResource(R.layout.custom_spinner);
+        fieldSpinner.setAdapter(fields);
 
         //Return button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

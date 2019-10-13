@@ -10,11 +10,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Calendar;
-
-import cs.anu.edu.au.comp2100.weiming.object.College;
-import cs.anu.edu.au.comp2100.weiming.object.Course;
-import cs.anu.edu.au.comp2100.weiming.object.Schedule;
 
 
 public class JSON {
@@ -27,6 +22,7 @@ public class JSON {
     private static final String WEEKS ="weeks";
     private static final String DAY ="day";
 
+    String filepath = "/Users/sallyzhao/ANU/COMP2100/gp19s2/app/src/main/java/cs/anu/edu/au/comp2100/weiming/object/courses";
 
 
     public List loadCourseName(String filePath) {
@@ -35,10 +31,9 @@ public class JSON {
         try {
             JSONArray array = (JSONArray) JSONValue.parse(new FileReader(f));
             for (int i = 0; i<array.size();i++) {
-                JSONObject obj = (JSONObject) array.get(i);
+                String str = (String) array.get(i);
                 Course newCourse = new Course();
-                String c = obj.toString();
-                String[] courseString = c.split("_S2 ");
+                String[] courseString = str.split("_S2 ");
                 newCourse.setCode(courseString[0]);
                 newCourse.setName(courseString[1]);
                 courses.add(newCourse);
@@ -47,6 +42,27 @@ public class JSON {
             e.printStackTrace();
         }
         return courses;
+    }
+
+    public List loadField(String filepath){
+        File f = new File(filepath);
+        List<String> codes = new ArrayList<>();
+       // Set<String> courses = new HashSet<>();
+        try {
+            JSONArray array = (JSONArray) JSONValue.parse(new FileReader(f));
+            for (int i = 0; i< array.size();i++) {
+                String str = (String) array.get(i);
+                String[] courseString = str.split("_S2 ");
+                String code = courseString[0].substring(0, 4);
+                if(!codes.contains(code)){
+                    codes.add(code);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return codes;
     }
 
     public List loadCourseTime(String filePath){
@@ -65,7 +81,13 @@ public class JSON {
         return schedules;
     }
 
-
+    public static void main(String[] args) {
+        JSON json = new JSON();
+        List<String> stringSet = json.loadCourseName(json.filepath);
+        for(String str : stringSet){
+            System.out.println("<item>"+str+"</item>");
+        }
+    }
 
 
 
