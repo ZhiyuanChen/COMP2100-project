@@ -2,6 +2,8 @@ package cs.anu.edu.au.comp2100.weiming.object;
 
 import android.location.Location;
 
+import com.alamkanak.weekview.WeekViewEvent;
+
 import java.util.Calendar;
 
 public class CourseSchedule extends Schedule {
@@ -53,6 +55,23 @@ public class CourseSchedule extends Schedule {
       super(start_time, interval, description);
       this.course = course;
       this.category = category;
+  }
+
+  @Override
+  public String getName() {
+      String courseCode = this.course.getCode();
+      String category = this.category.getName();
+      return courseCode + " " + category;
+  }
+
+  @Override
+  public WeekViewEvent toEvent() {
+      return super.toEvent();
+  }
+
+  @Override
+  public void addToEventsList() {
+      super.addToEventsList();
   }
 }
 

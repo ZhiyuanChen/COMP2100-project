@@ -2,8 +2,6 @@ package cs.anu.edu.au.comp2100.weiming.object;
 
 import android.location.Location;
 
-import androidx.annotation.NonNull;
-
 import com.alamkanak.weekview.WeekViewEvent;
 
 import java.util.Calendar;
@@ -11,11 +9,14 @@ import java.util.Calendar;
 import cs.anu.edu.au.comp2100.weiming.MainActivity;
 
 public class Schedule {
+  private String name;
   private Calendar start_time;
   private Calendar end_time;
   private Location location;
   private String description;
 
+
+  //constructor with location
   public Schedule(
       Calendar start_time,
       Calendar end_time,
@@ -27,6 +28,8 @@ public class Schedule {
     this.description = description;
   }
 
+
+  //constructor without location
   public Schedule(
           Calendar start_time,
           Calendar end_time,
@@ -37,6 +40,7 @@ public class Schedule {
     this.description = description;
   }
 
+  //constructor accepting duration interval with location
   public Schedule(
           Calendar start_time,
           int interval,
@@ -49,6 +53,7 @@ public class Schedule {
     this.description = description;
   }
 
+  //constructor accepting duration interval without location
   public Schedule(
           Calendar start_time,
           int interval,
@@ -60,17 +65,13 @@ public class Schedule {
     this.description = description;
   }
 
-  @NonNull
-  @Override
-  public String toString() {
-    String courseCode = this.course.getCode();
-    String category = this.category.getName();
-    return courseCode + " " + category;
+  public String getName() {
+    return name;
   }
 
   public WeekViewEvent toEvent(){
     WeekViewEvent event = new WeekViewEvent();
-    event.setName(this.toString());
+    event.setName(this.getName());
     event.setLocation(this.location.toString());
     event.setStartTime(this.start_time);
     event.setEndTime(this.end_time);
