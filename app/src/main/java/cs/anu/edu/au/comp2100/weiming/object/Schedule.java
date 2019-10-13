@@ -21,6 +21,14 @@ public class Schedule {
     this.end_time = end_time;
     this.description = description;
   }
+
+  public Schedule(Course course, Calendar start_time,Calendar end_time){
+    this.course = course;
+    this.start_time = start_time;
+    this.end_time = end_time;
+  }
+
+  public Schedule(){ }
 }
 
 enum Category {
