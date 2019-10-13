@@ -1,5 +1,8 @@
 package cs.anu.edu.au.comp2100.weiming;
 
+import android.content.SharedPreferences;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,17 +11,29 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.preference.PreferenceManager;
 import cs.anu.edu.au.comp2100.weiming.ui.login.ANULogin;
 
 public class LoginActivity extends AppCompatActivity {
+
+
+    public static SharedPreferences preferences;
+    public static RelativeLayout layout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_options);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        layout = findViewById(R.id.loginOption_layout);
 
         //Return button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //background color
+        int backgroundColor = preferences.getInt("background", 0);
+        layout.setBackgroundColor(backgroundColor);
     }
 
     public void loginPress(View view) {

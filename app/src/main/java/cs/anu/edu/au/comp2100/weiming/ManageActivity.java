@@ -1,21 +1,34 @@
 package cs.anu.edu.au.comp2100.weiming;
 
+import android.content.SharedPreferences;
+import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import androidx.preference.PreferenceManager;
 
 public class ManageActivity extends AppCompatActivity {
+
+    public static SharedPreferences preferences;
+    public static LinearLayout layout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        layout = findViewById(R.id.manage_layout);
 
         //Return button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //background color
+        int backgroundColor = preferences.getInt("background", 0);
+        layout.setBackgroundColor(backgroundColor);
     }
 
 
