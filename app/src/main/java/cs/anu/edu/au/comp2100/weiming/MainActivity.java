@@ -100,12 +100,12 @@ public class MainActivity extends AppCompatActivity
         mWeekView = findViewById(R.id.weekView);
         // Set an action when any event is clicked.
         mWeekView.setOnEventClickListener(this);
-        // The week view has infinite scrolling horizontally. We have to provide the events of a
+        // The week view has infinite scrolling horizontally. We have to provide the iid.json of a
         // month every time the month changes on the week view.
         mWeekView.setMonthChangeListener(this);
         // Set empty long press listener
         mWeekView.setEmptyViewLongPressListener(this);
-        // Set long press listener for events.
+        // Set long press listener for iid.json.
         mWeekView.setEventLongPressListener(this);
         inflater = getLayoutInflater();
 
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
-        // Populate the week view with some events
+        // Populate the week view with some iid.json
         if (newMonth == Calendar.getInstance().get(Calendar.MONTH))
             return events;
         else {

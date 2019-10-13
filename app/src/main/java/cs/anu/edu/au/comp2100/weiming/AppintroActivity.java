@@ -35,10 +35,10 @@ public class AppintroActivity extends AppIntro {
     String[] Description = {
             "Smart timetable assistant \n Help manage uni schedule at ease",
             "Updated with official ANU course information \n Support ANU account log in",
-            "Enrol courses and tutorial from list",
-            "Check overlapping tutorial times \n Manage your current courses",
-            "Add your own events",
-            "Smart recommending courses based on what you have taken so far \n Tutorials recommendation to avoid time overlapping",
+            "Enrol nid.json and tutorial from list",
+            "Check overlapping tutorial times \n Manage your current nid.json",
+            "Add your own iid.json",
+            "Smart recommending nid.json based on what you have taken so far \n Tutorials recommendation to avoid time overlapping",
             "Start your journey!"
     };
 
