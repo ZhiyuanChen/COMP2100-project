@@ -14,4 +14,11 @@ public class Course {
     this.description = description;
     this.prerequisite_list = prerequisite_list;
   }
+
+  public Course(String code, String name, String description) {
+    this.code = code;
+    this.name = name;
+    this.description = description;
+    this.prerequisite_list = null;
+  }
 }
