@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CourseActivity"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/course_layout"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical" tools:context=".CourseActivity">
 
     <TextView
         android:id="@+id/input_college_title"
@@ -14,14 +14,14 @@
         android:layout_marginLeft="10dp"
         android:paddingTop="12dp"
         android:text="Select College"
-        android:textSize="18sp" />
+        android:textSize="18sp"/>
 
     <Spinner
         android:id="@+id/input_college_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:paddingTop="12dp" />
+        android:paddingTop="12dp"/>
 
     <TextView
         android:id="@+id/input_degree_title"
@@ -30,14 +30,14 @@
         android:layout_marginLeft="10dp"
         android:paddingTop="12dp"
         android:text="Select Field"
-        android:textSize="18sp" />
+        android:textSize="18sp"/>
 
     <Spinner
         android:id="@+id/input_degree_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:paddingTop="12dp" />
+        android:paddingTop="12dp"/>
 
     <TextView
         android:id="@+id/input_courses"
@@ -46,13 +46,13 @@
         android:layout_marginLeft="10dp"
         android:paddingTop="12dp"
         android:text="Select Courses"
-        android:textSize="18sp" />
+        android:textSize="18sp"/>
 
     <RadioGroup
         android:id="@+id/current_courses"
-        android:paddingTop="6dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="6dp">
 
         <RadioButton
             android:id="@+id/course1"
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:text="course1: Empty" />
+            android:text="course1: Empty"/>
 
         <RadioButton
             android:id="@+id/course2"
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:text="course2: Empty" />
+            android:text="course2: Empty"/>
 
         <RadioButton
             android:id="@+id/course3"
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:text="course3: Empty" />
+            android:text="course3: Empty"/>
 
         <RadioButton
             android:id="@+id/course4"
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:text="course4: Empty" />
+            android:text="course4: Empty"/>
     </RadioGroup>
 
 
@@ -96,7 +96,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical"/>
     </ScrollView>
 
 </LinearLayout>

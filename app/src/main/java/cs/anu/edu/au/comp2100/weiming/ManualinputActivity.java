@@ -1,5 +1,7 @@
 package cs.anu.edu.au.comp2100.weiming;
 
+import android.content.SharedPreferences;
+import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,18 +12,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.Toast;
+import androidx.preference.PreferenceManager;
+
 import java.util.ArrayList;
 
 public class ManualinputActivity extends AppCompatActivity implements
         View.OnClickListener,
         AdapterView.OnItemSelectedListener {
+
+    public static SharedPreferences preferences;
+    public static LinearLayout layout;
 
     Spinner collegeSpinner;
     Spinner degreeSpinner;
@@ -37,6 +37,8 @@ public class ManualinputActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_input);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        layout = findViewById(R.id.manualInput_layout);
 
         //spinners
         collegeSpinner = findViewById(R.id.info_college_spinner);
@@ -68,6 +70,10 @@ public class ManualinputActivity extends AppCompatActivity implements
 
         //Return button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //background color
+        int backgroundColor = preferences.getInt("background", 0);
+        layout.setBackgroundColor(backgroundColor);
     }
 
 

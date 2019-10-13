@@ -8,6 +8,7 @@ import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -19,8 +20,8 @@ import petrov.kristiyan.colorpicker.ColorPicker;
 
 public class SettingsActivity extends AppCompatActivity{
 
-
     public static SharedPreferences preferences;
+    public static LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,13 @@ public class SettingsActivity extends AppCompatActivity{
                 .commit();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        layout = findViewById(R.id.settings_layout);
 
+
+        //background color
+        int backgroundColor = preferences.getInt("background", 0);
+        layout.setBackgroundColor(backgroundColor);
     }
 
 
@@ -104,6 +111,7 @@ public class SettingsActivity extends AppCompatActivity{
                                     summary.setSpan(0, 0, summary.length(), 0);
                                     preference.setSummary(summary);
                                     preferences.edit().putInt("background", color).apply();
+                                    layout.setBackgroundColor(color);
                                     MainActivity.mWeekView.setBackgroundColor(color);
                                 }
                             }

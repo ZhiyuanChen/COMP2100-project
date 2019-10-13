@@ -1,5 +1,7 @@
 package cs.anu.edu.au.comp2100.weiming;
 
+import android.content.SharedPreferences;
+import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,16 +10,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import androidx.preference.PreferenceManager;
 
 public class CourseActivity extends AppCompatActivity {
 
     Spinner collegeSpinner;
     Spinner fieldSpinner;
+    SharedPreferences preferences;
+    LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        layout = findViewById(R.id.course_layout);
 
         //select college
         collegeSpinner = findViewById(R.id.input_college_spinner);
@@ -30,6 +37,11 @@ public class CourseActivity extends AppCompatActivity {
 
         //Return button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //background
+        int backgroundColor = preferences.getInt("background", 0);
+        layout.setBackgroundColor(backgroundColor);
+
     }
 
 

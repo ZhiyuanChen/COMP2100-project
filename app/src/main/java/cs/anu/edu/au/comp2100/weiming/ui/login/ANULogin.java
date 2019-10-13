@@ -2,6 +2,8 @@ package cs.anu.edu.au.comp2100.weiming.ui.login;
 
 import android.app.Activity;
 
+import android.content.SharedPreferences;
+import android.widget.*;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -19,12 +21,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.preference.PreferenceManager;
 import cs.anu.edu.au.comp2100.weiming.MainActivity;
 import cs.anu.edu.au.comp2100.weiming.R;
 import cs.anu.edu.au.comp2100.weiming.ui.login.LoginViewModel;
@@ -33,14 +31,24 @@ import cs.anu.edu.au.comp2100.weiming.ui.login.LoginViewModelFactory;
 public class ANULogin extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    public static SharedPreferences preferences;
+    public static LinearLayout layout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_anulogin);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        layout = findViewById(R.id.anuLogin_layout);
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
+
+
+        //background color
+        int backgroundColor = preferences.getInt("background", 0);
+        layout.setBackgroundColor(backgroundColor);
+
 
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
