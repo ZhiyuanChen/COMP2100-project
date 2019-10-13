@@ -92,7 +92,6 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="Last Update: 01/01/2019" />
-
             <TextView
                 android:id="@+id/resourses"
                 android:layout_width="match_parent"

@@ -21,4 +21,19 @@ public class Course {
     this.description = description;
     this.prerequisite_list = null;
   }
+
+  public Course(String code, String name){
+    this.code = code;
+    this.name = name;
+  }
+
+  public Course(){}
+
+  public void setCode(String code) {
+    this.code = code;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
 }
