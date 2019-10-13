@@ -56,7 +56,7 @@ public class JSON {
             JSONArray array = (JSONArray) JSONValue.parse(new FileReader(f));
             for (int i = 0; i<array.size();i++) {
                 JSONObject obj = (JSONObject) array.get(i);
-                Schedule schedule = new Schedule();
+                //Schedule schedule = new Schedule();
 
             }
         } catch (IOException e) {
