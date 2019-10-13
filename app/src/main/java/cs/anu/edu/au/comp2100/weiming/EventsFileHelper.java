@@ -1,7 +1,6 @@
 package cs.anu.edu.au.comp2100.weiming;
 
 import android.content.Context;
-
 import com.alamkanak.weekview.WeekViewEvent;
 
 import java.io.FileInputStream;
