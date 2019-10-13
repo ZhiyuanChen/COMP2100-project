@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".AboutActivity">
 
     <ScrollView
@@ -15,15 +14,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 <<<<<<< HEAD
+<<<<<<< HEAD
             android:orientation="vertical">
 =======
             android:orientation="vertical" >
 >>>>>>> remotes/new/master
+=======
+            android:orientation="vertical">
+>>>>>>> cf85b6f36c0d5dba3bd76edd0f131bbd1d4fffea
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+<<<<<<< HEAD
 <<<<<<< HEAD
                 android:padding="20dp" />
 =======
@@ -44,11 +48,15 @@
                     android:text="person1" />
             </LinearLayout>
 >>>>>>> remotes/new/master
+=======
+                android:padding="20dp" />
+>>>>>>> cf85b6f36c0d5dba3bd76edd0f131bbd1d4fffea
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+<<<<<<< HEAD
 <<<<<<< HEAD
                 android:padding="20dp" />
 =======
@@ -69,6 +77,9 @@
                     android:text="person2" />
             </LinearLayout>
 >>>>>>> remotes/new/master
+=======
+                android:padding="20dp" />
+>>>>>>> cf85b6f36c0d5dba3bd76edd0f131bbd1d4fffea
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -77,6 +88,7 @@
                 android:padding="20dp">
 
                 <ImageView
+<<<<<<< HEAD
 <<<<<<< HEAD
                     android:id="@+id/imageView"
                     android:layout_width="wrap_content"
@@ -101,15 +113,27 @@
 
                 <TextView
                     android:id="@+id/person3"
+=======
+                    android:id="@+id/imageView"
+>>>>>>> cf85b6f36c0d5dba3bd76edd0f131bbd1d4fffea
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="20dp"
-                    android:text="person3" />
+                    app:srcCompat="@drawable/icon" />
             </LinearLayout>
 
             <TextView
+<<<<<<< HEAD
 >>>>>>> remotes/new/master
+=======
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="                                       Time-tabling assistant"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+            <TextView
+>>>>>>> cf85b6f36c0d5dba3bd76edd0f131bbd1d4fffea
                 android:id="@+id/version"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -138,6 +162,9 @@
                 android:text="Plugin Resources\ngithub.com/AppIntro/AppIntro\ngithub.com/alamkanak/Android-Week-View\ngithub.com/kristiyanP/colorpicker" />
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cf85b6f36c0d5dba3bd76edd0f131bbd1d4fffea
             <TextView
                 android:id="@+id/Team"
                 android:layout_width="match_parent"
@@ -150,8 +177,11 @@
                 android:layout_height="wrap_content"
                 android:text="   Zhiyuan Chen, Junming Zhao and Yijia Chen" />
 
+<<<<<<< HEAD
 =======
 >>>>>>> remotes/new/master
+=======
+>>>>>>> cf85b6f36c0d5dba3bd76edd0f131bbd1d4fffea
 
         </LinearLayout>
     </ScrollView>
