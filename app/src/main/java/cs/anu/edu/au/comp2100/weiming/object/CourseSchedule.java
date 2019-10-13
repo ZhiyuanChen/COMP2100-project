@@ -20,7 +20,7 @@ public class CourseSchedule extends Schedule {
       Calendar end_time,
       Location location,
       String description) {
-    super(start_time, end_time, location, description);
+    super(start_time, end_time, description);
     this.course = course;
     this.category = category;
   }
