@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".AboutActivity">
 
     <ScrollView
@@ -13,19 +14,61 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:orientation="vertical">
+=======
+            android:orientation="vertical" >
+>>>>>>> remotes/new/master
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+<<<<<<< HEAD
                 android:padding="20dp" />
+=======
+                android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/person1_img"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    tools:srcCompat="@drawable/ready" />
+
+                <TextView
+                    android:id="@+id/person1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="20dp"
+                    android:text="person1" />
+            </LinearLayout>
+>>>>>>> remotes/new/master
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+<<<<<<< HEAD
                 android:padding="20dp" />
+=======
+                android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/person2_img"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    tools:srcCompat="@drawable/ready" />
+
+                <TextView
+                    android:id="@+id/person2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="20dp"
+                    android:text="person2" />
+            </LinearLayout>
+>>>>>>> remotes/new/master
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -34,6 +77,7 @@
                 android:padding="20dp">
 
                 <ImageView
+<<<<<<< HEAD
                     android:id="@+id/imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -49,6 +93,23 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <TextView
+=======
+                    android:id="@+id/person3_img"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:srcCompat="@drawable/ready" />
+
+                <TextView
+                    android:id="@+id/person3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="20dp"
+                    android:text="person3" />
+            </LinearLayout>
+
+            <TextView
+>>>>>>> remotes/new/master
                 android:id="@+id/version"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,6 +137,7 @@
                 android:padding="10dp"
                 android:text="Plugin Resources\ngithub.com/AppIntro/AppIntro\ngithub.com/alamkanak/Android-Week-View\ngithub.com/kristiyanP/colorpicker" />
 
+<<<<<<< HEAD
             <TextView
                 android:id="@+id/Team"
                 android:layout_width="match_parent"
@@ -88,6 +150,8 @@
                 android:layout_height="wrap_content"
                 android:text="   Zhiyuan Chen, Junming Zhao and Yijia Chen" />
 
+=======
+>>>>>>> remotes/new/master
 
         </LinearLayout>
     </ScrollView>

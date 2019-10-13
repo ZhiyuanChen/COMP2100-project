@@ -9,7 +9,6 @@ public class Schedule {
   private Calendar end_time;
   private Location location;
   private String description;
-  private Course course;
 
   public Schedule(
       Calendar start_time,
@@ -54,12 +53,4 @@ public class Schedule {
     this.location = null;
     this.description = description;
   }
-
-  public Schedule(Course course, Calendar start_time,Calendar end_time){
-    this.course = course;
-    this.start_time = start_time;
-    this.end_time = end_time;
-  }
-
-  public Schedule(){ }
 }

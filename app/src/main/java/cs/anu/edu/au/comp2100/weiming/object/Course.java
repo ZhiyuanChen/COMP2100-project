@@ -22,12 +22,12 @@ public class Course {
     this.prerequisite_list = null;
   }
 
-  public Course(){}
-
   public Course(String code, String name){
     this.code = code;
     this.name = name;
   }
+
+  public Course(){}
 
   public void setCode(String code) {
     this.code = code;
