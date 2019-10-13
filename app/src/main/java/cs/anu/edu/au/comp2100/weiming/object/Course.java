@@ -25,4 +25,19 @@ public class Course {
   public String getCode(){
     return this.code;
   }
+
+  public Course(String code, String name){
+    this.code = code;
+    this.name = name;
+  }
+
+  public Course(){}
+
+  public void setCode(String code) {
+    this.code = code;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
 }
