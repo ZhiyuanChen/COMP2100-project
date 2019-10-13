@@ -9,6 +9,7 @@ public class Schedule {
   private Calendar end_time;
   private Location location;
   private String description;
+  private Course course;
 
   public Schedule(
       Calendar start_time,
