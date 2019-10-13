@@ -31,10 +31,10 @@ public class CourseActivity extends AppCompatActivity {
         layout = findViewById(R.id.course_layout);
 
         //select college
-        collegeSpinner = findViewById(R.id.input_college_spinner);
-        ArrayAdapter<CharSequence> colleges = ArrayAdapter.createFromResource(this, R.array.All_ANU_colleges, R.layout.custom_spinner);
-        colleges.setDropDownViewResource(R.layout.custom_spinner);
-        collegeSpinner.setAdapter(colleges);
+//        collegeSpinner = findViewById(R.id.input_college_spinner);
+//        ArrayAdapter<CharSequence> colleges = ArrayAdapter.createFromResource(this, R.array.All_ANU_colleges, R.layout.custom_spinner);
+//        colleges.setDropDownViewResource(R.layout.custom_spinner);
+//        collegeSpinner.setAdapter(colleges);
 
         //corresponding field e.g COMP MATH
         fieldSpinner = findViewById(R.id.info_degree_spinner);

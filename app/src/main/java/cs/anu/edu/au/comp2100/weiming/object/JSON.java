@@ -1,4 +1,4 @@
-package cs.anu.edu.au.comp2100.weiming.data;
+package cs.anu.edu.au.comp2100.weiming.object;
 
 
 import org.json.simple.JSONArray;
