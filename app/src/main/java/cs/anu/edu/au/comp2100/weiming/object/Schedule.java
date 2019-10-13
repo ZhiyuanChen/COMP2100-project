@@ -52,7 +52,7 @@ public class Schedule {
     this.category = category;
     this.start_time = start_time;
     this.end_time = Calendar.getInstance();
-    this.end_time.setTimeInMillis(this.start_time.getTimeInMillis() + interval * 3600000);
+    this.end_time.setTimeInMillis(this.start_time.getTimeInMillis() + interval * 60000);
     this.location = location;
     this.description = description;
   }
@@ -67,7 +67,7 @@ public class Schedule {
     this.category = category;
     this.start_time = start_time;
     this.end_time = Calendar.getInstance();
-    this.end_time.setTimeInMillis(this.start_time.getTimeInMillis() + interval * 3600000);
+    this.end_time.setTimeInMillis(this.start_time.getTimeInMillis() + interval * 60000);
     this.location = null;
     this.description = description;
   }
