@@ -1,7 +1,5 @@
 package cs.anu.edu.au.comp2100.weiming.object;
 
-import android.location.Location;
-
 import com.alamkanak.weekview.WeekViewEvent;
 
 import java.util.Calendar;
@@ -9,50 +7,36 @@ import java.util.Calendar;
 public class CourseSchedule extends Schedule {
 
   private Course course;
-  private Category category;
+  private String category;
   private Calendar start_time;
   private Calendar end_time;
-  private Location location;
-  private String description;
+  private String location;
 
-  public CourseSchedule(
-      Course course,
-      Category category,
-      Calendar start_time,
-      Calendar end_time,
-      Location location,
-      String description) {
-    super(start_time, end_time, description);
+  //constructor with all
+  public CourseSchedule(Course course, String category, Calendar start_time, Calendar end_time, String location) {
+    super(start_time, end_time);
+    this.course = course;
+    this.category = category;
+    this.location = location;
+  }
+
+  //constructor without location
+  public CourseSchedule(Course course, String category, Calendar start_time, Calendar end_time) {
+    super(start_time, end_time);
     this.course = course;
     this.category = category;
   }
 
-  public CourseSchedule(
-      Course course,
-      Category category,
-      Calendar start_time,
-      Calendar end_time,
-      String description) {
-    super(start_time, end_time, description);
+  //constructor with interval with location
+  public CourseSchedule(Course course, String category, Calendar start_time, int interval, String location) {
+    super(start_time, interval, location);
     this.course = course;
     this.category = category;
   }
 
-  public CourseSchedule(
-      Course course,
-      Category category,
-      Calendar start_time,
-      int interval,
-      Location location,
-      String description) {
-    super(start_time, interval, location, description);
-    this.course = course;
-    this.category = category;
-  }
-
-  public CourseSchedule(
-      Course course, Category category, Calendar start_time, int interval, String description) {
-      super(start_time, interval, description);
+  //constructor with interval without location
+  public CourseSchedule(Course course, String category, Calendar start_time, int interval) {
+      super(start_time, interval);
       this.course = course;
       this.category = category;
   }
@@ -60,7 +44,7 @@ public class CourseSchedule extends Schedule {
   @Override
   public String getName() {
       String courseCode = this.course.getCode();
-      String category = this.category.getName();
+      String category = this.category;
       return courseCode + " " + category;
   }
 
@@ -91,7 +75,7 @@ enum Category {
     this.index = index;
   }
 
-  public static String getName(int index) {
+  public String getName(int index) {
     for (Category category : Category.values()) {
       if (category.getIndex() == index) {
         return category.name;

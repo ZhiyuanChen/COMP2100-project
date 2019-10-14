@@ -17,7 +17,7 @@ import java.util.Calendar;
 
 public class EventsFileHelper {
 
-    public static final String FILENAME = "iid.json.dat";
+    public static final String FILENAME = "events.dat";
 
     public static ArrayList<String> eventsProperties(ArrayList<WeekViewEvent> events){
         ArrayList<String> properties = new ArrayList<>();

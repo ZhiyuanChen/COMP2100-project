@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cs.anu.edu.au.comp2100.weiming">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -17,9 +19,12 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity android:name=".ManageActivity" />
-        <activity android:name=".CourseActivity" />
+        <activity
+            android:name=".CourseActivity"
+            android:theme="@style/AppTheme"/>
         <activity android:name=".AboutActivity" />
-        <activity android:name=".ManualinputActivity"
+        <activity
+            android:name=".ManualinputActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.login.ANULogin"

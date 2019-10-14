@@ -50,59 +50,45 @@
         android:textSize="18sp"/>
 
     <LinearLayout
+        android:paddingTop="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="My Courses" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="Course Options" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <ScrollView
-            android:layout_width="124dp"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:id="@+id/selected_courses"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/your_courses_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:paddingTop="12dp"
-                    android:text="Your courses"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-        </ScrollView>
+        <ListView
+            android:id="@+id/selected_courses"
+            android:layout_width="125dp"
+            android:layout_height="match_parent" />
 
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="40dp"
             android:background="@android:color/darker_gray" />
 
-        <ScrollView
+
+        <ListView
+            android:id="@+id/course_options"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:id="@+id/course_options"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/course_option_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:paddingTop="12dp"
-                    android:text="Course Options"
-                    android:textSize="18sp" />
-            </LinearLayout>
-        </ScrollView>
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp" />
 
     </LinearLayout>
 

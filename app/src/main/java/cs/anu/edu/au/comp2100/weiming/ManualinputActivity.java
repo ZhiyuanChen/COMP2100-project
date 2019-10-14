@@ -17,8 +17,7 @@ import androidx.preference.PreferenceManager;
 import java.util.ArrayList;
 
 public class ManualinputActivity extends AppCompatActivity implements
-        View.OnClickListener,
-        AdapterView.OnItemSelectedListener {
+        View.OnClickListener{
 
     public static SharedPreferences preferences;
     public static LinearLayout layout;
@@ -122,13 +121,6 @@ public class ManualinputActivity extends AppCompatActivity implements
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-    }
 
     public void setDeleteIndividual(){
         itemsList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
