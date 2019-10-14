@@ -53,7 +53,7 @@ public class ManualinputActivity extends AppCompatActivity implements
         itemET = findViewById(R.id.input_courses);
         btn = findViewById(R.id.addCourse_btn);
 
-        takenCourses = CoursesTakenFileHelper.readData(this);
+        takenCourses = CoursesFileHelper.readData(this, 0);
         itemsList = findViewById(R.id.added_courses);
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, takenCourses);
@@ -106,7 +106,7 @@ public class ManualinputActivity extends AppCompatActivity implements
             itemET.setText("");
 
             //file_helper
-            CoursesTakenFileHelper.writeData(takenCourses, this);
+            CoursesFileHelper.writeData(takenCourses, this, 0);
             Toast toast = Toast.makeText(getApplicationContext(), "Course Added", Toast.LENGTH_SHORT);
             View toastView = toast.getView();
             toastView.getBackground().setColorFilter(getResources().getColor(R.color.green), PorterDuff.Mode.SRC_IN);
@@ -146,7 +146,7 @@ public class ManualinputActivity extends AppCompatActivity implements
                         adapter.notifyDataSetChanged();
 
                         //file_helper
-                        CoursesTakenFileHelper.writeData(takenCourses, getApplicationContext());
+                        CoursesFileHelper.writeData(takenCourses, getApplicationContext(), 0);
                         Toast toast = Toast.makeText(getApplicationContext(), "Course Deleted", Toast.LENGTH_SHORT);
                         View toastView = toast.getView();
                         toastView.getBackground().setColorFilter(getResources().getColor(R.color.pink), PorterDuff.Mode.SRC_IN);

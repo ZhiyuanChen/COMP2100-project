@@ -6,24 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingTop="10dp"
     tools:context=".ManageActivity" >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
         android:layout_marginLeft="10dp"
-        android:text="My Courses" />
+        android:text="Current Courses"
+        android:textSize="18sp" />
 
-    <ScrollView
+    <ListView
+        android:id="@+id/courseManage"
         android:layout_width="match_parent"
-        android:layout_height="194dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+        android:layout_height="250dp" />
 
     <View
         android:layout_width="match_parent"
@@ -35,17 +31,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
         android:layout_marginLeft="10dp"
-        android:text="Others" />
+        android:paddingTop="6dp"
+        android:text="Other events"
+        android:textSize="18sp" />
 
-    <ScrollView
+    <ListView
+        android:id="@+id/otherManage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
 </LinearLayout>

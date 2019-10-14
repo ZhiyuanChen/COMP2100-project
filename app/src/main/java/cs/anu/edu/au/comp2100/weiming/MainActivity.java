@@ -33,9 +33,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.preference.PreferenceManager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import petrov.kristiyan.colorpicker.ColorPicker;
 
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity
     public static int mWeekViewType;
     public static int defaultEventLength;
     public static ArrayList<WeekViewEvent> events;
+    public static boolean ampmMode;
 
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 3;
@@ -125,8 +128,8 @@ public class MainActivity extends AppCompatActivity
         int eventColor = preferences.getInt("eventColor", getResources().getColor(R.color.colorAccent));
         defaultEventColor = eventColor;
 
-        boolean ampmMode = preferences.getBoolean("ampmMode", false);
-        setupDateTimeInterpreter(ampmMode);
+        boolean ampm = preferences.getBoolean("ampmMode", false);
+        ampmMode = ampm;
 
         String startHr = preferences.getString("startHr", "now");
         goTo(startHr);
@@ -311,7 +314,8 @@ public class MainActivity extends AppCompatActivity
         builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                WeekViewEvent event = new WeekViewEvent(0, enterName.getText().toString(), enterLocation.getText().toString(), startTime, endTime);
+                int id = events.size() + 1;
+                WeekViewEvent event = new WeekViewEvent(id, enterName.getText().toString(), enterLocation.getText().toString(), startTime, endTime);
                 event.setColor(eventColor[0]);
 
                 onMonthChange(startYr, startMon);
@@ -466,6 +470,7 @@ public class MainActivity extends AppCompatActivity
     public static void changeView(int visibleDays){
         mWeekView.setNumberOfVisibleDays(visibleDays);
         mWeekViewType = visibleDays;
+        setupDateTimeInterpreter(ampmMode, visibleDays == 7);
     }
 
 
@@ -487,12 +492,16 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public static void setupDateTimeInterpreter(final boolean ampmMode) {
-        final DateTimeInterpreter temp = mWeekView.getDateTimeInterpreter();
+    public static void setupDateTimeInterpreter(final boolean ampmMode, final boolean shortDate) {
         mWeekView.setDateTimeInterpreter(new DateTimeInterpreter() {
             @Override
             public String interpretDate(Calendar date) {
-                return temp.interpretDate(date);
+                SimpleDateFormat weekdayNameFormat = new SimpleDateFormat("EEE", Locale.getDefault());
+                String weekday = weekdayNameFormat.format(date.getTime());
+                SimpleDateFormat format = new SimpleDateFormat(" M/d", Locale.getDefault());
+
+                if (shortDate) return format.format(date.getTime());
+                return weekday.toUpperCase() + format.format(date.getTime());
             }
 
             @Override
@@ -580,11 +589,29 @@ public class MainActivity extends AppCompatActivity
     public static void addEvent(WeekViewEvent event){
         events.add(event);
         EventsFileHelper.writeData(events, context);
+        mWeekView.notifyDatasetChanged();
     }
 
     public static void removeEvent(WeekViewEvent event){
         events.remove(event);
         EventsFileHelper.writeData(events, context);
+        mWeekView.notifyDatasetChanged();
+    }
+
+    public static void addEvents(List<WeekViewEvent> evnts){
+        for(WeekViewEvent event : evnts){
+            events.add(event);
+        }
+        EventsFileHelper.writeData(events, context);
+        mWeekView.notifyDatasetChanged();
+    }
+
+    public static void removeEvents(List<WeekViewEvent> evnts){
+        for(WeekViewEvent event : evnts){
+            if(event.getLocation().length() > 4) events.remove(event);
+        }
+        EventsFileHelper.writeData(events, context);
+        mWeekView.notifyDatasetChanged();
     }
 
     public static ArrayList<WeekViewEvent> getEvents() {

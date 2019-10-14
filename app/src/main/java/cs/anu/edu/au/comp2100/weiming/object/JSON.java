@@ -1,6 +1,10 @@
 package cs.anu.edu.au.comp2100.weiming.object;
 
 
+import android.widget.ListView;
+
+import com.alamkanak.weekview.WeekViewEvent;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -24,25 +28,25 @@ public class JSON {
     private static final String DAY ="day";
 
     private static String absolutePath = new File("").getAbsolutePath();
-    private static String nidpath = absolutePath + "app/src/main/java/cs/anu/edu/au/comp2100/weiming/object/nid.json";
+    private static String nidpath = absolutePath + "/app/src/main/java/cs/anu/edu/au/comp2100/weiming/object/nid.json";
     private static String iidpath = absolutePath + "/app/src/main/java/cs/anu/edu/au/comp2100/weiming/object/iid.json";
     private static String lidpath = absolutePath + "/app/src/main/java/cs/anu/edu/au/comp2100/weiming/object/lid.json";
     private static String evnpath = absolutePath + "/app/src/main/java/cs/anu/edu/au/comp2100/weiming/object/events.json";
 
 
     //nid (course)
-    public static List<Course> loadCourse() {
+    public static List<String> loadCourse() {
         File f = new File(nidpath);
-        List<Course> courses = new ArrayList<>();
+        List<String> courses = new ArrayList<>();
         try {
             JSONArray array = (JSONArray) JSONValue.parse(new FileReader(f));
             for (int i = 0; i <array.size();i++) {
                 String str = (String) array.get(i);
-                Course newCourse = new Course();
-                String[] courseString = str.split("_S2 ");
-                newCourse.setCode(courseString[0]);
-                newCourse.setName(courseString[1]);
-                courses.add(newCourse);
+//                Course newCourse = new Course();
+//                String[] courseString = str.split("_S2 ");
+//                newCourse.setCode(courseString[0]);
+//                newCourse.setName(courseString[1]);
+                courses.add(str);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,11 +71,13 @@ public class JSON {
     }
 
     //event to courseSchedule
-    public static List<CourseSchedule> loadEvent() {
+    public static List<List<WeekViewEvent>> loadEvents(String course) {
         File f = new File(evnpath);
-        List<CourseSchedule> schedules = new ArrayList<>();
+        List<WeekViewEvent> lectures = new ArrayList<>();
+        List<WeekViewEvent> tutorials = new ArrayList<>();
+        List<WeekViewEvent> dropin = new ArrayList<>();
         try {
-            List<Course> courses = new ArrayList<>();
+            List<String> courses = loadInfo(nidpath);
             List <String> types = loadInfo(iidpath);
             List <String> locations = loadInfo(lidpath);
             JSONArray array = (JSONArray) JSONValue.parse(new FileReader(f));
@@ -79,38 +85,65 @@ public class JSON {
                 JSONObject obj = (JSONObject) array.get(i);
 
                 int courseId = Integer.parseInt(obj.get(NID).toString());
-                Course course = courses.get(courseId);
-                String courseName = course.getCode() + " " + course.getName();
+                String[] courseInfo = courses.get(courseId).split("_S2 ");
+                String courseCode = courseInfo[0];
 
-                int typeId = Integer.parseInt(obj.get(IID).toString());
-                String type = types.get(typeId);
+                if(courseCode.equals(course)){
+                    int typeId = Integer.parseInt(obj.get(IID).toString());
+                    String type = types.get(typeId);
+                    String subType = type.substring(0, 3);
 
-                int locationId = Integer.parseInt(obj.get(LID).toString());
-                String location = locations.get(locationId);
+                    int locationId = Integer.parseInt(obj.get(LID).toString());
+                    String location = locations.get(locationId);
 
-                double durationD = Double.parseDouble(obj.get(DUR).toString());
-                int duration = (int) durationD*60;
+                    double durationD = Double.parseDouble(obj.get(DUR).toString());
+                    int duration = (int) durationD*60;
 
-                int day = Integer.parseInt(obj.get(DAY).toString());
+                    int day = Integer.parseInt(obj.get(DAY).toString());
 
-                double start = Double.parseDouble(obj.get(START).toString());
+                    double start = Double.parseDouble(obj.get(START).toString());
 
-                String weeksStr = (String) obj.get(WEEKS);
-                List<Integer> weeks = parseWeeks(weeksStr);
-                for(int week : weeks){
-                    Calendar startTime = weekToDate(week, day);
-                    int[] time = parseStartTime(start);
-                    startTime.set(Calendar.HOUR_OF_DAY, time[0]);
-                    startTime.set(Calendar.MINUTE, time[1]);
-                    CourseSchedule schedule = new CourseSchedule(course, type, startTime, duration, location);
-                    schedules.add(schedule);
+                    String weeksStr = (String) obj.get(WEEKS);
+                    List<Integer> weeks = parseWeeks(weeksStr);
+                    for(int week : weeks){
+                        Calendar startTime = weekToDate(week, day);
+                        Calendar endTime = weekToDate(week, day);
+
+                        int[] time = parseStartTime(start);
+                        startTime.set(Calendar.HOUR_OF_DAY, time[0]);
+                        startTime.set(Calendar.MINUTE, time[1]);
+                        endTime.set(Calendar.HOUR_OF_DAY, time[0]);
+                        endTime.set(Calendar.MINUTE, time[1]);
+                        endTime.add(Calendar.MINUTE, duration);
+
+                        WeekViewEvent schedule = new WeekViewEvent();
+                        schedule.setName(courseCode + " " + type);
+                        schedule.setLocation(location);
+                        schedule.setStartTime(startTime);
+                        schedule.setEndTime(endTime);
+
+                        if(subType.equals("Lec")){
+                            lectures.add(schedule);
+                        }
+                        else if(subType.equals("Drp")){
+                            dropin.add(schedule);
+                        }
+                        else{
+                            tutorials.add(schedule);
+                        }
+                    }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return schedules;
+        List<List<WeekViewEvent>> result = new ArrayList<>();
+        result.add(lectures);
+        result.add(tutorials);
+        result.add(dropin);
+        return result;
     }
+
 
 
     public static List<Integer> parseWeeks(String weeksStr){
@@ -140,12 +173,21 @@ public class JSON {
         return calendar;
     }
 
+
     public static int[] parseStartTime(Double time){
         int hour = (int) Math.floor(time);
         int miniute = (int) ((time - hour)*60);
         return new int[]{hour, miniute};
     }
 
+
+
     public static void main(String[] args) {
+        List<List<WeekViewEvent>> test = JSON.loadEvents("COMP2100");
+        for(List<WeekViewEvent> list : test){
+            for(WeekViewEvent weekViewEvent : list){
+                System.out.println(weekViewEvent.getName() +" "+ weekViewEvent.getLocation() +" "+ weekViewEvent.getStartTime().getTime().getDay());
+            }
+        }
     }
 }

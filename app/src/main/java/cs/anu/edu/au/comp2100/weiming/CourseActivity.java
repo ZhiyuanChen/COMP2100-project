@@ -2,6 +2,7 @@ package cs.anu.edu.au.comp2100.weiming;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,12 +22,19 @@ import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
 
+import com.alamkanak.weekview.WeekViewEvent;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import cs.anu.edu.au.comp2100.weiming.object.JSON;
 
 
 public class CourseActivity extends AppCompatActivity implements View.OnClickListener{
@@ -40,7 +48,9 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
     public String currentCollege;
     public String currentField;
     public ListView courseOptionsView;
+    public ListView selectedCoursesView;
     public ArrayAdapter<String> optionAdapter;
+    public ArrayAdapter<String> selectAdapter;
 
 
     @Override
@@ -50,6 +60,7 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         layout = findViewById(R.id.course_layout);
         courseOptionsView = findViewById(R.id.course_options);
+        selectedCoursesView = findViewById(R.id.selected_courses);
 
         //select college
         collegeSpinner = findViewById(R.id.input_college_spinner);
@@ -113,12 +124,12 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
         courseOptions = new ArrayList<>();
         optionAdapter = new ArrayAdapter<>(this, R.layout.custom_listview, courseOptions);
         courseOptionsView.setAdapter(optionAdapter);
-        courseOptionsView.setLongClickable(true);
         loadCourseOptions();
 
-        courseOptionsView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            public boolean onItemLongClick(AdapterView<?> parent, View v, final int position, long id) {
-                String course = courseOptions.get(position).split("\n")[0];
+        courseOptionsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final String course = courseOptions.get(position).split("\n")[0];
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(CourseActivity.this);
                 builder.setCancelable(true);
@@ -135,14 +146,68 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
                 builder.setPositiveButton("SELECT", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-//                        courseOptions.remove(position);
-//                        optionAdapter.notifyDataSetChanged();
-//
-//                        //file_helper
-//                        CoursesTakenFileHelper.writeData(courseOptions, getApplicationContext());
-                        Toast toast = Toast.makeText(getApplicationContext(), "Course Selected!", Toast.LENGTH_SHORT);
+                        if(selectedCourses.contains(course)){
+                            Toast toast = Toast.makeText(getApplicationContext(), "Course Duplicate", Toast.LENGTH_SHORT);
+                            View toastView = toast.getView();
+                            toastView.getBackground().setColorFilter(getResources().getColor(R.color.pink), PorterDuff.Mode.SRC_IN);
+                            toast.show();
+                        }
+                        else {
+                            selectedCourses.add(course);
+                            selectAdapter.notifyDataSetChanged();
+                            //file_helper
+                            CoursesFileHelper.writeData(selectedCourses, getApplicationContext(), 1);
+                            Toast toast = Toast.makeText(getApplicationContext(), "Course Selected", Toast.LENGTH_SHORT);
+
+                            List<WeekViewEvent> lectures = loadEventsByCourse(course).get(0);
+                            MainActivity.addEvents(lectures);
+
+                            View toastView = toast.getView();
+                            toastView.getBackground().setColorFilter(getResources().getColor(R.color.green), PorterDuff.Mode.SRC_IN);
+                            toast.show();
+                        }
+                    }
+                });
+                builder.show();
+            }
+        });
+
+
+        //selected courses
+        selectedCourses = CoursesFileHelper.readData(this, 1);
+        selectAdapter = new ArrayAdapter<>(this, R.layout.custom_listview, selectedCourses);
+        selectedCoursesView.setAdapter(selectAdapter);
+        selectedCoursesView.setLongClickable(true);
+        selectedCoursesView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                final String course = selectedCourses.get(position);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(CourseActivity.this);
+                builder.setCancelable(true);
+                builder.setTitle("Delete");
+                builder.setMessage("Delete selected course " + course + " ?");
+
+                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+                builder.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        selectedCourses.remove(position);
+                        List<WeekViewEvent> lectures = loadEventsByCourse(course).get(0);
+                        MainActivity.removeEvents(lectures);
+
+                        selectAdapter.notifyDataSetChanged();
+                        //file_helper
+                        CoursesFileHelper.writeData(selectedCourses, getApplicationContext(), 1);
+                        Toast toast = Toast.makeText(getApplicationContext(), "Course Deleted", Toast.LENGTH_SHORT);
                         View toastView = toast.getView();
-                        toastView.getBackground().setColorFilter(getResources().getColor(R.color.green), PorterDuff.Mode.SRC_IN);
+                        toastView.getBackground().setColorFilter(getResources().getColor(R.color.pink), PorterDuff.Mode.SRC_IN);
                         toast.show();
                     }
                 });
@@ -150,6 +215,7 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
                 return true;
             }
         });
+
 
         //Return button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -192,10 +258,10 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    public String loadJSONFromAsset() {
-        String json = null;
+    public String loadJSONFromAsset(String filename) {
+        String json;
         try {
-            InputStream is = this.getAssets().open("nid.json");
+            InputStream is = this.getAssets().open(filename);
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -208,10 +274,11 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
         return json;
     }
 
+
     public void loadCourseOptions(){
         try {
-            JSONArray array = new JSONArray(loadJSONFromAsset());
-            for (int i = 0; i < array.length();i++) {
+            JSONArray array = new JSONArray(loadJSONFromAsset("nid.json"));
+            for (int i = 0; i < array.length();i ++) {
                 String str = (String) array.get(i);
                 String[] split = str.split("_S2 ");
                 String field = split[0].substring(0, 4);
@@ -223,6 +290,83 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public List<List<WeekViewEvent>> loadEventsByCourse(String course){
+        List<WeekViewEvent> lectures = new ArrayList<>();
+        List<WeekViewEvent> tutorials = new ArrayList<>();
+        List<WeekViewEvent> dropin = new ArrayList<>();
+        try {
+            JSONArray names = new JSONArray(loadJSONFromAsset("nid.json"));
+            JSONArray types = new JSONArray(loadJSONFromAsset("iid.json"));
+            JSONArray locas = new JSONArray(loadJSONFromAsset("lid.json"));
+            JSONArray evnts = new JSONArray(loadJSONFromAsset("events.json"));
+            for (int i = 0; i < evnts.length(); i++) {
+                JSONObject obj = (JSONObject) evnts.get(i);
+
+                int courseId = Integer.parseInt(obj.get("nid").toString());
+                String courseName = (String) names.get(courseId);
+                String[] courseInfo = courseName.split("_S2 ");
+                String courseCode = courseInfo[0];
+
+                if(courseCode.equals(course)){
+                    int typeId = Integer.parseInt(obj.get("iid").toString());
+                    String type = (String) types.get(typeId);
+                    String subType = type.substring(0, 3);
+
+                    int locationId = Integer.parseInt(obj.get("lid").toString());
+                    String location = (String) locas.get(locationId);
+
+                    double durationD = Double.parseDouble(obj.get("dur").toString());
+                    int duration = (int) durationD*60;
+
+                    int day = Integer.parseInt(obj.get("day").toString());
+
+                    double start = Double.parseDouble(obj.get("start").toString());
+
+                    String weeksStr = (String) obj.get("weeks");
+                    List<Integer> weeks = JSON.parseWeeks(weeksStr);
+                    for(int week : weeks){
+                        Calendar startTime = JSON.weekToDate(week, day);
+                        Calendar endTime = JSON.weekToDate(week, day);
+
+                        int[] time = JSON.parseStartTime(start);
+                        startTime.set(Calendar.HOUR_OF_DAY, time[0]);
+                        startTime.set(Calendar.MINUTE, time[1]);
+                        endTime.set(Calendar.HOUR_OF_DAY, time[0]);
+                        endTime.set(Calendar.MINUTE, time[1]);
+                        endTime.add(Calendar.MINUTE, duration);
+
+                        WeekViewEvent schedule = new WeekViewEvent();
+                        schedule.setName(courseCode + " " + type);
+                        schedule.setLocation(location);
+                        schedule.setStartTime(startTime);
+                        schedule.setEndTime(endTime);
+
+                        if(subType.equals("Lec")){
+                            schedule.setColor(Color.rgb(44, 114, 219));
+                            lectures.add(schedule);
+                        }
+                        else if(subType.equals("Dro")){
+                            schedule.setColor(Color.rgb(53, 204, 108));
+                            dropin.add(schedule);
+                        }
+                        else{
+                            schedule.setColor(Color.rgb(252, 186, 3));
+                            tutorials.add(schedule);
+                        }
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        List<List<WeekViewEvent>> result = new ArrayList<>();
+        result.add(lectures);
+        result.add(tutorials);
+        result.add(dropin);
+        return result;
     }
 
 }

@@ -84,12 +84,6 @@ public class SettingsActivity extends AppCompatActivity{
             Spannable summary2 = new SpannableString("Current color  (" + lineColor +")");
             summary2.setSpan(0, 0, summary2.length(), 0);
             nowLine.setSummary(summary2);
-
-
-            ListPreference startHr = findPreference("startHr");
-            startHr.setValue("midnight");
-            ListPreference eventDuration = findPreference("eventDuration");
-            eventDuration.setValue("60");
         }
 
 
@@ -154,7 +148,7 @@ public class SettingsActivity extends AppCompatActivity{
 
             if (key.equals("ampmMode")) {
                 SwitchPreferenceCompat switchPreference = (SwitchPreferenceCompat) preference;
-                MainActivity.setupDateTimeInterpreter(switchPreference.isChecked());
+                MainActivity.setupDateTimeInterpreter(switchPreference.isChecked(), true);
             }
 
             if(key.equals("dayViews")) {
@@ -186,7 +180,7 @@ public class SettingsActivity extends AppCompatActivity{
                 weekStart.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                     @Override
                     public boolean onPreferenceChange(Preference preference, Object newValue) {
-                        MainActivity.mWeekView.setFirstDayOfWeek(Integer.parseInt(weekStart.getValue()));
+                        MainActivity.mWeekView.setFirstDayOfWeek(Integer.parseInt((String) newValue));
                         return true;
                     }
                 });
@@ -197,6 +191,7 @@ public class SettingsActivity extends AppCompatActivity{
                 eventDuration.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                     @Override
                     public boolean onPreferenceChange(Preference preference, Object newValue) {
+                        MainActivity.defaultEventLength = Integer.parseInt((String) newValue);
                         return true;
                     }
                 });

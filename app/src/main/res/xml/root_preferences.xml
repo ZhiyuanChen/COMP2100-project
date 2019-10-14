@@ -50,7 +50,6 @@
 
         <ListPreference
             app:key="startHr"
-            app:defaultValue="midnight"
             app:entries="@array/starthr_entries"
             app:entryValues="@array/starthr"
             app:title="Start of the day"
@@ -66,7 +65,6 @@
 
         <ListPreference
             app:key="eventDuration"
-            app:defaultValue="60"
             app:entries="@array/duration_entries"
             app:entryValues="@array/duration"
             app:title="Default event duration"

@@ -12,13 +12,21 @@ import java.util.ArrayList;
 
 
 //Hint by github.com/BradTeachesCode/TodoList
-public class CoursesTakenFileHelper {
+public class CoursesFileHelper {
 
-    public static final String FILENAME = "courseTakenInfo.dat";
+    public static final String COURSE_TAKEN = "courseTakenInfo.dat";
+    public static final String COURSE_SELECTED = "courseSelected.dat";
 
-    public static void writeData(ArrayList<String> items, Context context){
+    public static void writeData(ArrayList<String> items, Context context, int mode){
+        String fileName = null;
+        if(mode == 0){
+            fileName = COURSE_TAKEN;
+        }
+        if(mode == 1){
+            fileName = COURSE_SELECTED;
+        }
         try {
-            FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(items);
             oos.close();
@@ -31,14 +39,20 @@ public class CoursesTakenFileHelper {
     }
 
 
-    public static ArrayList<String> readData(Context context){
+    public static ArrayList<String> readData(Context context, int mode){
+        String fileName = null;
+        if(mode == 0){
+            fileName = COURSE_TAKEN;
+        }
+        if(mode == 1){
+            fileName = COURSE_SELECTED;
+        }
         ArrayList<String> itemsList = null;
         try {
-            FileInputStream fis = context.openFileInput(FILENAME);
+            FileInputStream fis = context.openFileInput(fileName);
             ObjectInputStream ois = new ObjectInputStream(fis);
             itemsList = (ArrayList<String>) ois.readObject();
         } catch (FileNotFoundException e) {
-
             itemsList = new ArrayList<>();
             e.printStackTrace();
         } catch (IOException e) {
