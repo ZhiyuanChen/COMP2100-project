@@ -1,6 +1,7 @@
 package cs.anu.edu.au.comp2100.weiming.object;
 
 import java.util.List;
+import java.util.Map;
 
 public class Program {
   private String code;
@@ -13,8 +14,7 @@ public class Program {
   private List<Specialisation> specialization_list;
   private List<Minor> minor_list;
   private List<Major> major_list;
-  private List<List<Course>> requirement_lists;
-  private List<Integer> requirement_unit;
+  private Map<String, List> requirement_map;
 
   public Program(
       String code, String name, String short_name, Career career, int year, int duration) {
@@ -106,20 +106,12 @@ public class Program {
     this.major_list = major_list;
   }
 
-  public List<List<Course>> getRequirementLists() {
-    return requirement_lists;
+  public Map<String, List> getRequirementMap() {
+    return requirement_map;
   }
 
-  public void setRequirementLists(List<List<Course>> requirement_lists) {
-    this.requirement_lists = requirement_lists;
-  }
-
-  public List<Integer> getRequirementUnit() {
-    return requirement_unit;
-  }
-
-  public void setRequirementUnit(List<Integer> requirement_unit) {
-    this.requirement_unit = requirement_unit;
+  public void setRequirementMap(Map<String, List> requirement_map) {
+    this.requirement_map = requirement_map;
   }
 
   public void update(
@@ -127,13 +119,11 @@ public class Program {
       List<Specialisation> specialization_list,
       List<Minor> minor_list,
       List<Major> major_list,
-      List<List<Course>> requirement_lists,
-      List<Integer> requirement_unit) {
+      Map<String, List> requirement_map) {
     setDescription(description);
     setSpecializationList(specialization_list);
     setMinorList(minor_list);
     setMajorList(major_list);
-    setRequirementLists(requirement_lists);
-    setRequirementUnit(requirement_unit);
+    setRequirementMap(requirement_map);
   }
 }
