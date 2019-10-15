@@ -35,11 +35,12 @@
         android:text="My degree"
         android:textSize="18sp"/>
 
-    <Spinner
-        android:id="@+id/info_degree_spinner"
+    <AutoCompleteTextView
+        android:id="@+id/info_degree_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:paddingTop="12dp"/>
 
     <TextView

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/manage_layout"
+    android:id="@+id/tutorial_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="10dp"
-    tools:context=".ManageActivity" >
+    tools:context=".TutorialActivity" >
 
     <TextView
         android:layout_width="match_parent"
@@ -19,7 +18,7 @@
     <ListView
         android:id="@+id/courseManage"
         android:layout_width="match_parent"
-        android:layout_height="250dp" />
+        android:layout_height="210dp" />
 
     <View
         android:layout_width="match_parent"
@@ -33,12 +32,13 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:paddingTop="6dp"
-        android:text="Other events"
+        android:text="Tutorial Enrolment"
         android:textSize="18sp" />
 
-    <ListView
-        android:id="@+id/otherManage"
+    <LinearLayout
+        android:id="@+id/tutorialView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
 
 </LinearLayout>

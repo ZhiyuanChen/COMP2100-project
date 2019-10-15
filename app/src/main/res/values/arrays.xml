@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="dayviews_entries">
         <item>Day View</item>
@@ -188,7 +189,356 @@
         <item>#80FDFBFB</item>
         <item>#80FDF2FA</item>
         <item>#80EBE3DF</item>
-
     </array>
+
+    <string-array name="degrees">
+        <item>Bachelor of Accounting</item>
+        <item>Bachelor of Accounting (Honours)</item>
+        <item>Bachelor of Actuarial Studies</item>
+        <item>Bachelor of Actuarial Studies (Honours)</item>
+        <item>Bachelor of Advanced Computing (Honours)</item>
+        <item>Bachelor of Advanced Computing (Research and Development) (Honours)</item>
+        <item>Bachelor of Applied Data Analytics</item>
+        <item>Bachelor of Applied Data Analytics (Honours)</item>
+        <item>Bachelor of Accounting</item>
+        <item>Bachelor of Accounting (Honours)</item>
+        <item>Bachelor of Actuarial Studies</item>
+        <item>Bachelor of Actuarial Studies (Honours)</item>
+        <item>Bachelor of Advanced Computing (Honours)</item>
+        <item>Bachelor of Advanced Computing (Research and Development) (Honours)</item>
+        <item>Bachelor of Applied Data Analytics</item>
+        <item>Bachelor of Applied Data Analytics (Honours)</item>
+        <item>Bachelor of Archaeological Practice</item>
+        <item>Bachelor of Archaeological Practice (Honours)</item>
+        <item>Bachelor of Art History and Curatorship</item>
+        <item>Bachelor of Art History and Curatorship (Honours)</item>
+        <item>Bachelor of Arts</item>
+        <item>Bachelor of Arts (Honours)</item>
+        <item>Bachelor of Asian Studies</item>
+        <item>Bachelor of Asian Studies (Honours)</item>
+        <item>Bachelor of Asia-Pacific Affairs</item>
+        <item>Bachelor of Asia-Pacific Studies (Year in Asia)</item>
+        <item>Bachelor of Biotechnology</item>
+        <item>Bachelor of Biotechnology (Honours)</item>
+        <item>Bachelor of Business Administration</item>
+        <item>Bachelor of Business Administration (Honours)</item>
+        <item>Bachelor of Classical Studies</item>
+        <item>Bachelor of Classical Studies (Honours)</item>
+        <item>Bachelor of Commerce</item>
+        <item>Bachelor of Commerce (Honours)</item>
+        <item>Bachelor of Criminology</item>
+        <item>Bachelor of Criminology (Honours)</item>
+        <item>Bachelor of Design</item>
+        <item>Bachelor of Design (Honours)</item>
+        <item>Bachelor of Design Arts (Honours)</item>
+        <item>Bachelor of Development Studies</item>
+        <item>Bachelor of Development Studies (Honours)</item>
+        <item>Bachelor of Economics</item>
+        <item>Bachelor of Economics (Honours)</item>
+        <item>Bachelor of Engineering (Honours)</item>
+        <item>Bachelor of Engineering (Research and Development) (Honours)</item>
+        <item>Bachelor of Environment and Sustainability</item>
+        <item>Bachelor of Environment and Sustainability (Honours)</item>
+        <item>Bachelor of Environment and Sustainability Advanced (Honours)</item>
+        <item>Bachelor of Environmental Studies (Honours)</item>
+        <item>Bachelor of European Studies</item>
+        <item>Bachelor of European Studies (Honours)</item>
+        <item>Bachelor of Finance</item>
+        <item>Bachelor of Finance (Honours)</item>
+        <item>Bachelor of Finance, Economics and Statistics (Honours)</item>
+        <item>Bachelor of Genetics</item>
+        <item>Bachelor of Genetics (Honours)</item>
+        <item>Bachelor of Health Science</item>
+        <item>Bachelor of Information Technology</item>
+        <item>Bachelor of Information Technology (Honours)</item>
+        <item>Bachelor of International Business</item>
+        <item>Bachelor of International Business (Honours)</item>
+        <item>Bachelor of International Relations</item>
+        <item>Bachelor of International Relations (Honours)</item>
+        <item>Bachelor of International Security Studies</item>
+        <item>Bachelor of International Security Studies (Honours)</item>
+        <item>Bachelor of Languages</item>
+        <item>Bachelor of Languages (Honours)</item>
+        <item>Bachelor of Latin American Studies (Honours)</item>
+        <item>Bachelor of Laws (Honours)</item>
+        <item>Bachelor of Mathematical Sciences</item>
+        <item>Bachelor of Mathematical Sciences (Honours)</item>
+        <item>Bachelor of Medical Science</item>
+        <item>Bachelor of Medical Science (Honours)</item>
+        <item>Bachelor of Medical Science (Honours)</item>
+        <item>Bachelor of Middle Eastern and Central Asian Studies</item>
+        <item>Bachelor of Middle Eastern and Central Asian Studies (Honours)</item>
+        <item>Bachelor of Music</item>
+        <item>Bachelor of Music (Honours)</item>
+        <item>Bachelor of Pacific Studies</item>
+        <item>Bachelor of Pacific Studies (Honours)</item>
+        <item>Bachelor of Philosophy (Honours) - Arts and Social Science</item>
+        <item>Bachelor of Philosophy (Honours) - Asia and the Pacific</item>
+        <item>Bachelor of Philosophy (Honours) - Science</item>
+        <item>Bachelor of Philosophy (Honours) / Bachelor of Arts (Honours)</item>
+        <item>Bachelor of Philosophy (Honours) / Bachelor of Science (Honours) - ANU as home institution</item>
+        <item>Bachelor of Philosophy (Honours) / Bachelor of Science (Honours) - NUS as home institution</item>
+        <item>Bachelor of Policy Studies (Honours)</item>
+        <item>Bachelor of Political Science</item>
+        <item>Bachelor of Political Science (Honours)</item>
+        <item>Bachelor of Politics, Philosophy and Economics</item>
+        <item>Bachelor of Politics, Philosophy and Economics (Honours)</item>
+        <item>Bachelor of Psychology (Honours)</item>
+        <item>Bachelor of Public Policy</item>
+        <item>Bachelor of Public Policy (Honours)</item>
+        <item>Bachelor of Science</item>
+        <item>Bachelor of Science (Advanced) (Honours)</item>
+        <item>Bachelor of Science (Honours)</item>
+        <item>Bachelor of Science (Psychology)</item>
+        <item>Bachelor of Science (Psychology) (Honours)</item>
+        <item>Bachelor of Social Sciences (Honours in Actuarial Studies and Economics)</item>
+        <item>Bachelor of Software Engineering (Honours)</item>
+        <item>Bachelor of Statistics</item>
+        <item>Bachelor of Statistics (Honours)</item>
+        <item>Bachelor of Studies</item>
+        <item>Bachelor of Visual Arts</item>
+        <item>Bachelor of Visual Arts (Honours)</item>
+        <item>Diploma of Computing</item>
+        <item>Diploma of Creative Design</item>
+        <item>Diploma of Languages</item>
+        <item>Diploma of Liberal Studies</item>
+        <item>Diploma of Music</item>
+        <item>Diploma of Science</item>
+        <item>Doctor of Laws</item>
+        <item>Doctor of Letters</item>
+        <item>Doctor of Medicine</item>
+        <item>Doctor of Medicine and Surgery</item>
+        <item>Doctor of Philosophy (Clinical Psychology)</item>
+        <item>Doctor of Philosophy, ANU College of Business and Economics</item>
+        <item>Doctor of Philosophy, ANU College of Engineering and Computer Science</item>
+        <item>Doctor of Philosophy, ANU College of Law</item>
+        <item>Doctor of Philosophy, ANU Colleges of Science (Joint item ANU-NUS)</item>
+        <item>Doctor of Philosophy, Australian Centre on China in the World</item>
+        <item>Doctor of Philosophy, Australian National Centre for the Public Awareness of Science</item>
+        <item>Doctor of Philosophy, Crawford School of Public Policy</item>
+        <item>Doctor of Philosophy, Culture History and Languages</item>
+        <item>Doctor of Philosophy, Diplomacy</item>
+        <item>Doctor of Philosophy, Fenner School of Environment and Society</item>
+        <item>Doctor of Philosophy, International, Political and Strategic Studies</item>
+        <item>Doctor of Philosophy, John Curtin School of Medical Research</item>
+        <item>Doctor of Philosophy, Mathematical Sciences Institute</item>
+        <item>Doctor of Philosophy, Medical School</item>
+        <item>Doctor of Philosophy, National Centre for Indigenous Studies</item>
+        <item>Doctor of Philosophy, National Security College</item>
+        <item>Doctor of Philosophy, Psychology</item>
+        <item>Doctor of Philosophy, Regulation and Governance</item>
+        <item>Doctor of Philosophy, Research School of Astronomy and Astrophysics</item>
+        <item>Doctor of Philosophy, Research School of Biology</item>
+        <item>Doctor of Philosophy, Research School of Chemistry</item>
+        <item>Doctor of Philosophy, Research School of Earth Sciences</item>
+        <item>Doctor of Philosophy, Research School of Humanities and the Arts</item>
+        <item>Doctor of Philosophy, Research School of Physics and Engineering</item>
+        <item>Doctor of Philosophy, Research School of Population Health</item>
+        <item>Doctor of Philosophy, Research School of Social Sciences</item>
+        <item>Doctor of Philosophy, Science</item>
+        <item>Doctor of Psychology (Clinical)</item>
+        <item>Doctor of Science</item>
+        <item>Executive Master of Public Administration</item>
+        <item>Executive Master of Public Policy</item>
+        <item>Graduate Certificate of Accounting</item>
+        <item>Graduate Certificate of Applied Data Analytics</item>
+        <item>Graduate Certificate of Cyber Security, Strategy and Risk Management</item>
+        <item>Graduate Certificate of Economics</item>
+        <item>Graduate Certificate of Environment</item>
+        <item>Graduate Certificate of Finance and Actuarial Statistics</item>
+        <item>Graduate Certificate of Law</item>
+        <item>Graduate Certificate of Management</item>
+        <item>Graduate Certificate of Military and Defence Studies</item>
+        <item>Graduate Certificate of Military Law</item>
+        <item>Graduate Certificate of Public Health</item>
+        <item>Graduate Certificate of Public Policy</item>
+        <item>Graduate Certificate of Science</item>
+        <item>Graduate Certificate of Studies</item>
+        <item>Graduate Certificate of Studies - Online</item>
+        <item>Graduate Diploma of Applied Data Analytics</item>
+        <item>Graduate Diploma of Business</item>
+        <item>Graduate Diploma of Computing</item>
+        <item>Graduate Diploma of Cyber Security, Strategy and Risk Management</item>
+        <item>Graduate Diploma of Economics</item>
+        <item>Graduate Diploma of Environment</item>
+        <item>Graduate Diploma of International Affairs</item>
+        <item>Graduate Diploma of Legal PracticeMulti-Modal</item>
+        <item>Graduate Diploma of Military and Defence Studies</item>
+        <item>Graduate Diploma of Military Law</item>
+        <item>Graduate Diploma of Public Health</item>
+        <item>Graduate Diploma of Public Policy</item>
+        <item>Graduate Diploma of Science</item>
+        <item>Graduate Diploma of Studies</item>
+        <item>Juris Doctor</item>
+        <item>Juris Doctor (Honours)</item>
+        <item>Master of Accounting</item>
+        <item>Master of Actuarial Practice</item>
+        <item>Master of Actuarial Studies</item>
+        <item>Master of Anthropology</item>
+        <item>Master of Anthropology (Advanced)</item>
+        <item>Master of Applied Anthropology and Participatory Development</item>
+        <item>Master of Applied Anthropology and Participatory Development - Online</item>
+        <item>Master of Applied Anthropology and Participatory Development (Advanced)</item>
+        <item>Master of Applied Anthropology and Participatory Development (Advanced) - Online</item>
+        <item>Master of Applied Data Analytics</item>
+        <item>Master of Applied Economics</item>
+        <item>Master of Applied Finance</item>
+        <item>Master of Archaeological and Evolutionary Science</item>
+        <item>Master of Archaeological and Evolutionary Science (Advanced)</item>
+        <item>Master of Archaeological Science (Advanced)</item>
+        <item>Master of Art History and Curatorial Studies</item>
+        <item>Master of Art History and Curatorial Studies (Advanced)</item>
+        <item>Master of Arts - Arts Administration / Master of Museum and Heritage Studies</item>
+        <item>Master of Asian and Pacific Studies</item>
+        <item>Master of Asian and Pacific Studies (Advanced)</item>
+        <item>Master of Astronomy and Astrophysics (Advanced)</item>
+        <item>Master of Biological Anthropology (Advanced)</item>
+        <item>Master of Biotechnology</item>
+        <item>Master of Biotechnology (Advanced)</item>
+        <item>Master of Business Administration</item>
+        <item>Master of Business Administration (Advanced)</item>
+        <item>Master of Business Information Systems</item>
+        <item>Master of Business Information Systems (Advanced)</item>
+        <item>Master of Classical Studies (Advanced)</item>
+        <item>Master of Climate Change</item>
+        <item>Master of Clinical Psychology</item>
+        <item>Master of Commerce (Advanced)</item>
+        <item>Master of Computing</item>
+        <item>Master of Computing (Advanced)</item>
+        <item>Master of Criminology, Justice and Regulation</item>
+        <item>Master of Criminology, Justice and Regulation (Advanced)</item>
+        <item>Master of Culture Health and Medicine (Advanced)</item>
+        <item>Master of Culture, Health and Medicine</item>
+        <item>Master of Cyber Security, Strategy and Risk Management</item>
+        <item>Master of Demography</item>
+        <item>Master of Demography (Advanced)</item>
+        <item>Master of Design</item>
+        <item>Master of Design (Advanced)</item>
+        <item>Master of Digital Arts (Advanced)</item>
+        <item>Master of Digital Humanities and Public Culture</item>
+        <item>Master of Digital Humanities and Public Culture (Advanced)</item>
+        <item>Master of Diplomacy</item>
+        <item>Master of Diplomacy (Advanced)</item>
+        <item>Master of Earth Sciences (Advanced)</item>
+        <item>Master of Economic Policy</item>
+        <item>Master of Economics</item>
+        <item>Master of Energy Change</item>
+        <item>Master of Energy Change (Advanced)</item>
+        <item>Master of Engineering in Digital Systems and Telecommunications</item>
+        <item>Master of Engineering in Electrical Engineering</item>
+        <item>Master of Engineering in Mechatronics</item>
+        <item>Master of Engineering in Photonics</item>
+        <item>Master of Engineering in Renewable Energy</item>
+        <item>Master of Entrepreneurship and Innovation</item>
+        <item>Master of Entrepreneurship and Innovation (Advanced)</item>
+        <item>Master of Environment</item>
+        <item>Master of Environment (Advanced)</item>
+        <item>Master of Environmental and Resource Economics</item>
+        <item>Master of Environmental Management and Development</item>
+        <item>Master of Environmental Management and Development - Online</item>
+        <item>Master of Environmental Management and Development (Advanced)</item>
+        <item>Master of Environmental Science</item>
+        <item>Master of Environmental Science (Advanced)</item>
+        <item>Master of Finance</item>
+        <item>Master of Financial Economics</item>
+        <item>Master of Financial Management</item>
+        <item>Master of Forestry</item>
+        <item>Master of Forestry (Advanced)</item>
+        <item>Master of General and Applied Linguistics</item>
+        <item>Master of General and Applied Linguistics (Advanced)</item>
+        <item>Master of Globalisation (Advanced)</item>
+        <item>Master of History</item>
+        <item>Master of History (Advanced)</item>
+        <item>Master of Innovation and Professional Practice</item>
+        <item>Master of International and Development Economics</item>
+        <item>Master of International and Development Economics - ANU-Nankai University</item>
+        <item>Master of International Management</item>
+        <item>Master of International Management (Advanced)</item>
+        <item>Master of International Relations</item>
+        <item>Master of International Relations (Advanced)</item>
+        <item>Master of Islam in the Modern World (Advanced)</item>
+        <item>Master of Laws</item>
+        <item>Master of Leadership</item>
+        <item>Master of Leadership (Advanced)</item>
+        <item>Master of Legal Practice</item>
+        <item>Master of Machine Learning and Computer Vision</item>
+        <item>Master of Management (Advanced)</item>
+        <item>Master of Management ANU/Tsinghua</item>
+        <item>Master of Marketing Management</item>
+        <item>Master of Marketing Management (Advanced)</item>
+        <item>Master of Mathematical Sciences (Advanced)</item>
+        <item>Master of Middle Eastern and Central Asian Studies</item>
+        <item>Master of Middle Eastern and Central Asian Studies (Advanced)</item>
+        <item>Master of Military and Defence Studies</item>
+        <item>Master of Military and Defence Studies (Advanced)</item>
+        <item>Master of Military Law</item>
+        <item>Master of Museum and Heritage Studies</item>
+        <item>Master of Museum and Heritage Studies (Advanced)</item>
+        <item>Master of Music (Advanced)</item>
+        <item>Master of National Security Policy</item>
+        <item>Master of National Security Policy (Advanced)</item>
+        <item>Master of Neuroscience</item>
+        <item>Master of Neuroscience (Advanced)</item>
+        <item>Master of Philosophy (MPhil), ANU College of Law</item>
+        <item>Master of Philosophy in Applied Epidemiology</item>
+        <item>Master of Philosophy, ANU College of Business and Economics</item>
+        <item>Master of Philosophy, ANU College of Engineering and Computer Science</item>
+        <item>Master of Philosophy, ANU Colleges of Science</item>
+        <item>Master of Philosophy, ANU Medical School</item>
+        <item>Master of Philosophy, Australian National Centre for the Public Awareness of Science</item>
+        <item>Master of Philosophy, Crawford School of Public Policy</item>
+        <item>Master of Philosophy, Culture, History and Languages</item>
+        <item>Master of Philosophy, Fenner School of Environment and Society</item>
+        <item>Master of Philosophy, International, Political and Strategic Studies</item>
+        <item>Master of Philosophy, John Curtin School of Medical Research</item>
+        <item>Master of Philosophy, Mathematical Sciences Institute</item>
+        <item>Master of Philosophy, National Centre for Indigenous Studies</item>
+        <item>Master of Philosophy, National Security College</item>
+        <item>Master of Philosophy, Psychology</item>
+        <item>Master of Philosophy, Regulation and Governance</item>
+        <item>Master of Philosophy, Research School of Astronomy and Astrophysics</item>
+        <item>Master of Philosophy, Research School of Biology</item>
+        <item>Master of Philosophy, Research School of Chemistry</item>
+        <item>Master of Philosophy, Research School of Earth Sciences</item>
+        <item>Master of Philosophy, Research School of Humanities and the Arts</item>
+        <item>Master of Philosophy, Research School of Physics and Engineering</item>
+        <item>Master of Philosophy, Research School of Population Health</item>
+        <item>Master of Philosophy, Research School of Social Sciences</item>
+        <item>Master of Political Science</item>
+        <item>Master of Political Science (Advanced)</item>
+        <item>Master of Professional Accounting</item>
+        <item>Master of Project Management</item>
+        <item>Master of Project Management (Advanced)</item>
+        <item>Master of Public Administration</item>
+        <item>Master of Public Health</item>
+        <item>Master of Public Health (Advanced)</item>
+        <item>Master of Public Policy</item>
+        <item>Master of Public Policy/Master of Public Policy ANU-U Tokyo</item>
+        <item>Master of Public Policy/Master of Public Policy ANU-U Tokyo</item>
+        <item>Master of Science (Advanced) in Biological Sciences</item>
+        <item>Master of Science (Advanced) in Nuclear Science</item>
+        <item>Master of Science (Advanced) in Precision Instrumentation and Measurement</item>
+        <item>Master of Science (Advanced) in Quantitative Biology and Bioinformatics</item>
+        <item>Master of Science (Advanced) in Quantum Technology</item>
+        <item>Master of Science Communication</item>
+        <item>Master of Science Communication Outreach</item>
+        <item>Master of Science in Biological Sciences</item>
+        <item>Master of Science in Nuclear Science</item>
+        <item>Master of Science in Precision Instrumentation and Measurement</item>
+        <item>Master of Science in Quantitative Biology and Bioinformatics</item>
+        <item>Master of Science in Quantum Technology</item>
+        <item>Master of Science in Science Communication</item>
+        <item>Master of Social Research</item>
+        <item>Master of Social Research (Advanced)</item>
+        <item>Master of Statistics</item>
+        <item>Master of Strategic Studies</item>
+        <item>Master of Strategic Studies (Advanced)</item>
+        <item>Master of Studies</item>
+        <item>Master of Studies (Advanced)</item>
+        <item>Master of Translation</item>
+        <item>Master of Translation (Advanced)</item>
+        <item>Master of Visual Arts</item>
+        <item>Master of Visual Arts (Advanced)</item>
+    </string-array>
 
 </resources>

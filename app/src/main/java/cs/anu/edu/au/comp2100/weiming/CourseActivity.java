@@ -159,8 +159,12 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
                             CoursesFileHelper.writeData(selectedCourses, getApplicationContext(), 1);
                             Toast toast = Toast.makeText(getApplicationContext(), "Course Selected", Toast.LENGTH_SHORT);
 
-                            List<WeekViewEvent> lectures = loadEventsByCourse(course).get(0);
+                            //Add to weekView
+                            List<List<WeekViewEvent>> events = loadEventsByCourse(course);
+                            List<WeekViewEvent> lectures = events.get(0);
+                            List<WeekViewEvent> dropins = events.get(2);
                             MainActivity.addEvents(lectures);
+                            MainActivity.addEvents(dropins);
 
                             View toastView = toast.getView();
                             toastView.getBackground().setColorFilter(getResources().getColor(R.color.green), PorterDuff.Mode.SRC_IN);
@@ -199,10 +203,13 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         selectedCourses.remove(position);
-                        List<WeekViewEvent> lectures = loadEventsByCourse(course).get(0);
+                        List<List<WeekViewEvent>> events = loadEventsByCourse(course);
+                        List<WeekViewEvent> lectures = events.get(0);
+                        List<WeekViewEvent> dropins = events.get(2);
                         MainActivity.removeEvents(lectures);
-
+                        MainActivity.removeEvents(dropins);
                         selectAdapter.notifyDataSetChanged();
+
                         //file_helper
                         CoursesFileHelper.writeData(selectedCourses, getApplicationContext(), 1);
                         Toast toast = Toast.makeText(getApplicationContext(), "Course Deleted", Toast.LENGTH_SHORT);
@@ -304,7 +311,7 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
             JSONArray types = new JSONArray(loadJSONFromAsset("iid.json"));
             JSONArray locas = new JSONArray(loadJSONFromAsset("lid.json"));
             JSONArray evnts = new JSONArray(loadJSONFromAsset("events.json"));
-            for (int i = 0; i < evnts.length(); i++) {
+            for (int i = 0; i < evnts.length(); i ++) {
                 JSONObject obj = (JSONObject) evnts.get(i);
 
                 int courseId = Integer.parseInt(obj.get("nid").toString());
@@ -321,7 +328,7 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
                     String location = (String) locas.get(locationId);
 
                     double durationD = Double.parseDouble(obj.get("dur").toString());
-                    int duration = (int) durationD*60;
+                    int duration = (int) (durationD*60);
 
                     int day = Integer.parseInt(obj.get("day").toString());
 
@@ -339,19 +346,22 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
                         endTime.set(Calendar.HOUR_OF_DAY, time[0]);
                         endTime.set(Calendar.MINUTE, time[1]);
                         endTime.add(Calendar.MINUTE, duration);
-
                         WeekViewEvent schedule = new WeekViewEvent();
+                        String name = courseCode + " " + type;
+                        schedule.setId(startTime.get(Calendar.MONTH)*100 + startTime.get(Calendar.DAY_OF_MONTH) + name.hashCode());
                         schedule.setName(courseCode + " " + type);
                         schedule.setLocation(location);
                         schedule.setStartTime(startTime);
                         schedule.setEndTime(endTime);
 
                         if(subType.equals("Lec")){
+                            schedule.setName(courseCode + "\nLecture");
                             schedule.setColor(Color.rgb(44, 114, 219));
                             lectures.add(schedule);
                         }
                         else if(subType.equals("Dro")){
-                            schedule.setColor(Color.rgb(53, 204, 108));
+                            schedule.setName(courseCode + "\nDrop-in");
+                            schedule.setColor(Color.rgb(130, 130, 130));
                             dropin.add(schedule);
                         }
                         else{
