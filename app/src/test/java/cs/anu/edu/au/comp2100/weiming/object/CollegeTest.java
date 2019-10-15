@@ -17,3 +17,4 @@ public class CollegeTest {
     assertEquals(cecs.getName(), "College of Engineering and Computer Science");
   }
 }
+

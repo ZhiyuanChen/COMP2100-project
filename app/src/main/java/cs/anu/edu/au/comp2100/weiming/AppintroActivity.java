@@ -9,7 +9,7 @@ import android.os.Bundle;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
-public class AppintroActivity extends AppIntro {
+public class AppintroActivity extends AppIntro { //this class is about app instructions
 
   String[] Headings = {
     "Welcome to WeiMing Timetable",
@@ -32,7 +32,7 @@ public class AppintroActivity extends AppIntro {
     };
 
 
-    String[] Description = {
+    String[] Description = { //one line text for each page
             "Smart timetable assistant \n Help manage uni schedule at ease",
             "Updated with official ANU course information \n Support ANU account log in",
             "Enrol nid.json and tutorial from list",
@@ -48,7 +48,7 @@ public class AppintroActivity extends AppIntro {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int[] Colors = {
+        int[] Colors = { //different color background for each page
                 ContextCompat.getColor(getApplicationContext(), R.color.slide1),
                 ContextCompat.getColor(getApplicationContext(), R.color.slide2),
                 ContextCompat.getColor(getApplicationContext(), R.color.slide3),
@@ -58,7 +58,7 @@ public class AppintroActivity extends AppIntro {
                 ContextCompat.getColor(getApplicationContext(), R.color.slide7),
         };
 
-        for(int i = 0; i < Headings.length; i ++){
+        for(int i = 0; i < Headings.length; i ++){ //build pages
             addSlide(AppIntroFragment.newInstance(Headings[i], Description[i], Images[i], Colors[i]));
         }
         setFadeAnimation();

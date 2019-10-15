@@ -258,6 +258,7 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    //
     public String loadJSONFromAsset(String filename) {
         String json;
         try {
@@ -274,7 +275,7 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
         return json;
     }
 
-
+    //add course (with course name and course ID) options
     public void loadCourseOptions(){
         try {
             JSONArray array = new JSONArray(loadJSONFromAsset("nid.json"));
@@ -293,6 +294,7 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
+    //input a course name, output a list of relative course events & set colors respectively for different course types.
     public List<List<WeekViewEvent>> loadEventsByCourse(String course){
         List<WeekViewEvent> lectures = new ArrayList<>();
         List<WeekViewEvent> tutorials = new ArrayList<>();
