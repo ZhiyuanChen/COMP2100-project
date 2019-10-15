@@ -1,6 +1,6 @@
 package cs.anu.edu.au.comp2100.weiming.object;
 
-enum Career {
+public enum Career {
     Undergraduate("Undergraduate", 0),
     Postgraduate("Postgraduate", 1),
     Research("Research", 2),
