@@ -21,12 +21,12 @@ public class Course {
     this.year = year;
   }
 
-  public Course(String code, String name){
+  public Course(String code, String name) {
     this.code = code;
     this.name = name;
   }
 
-  public Course(){}
+  public Course() {}
 
   public String getCode() {
     return code;
@@ -139,4 +139,3 @@ enum Session {
     this.index = index;
   }
 }
-
