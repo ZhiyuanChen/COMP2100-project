@@ -7,7 +7,7 @@ public class Program {
   private String code;
   private String name;
   private String shortName;
-  private Career career;
+  private String career;
   private int year;
   private int duration;
   private String description;
@@ -17,7 +17,7 @@ public class Program {
   private Map<String, List> requirementMap;
 
   public Program(
-      String code, String name, String shortName, Career career, int year, int duration) {
+      String code, String name, String shortName, String career, int year, int duration) {
     this.code = code;
     this.name = name;
     this.shortName = shortName;
@@ -50,11 +50,11 @@ public class Program {
     this.shortName = shortName;
   }
 
-  public Career getCareer() {
+  public String getCareer() {
     return career;
   }
 
-  public void setCareer(Career career) {
+  public void setCareer(String career) {
     this.career = career;
   }
 
