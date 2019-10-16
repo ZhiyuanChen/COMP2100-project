@@ -16,7 +16,7 @@ import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 
-public class ManualinputActivity extends AppCompatActivity implements
+public class InfoActivity extends AppCompatActivity implements
         View.OnClickListener{
 
     public static SharedPreferences preferences;
@@ -130,7 +130,7 @@ public class ManualinputActivity extends AppCompatActivity implements
             public boolean onItemLongClick(AdapterView<?> parent, View v, final int position, long id) {
                 String course = takenCourses.get(position);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(ManualinputActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(InfoActivity.this);
                 builder.setCancelable(true);
                 builder.setTitle("Delete");
                 builder.setMessage("Delete course "+course+" ?");

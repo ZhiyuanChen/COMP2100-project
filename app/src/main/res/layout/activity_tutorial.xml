@@ -35,14 +35,6 @@
         android:text="Tutorial Enrolment"
         android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/tutorial_title"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginLeft="10dp"
-        android:paddingTop="6dp"
-        android:textSize="18sp" />
-
     <LinearLayout
         android:id="@+id/tutorialView"
         android:layout_width="match_parent"

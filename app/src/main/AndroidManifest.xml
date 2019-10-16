@@ -30,12 +30,11 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".AboutActivity" />
         <activity
-            android:name=".ManualinputActivity"
+            android:name=".InfoActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.login.ANULogin"
             android:label="@string/title_activity_anulogin" />
-        <activity android:name=".LoginActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -31,7 +32,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import cs.anu.edu.au.comp2100.weiming.object.JSON;
 
@@ -40,7 +40,6 @@ public class TutorialActivity extends AppCompatActivity {
     public static SharedPreferences preferences;
     public static LinearLayout layout;
     public ArrayList<String> selectedCourses;
-    public HashMap<String, ArrayList<String>> selectedTutorial;
     public ArrayList<String> selectedTuts;
     public ArrayList<String> availableTuts;
     public ListView courseManage;
@@ -113,6 +112,7 @@ public class TutorialActivity extends AppCompatActivity {
             }
         });
 
+
         //add button
         addTutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,8 +125,14 @@ public class TutorialActivity extends AppCompatActivity {
                     View toastView = toast.getView();
                     toastView.getBackground().setColorFilter(getResources().getColor(R.color.pink), PorterDuff.Mode.SRC_IN);
                     toast.show();
-                    //file_helper
-//                CoursesFileHelper.writeData(takenCourses, this, 0);
+                }
+                //not in suggestion list
+                else if(!isTutorial(tut)){
+                    addTutTxt.setText("");
+                    Toast toast = Toast.makeText(getApplicationContext(), "Not a tutorial", Toast.LENGTH_SHORT);
+                    View toastView = toast.getView();
+                    toastView.getBackground().setColorFilter(getResources().getColor(R.color.pink), PorterDuff.Mode.SRC_IN);
+                    toast.show();
                 }
                 //same type
                 else if(tutSameType(selectedTuts, tut)){
@@ -167,7 +173,7 @@ public class TutorialActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(TutorialActivity.this);
                 builder.setCancelable(true);
                 builder.setTitle("Delete");
-                builder.setMessage("Delete "+tutorial+" ?");
+                builder.setMessage("Delete '"+tutorial+"' ?");
 
                 builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                     @Override
@@ -235,6 +241,17 @@ public class TutorialActivity extends AppCompatActivity {
         return false;
     }
 
+    public boolean isTutorial(String tut){
+        Adapter adapter = addTutTxt.getAdapter();
+        for(int i = 0; i < adapter.getCount(); i ++){
+            String temp = (String) adapter.getItem(i);
+            if(temp.equals(tut)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String loadJSONFromAsset(String filename) {
         String json;
         try {
@@ -280,7 +297,7 @@ public class TutorialActivity extends AppCompatActivity {
                     String day = JSON.convertDay(Integer.parseInt(obj.get("day").toString()));
                     String start = JSON.convertTime(Double.parseDouble(obj.get("start").toString()));
 
-                    String desp = type + "  " + duration + " min  " + day + "  " + start + "  " + location;
+                    String desp = type + " " + duration + "min " + day + " " + start + " " + location;
                     tutorials.add(desp);
                 }
             }

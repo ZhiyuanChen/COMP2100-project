@@ -211,6 +211,7 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
                         selectAdapter.notifyDataSetChanged();
 
                         //file_helper
+                        CoursesFileHelper.writeData(new ArrayList<String>(), getApplicationContext(), course+".dat");
                         CoursesFileHelper.writeData(selectedCourses, getApplicationContext(), "courseSelected.dat");
                         Toast toast = Toast.makeText(getApplicationContext(), "Course Deleted", Toast.LENGTH_SHORT);
                         View toastView = toast.getView();
