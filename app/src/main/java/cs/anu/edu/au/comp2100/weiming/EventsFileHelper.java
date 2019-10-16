@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 //Hint by github.com/BradTeachesCode/TodoList
 
-public class EventsFileHelper {
+public class EventsFileHelper {// save events in the locality
 
     public static final String FILENAME = "events.dat";
 

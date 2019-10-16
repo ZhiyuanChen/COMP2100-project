@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 
 //Hint by github.com/BradTeachesCode/TodoList
-public class CoursesFileHelper {
+public class CoursesFileHelper {//save courses in the locality
 
     public static void writeData(ArrayList<String> items, Context context, String fileName){
         try {

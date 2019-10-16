@@ -9,7 +9,7 @@
     <color name="slide1">#8D8D8D</color>
     <color name="slide2">#0E464E</color>
     <color name="slide3">#AA3F39</color>
-    <color name="slide4">#D8B356</color>
+    <color name="slide4">#CEA131</color>
     <color name="slide5">#042B4B</color>
     <color name="slide6">#B15983</color>
     <color name="slide7">#63AA68</color>
@@ -18,4 +18,5 @@
     <color name="pink">#CCC97B7B</color>
     <color name="green">#CC70C273</color>
     <color name="gray_background">#757575</color>
+    <color name = "light_pink">#FAEBFF</color>
 </resources>
