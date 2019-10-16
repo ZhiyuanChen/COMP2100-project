@@ -7,14 +7,6 @@
               android:layout_height="match_parent"
               android:orientation="vertical" tools:context=".CourseActivity">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@android:color/darker_gray" />
-
     <TextView
         android:id="@+id/input_college_title"
         android:layout_width="match_parent"

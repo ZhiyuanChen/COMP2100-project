@@ -1,8 +1,6 @@
 package cs.anu.edu.au.comp2100.weiming.object;
 
 
-import android.widget.ListView;
-
 import com.alamkanak.weekview.WeekViewEvent;
 
 import org.json.simple.JSONArray;
@@ -14,6 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -97,7 +96,7 @@ public class JSON {
                     String location = locations.get(locationId);
 
                     double durationD = Double.parseDouble(obj.get(DUR).toString());
-                    int duration = (int) durationD*60;
+                    int duration = (int) (durationD*60);
 
                     int day = Integer.parseInt(obj.get(DAY).toString());
 
@@ -173,20 +172,85 @@ public class JSON {
         return calendar;
     }
 
+    public static HashMap<String, List<String>> loadTutorials(String course){
+        File f = new File(evnpath);
+        HashMap<String, List<String>> tutorials = new HashMap<>();
+        try {
+            List<String> courses = loadInfo(nidpath);
+            List <String> types = loadInfo(iidpath);
+            List <String> locations = loadInfo(lidpath);
+            JSONArray array = (JSONArray) JSONValue.parse(new FileReader(f));
+            for (int i = 0; i < array.size(); i ++) {
+                JSONObject obj = (JSONObject) array.get(i);
 
-    public static int[] parseStartTime(Double time){
+                int courseId = Integer.parseInt(obj.get(NID).toString());
+                String[] courseInfo = courses.get(courseId).split("_S2 ");
+                String courseCode = courseInfo[0];
+
+                int typeId = Integer.parseInt(obj.get(IID).toString());
+                String type = types.get(typeId);
+                String subType = type.substring(0, 3);
+
+                if(courseCode.equals(course) && !subType.equals("Lec") & !subType.equals("Dro")){
+                    int locationId = Integer.parseInt(obj.get(LID).toString());
+                    String location = locations.get(locationId);
+
+                    double durationD = Double.parseDouble(obj.get(DUR).toString());
+                    int duration = (int) (durationD*60);
+
+                    String day = convertDay(Integer.parseInt(obj.get(DAY).toString()));
+                    String start = convertTime(Double.parseDouble(obj.get(START).toString()));
+
+                    String title = subType + " " + duration + " min";
+                    String desp = type + " " + day + " " + start + " " + location;
+
+                    if(tutorials.containsKey(title)){
+                        tutorials.get(title).add(desp);
+                    }
+                    else{
+                        List<String> list = new ArrayList<>();
+                        list.add(desp);
+                        tutorials.put(title, list);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return tutorials;
+    }
+
+    public static String convertDay(int day){
+        if(day == 0) return "Mon";
+        if(day == 1) return "Tue";
+        if(day == 2) return "Wed";
+        if(day == 3) return "Thu";
+        if(day == 4) return "Fri";
+        else return null;
+    }
+
+    public static String convertTime(Double time){
         int hour = (int) Math.floor(time);
-        int miniute = (int) ((time - hour)*60);
-        return new int[]{hour, miniute};
+        int minute = (int) ((time - hour)*60);
+        String hr = hour >= 10 ? ""+hour : "0"+hour;
+        String min = minute >= 10 ? ""+minute : "0"+minute;
+        return hr+":"+min;
     }
 
 
+    public static int[] parseStartTime(Double time){
+        int hour = (int) Math.floor(time);
+        int minute = (int) ((time - hour)*60);
+        return new int[]{hour, minute};
+    }
+
 
     public static void main(String[] args) {
-        List<List<WeekViewEvent>> test = JSON.loadEvents("COMP2100");
-        for(List<WeekViewEvent> list : test){
-            for(WeekViewEvent weekViewEvent : list){
-                System.out.println(weekViewEvent.getName() +" "+ weekViewEvent.getLocation() +" "+ weekViewEvent.getStartTime().getTime().getDay());
+        HashMap<String, List<String>> test = JSON.loadTutorials("COMP1720");
+        for(String key : test.keySet()){
+            System.out.println(key);
+            for(String string : test.get(key)){
+                System.out.println(string);
             }
         }
     }

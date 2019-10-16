@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity //home page
     public static int defaultEventLength;
     public static ArrayList<WeekViewEvent> events;
     public static boolean ampmMode;
+    public static String startHr;
 
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 3;
@@ -131,7 +132,7 @@ public class MainActivity extends AppCompatActivity //home page
         boolean ampm = preferences.getBoolean("ampmMode", false);
         ampmMode = ampm;
 
-        String startHr = preferences.getString("startHr", "now");
+        startHr = preferences.getString("startHr", "now");
         goTo(startHr);
 
         int weekStart = Integer.parseInt(preferences.getString("weekStart", "0"));
@@ -145,7 +146,6 @@ public class MainActivity extends AppCompatActivity //home page
 
     @Override
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
-        // Populate the week view with some iid.json
         if (newMonth == Calendar.getInstance().get(Calendar.MONTH))
             return events;
         else {
@@ -314,15 +314,13 @@ public class MainActivity extends AppCompatActivity //home page
         builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                int id = events.size() + 1;
-                WeekViewEvent event = new WeekViewEvent(id, enterName.getText().toString(), enterLocation.getText().toString(), startTime, endTime);
+                WeekViewEvent event = new WeekViewEvent(0, enterName.getText().toString()+"\n",
+                        enterLocation.getText().toString(), startTime, endTime);
+                event.setId(startTime.get(Calendar.MONTH)*1000000 + startTime.get(Calendar.DAY_OF_MONTH)*10000 +
+                        startTime.get(Calendar.HOUR)*100 + startTime.get(Calendar.MINUTE));
                 event.setColor(eventColor[0]);
-
-                onMonthChange(startYr, startMon);
-                mWeekView.notifyDatasetChanged();
-
-                //file_helper
                 addEvent(event);
+                onMonthChange(startYr, startMon);
             }
         });
 
@@ -344,7 +342,7 @@ public class MainActivity extends AppCompatActivity //home page
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setCancelable(true);
         builder.setTitle("Delete");
-        builder.setMessage("Delete event "+ eventStr +" ?");
+        builder.setMessage("Delete event " + eventStr +" ?");
 
         builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
@@ -356,9 +354,6 @@ public class MainActivity extends AppCompatActivity //home page
         builder.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                System.out.println(events.size());
-                mWeekView.notifyDatasetChanged();
-
                 removeEvent(event);
             }
         });
@@ -373,7 +368,6 @@ public class MainActivity extends AppCompatActivity //home page
     public void onEmptyViewLongPress(Calendar time) {
         addEvent(time);
     }
-
 
 
     //Action bar set up
@@ -463,14 +457,12 @@ public class MainActivity extends AppCompatActivity //home page
         addEvent(now);
     }
 
-
-
-
     // Extended functions for weekView
     public static void changeView(int visibleDays){
         mWeekView.setNumberOfVisibleDays(visibleDays);
         mWeekViewType = visibleDays;
         setupDateTimeInterpreter(ampmMode, visibleDays == 7);
+        goTo(startHr);
     }
 
 
@@ -549,8 +541,12 @@ public class MainActivity extends AppCompatActivity //home page
             Intent infoIntent = new Intent(this, CourseActivity.class);
             startActivity(infoIntent);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        } else if (id == R.id.nav_manage) {
-            Intent infoIntent = new Intent(this, ManageActivity.class);
+        } else if (id == R.id.nav_tutorial) {
+            Intent infoIntent = new Intent(this, TutorialActivity.class);
+            startActivity(infoIntent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        } else if (id == R.id.nav_conflict) {
+            Intent infoIntent = new Intent(this, ConflictActivity.class);
             startActivity(infoIntent);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         } else if (id == R.id.nav_settings) {
@@ -587,15 +583,16 @@ public class MainActivity extends AppCompatActivity //home page
     }
 
     public static void addEvent(WeekViewEvent event){
+        //event.setId(events.size());
         events.add(event);
-        EventsFileHelper.writeData(events, context);
         mWeekView.notifyDatasetChanged();
+        EventsFileHelper.writeData(events, context);
     }
 
     public static void removeEvent(WeekViewEvent event){
         events.remove(event);
-        EventsFileHelper.writeData(events, context);
         mWeekView.notifyDatasetChanged();
+        EventsFileHelper.writeData(events, context);
     }
 
     public static void addEvents(List<WeekViewEvent> evnts){
@@ -608,7 +605,7 @@ public class MainActivity extends AppCompatActivity //home page
 
     public static void removeEvents(List<WeekViewEvent> evnts){
         for(WeekViewEvent event : evnts){
-            if(event.getLocation().length() > 4) events.remove(event);
+            events.remove(event);
         }
         EventsFileHelper.writeData(events, context);
         mWeekView.notifyDatasetChanged();

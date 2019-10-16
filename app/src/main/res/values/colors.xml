@@ -15,8 +15,8 @@
     <color name="slide7">#63AA68</color>
 
     <color name="yellow">#FFBB33</color>
-    <color name="pink">#B5C97B7B</color>
-    <color name="green">#B570C273</color>
+    <color name="pink">#CCC97B7B</color>
+    <color name="green">#CC70C273</color>
     <color name="gray_background">#757575</color>
     <color name = "light_pink">#FAEBFF</color>
 </resources>

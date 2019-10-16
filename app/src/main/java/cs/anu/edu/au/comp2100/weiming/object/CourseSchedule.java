@@ -12,50 +12,52 @@ public class CourseSchedule extends Schedule {
   private Calendar end_time;
   private String location;
 
-  //constructor with all
-  public CourseSchedule(Course course, String category, Calendar start_time, Calendar end_time, String location) {
+  // constructor with all
+  public CourseSchedule(
+      Course course, String category, Calendar start_time, Calendar end_time, String location) {
     super(start_time, end_time);
     this.course = course;
     this.category = category;
     this.location = location;
   }
 
-  //constructor without location
+  // constructor without location
   public CourseSchedule(Course course, String category, Calendar start_time, Calendar end_time) {
     super(start_time, end_time);
     this.course = course;
     this.category = category;
   }
 
-  //constructor with interval with location
-  public CourseSchedule(Course course, String category, Calendar start_time, int interval, String location) {
+  // constructor with interval with location
+  public CourseSchedule(
+      Course course, String category, Calendar start_time, int interval, String location) {
     super(start_time, interval, location);
     this.course = course;
     this.category = category;
   }
 
-  //constructor with interval without location
+  // constructor with interval without location
   public CourseSchedule(Course course, String category, Calendar start_time, int interval) {
-      super(start_time, interval);
-      this.course = course;
-      this.category = category;
+    super(start_time, interval);
+    this.course = course;
+    this.category = category;
   }
 
   @Override
   public String getName() {
-      String courseCode = this.course.getCode();
-      String category = this.category;
-      return courseCode + " " + category;
+    String courseCode = this.course.getCode();
+    String category = this.category;
+    return courseCode + " " + category;
   }
 
   @Override
   public WeekViewEvent toEvent() {
-      return super.toEvent();
+    return super.toEvent();
   }
 
   @Override
   public void addToEventsList() {
-      super.addToEventsList();
+    super.addToEventsList();
   }
 }
 

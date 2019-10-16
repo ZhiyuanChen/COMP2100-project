@@ -23,14 +23,16 @@ public class ManualinputActivity extends AppCompatActivity implements
     public static LinearLayout layout;
 
     Spinner collegeSpinner;
-    Spinner degreeSpinner;
+    AutoCompleteTextView degreeEdit;
 
     private EditText itemET;
     private Button btn;
     private ListView itemsList;
 
     private ArrayList<String> takenCourses;
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<String> itemAdapter;
+    private ArrayAdapter<CharSequence> collegeAdapter;
+    private ArrayAdapter<CharSequence> degreeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +43,13 @@ public class ManualinputActivity extends AppCompatActivity implements
 
         //spinners
         collegeSpinner = findViewById(R.id.info_college_spinner);
-        ArrayAdapter<CharSequence> colleges = ArrayAdapter.createFromResource(this, R.array.All_ANU_colleges, R.layout.custom_spinner);
-        colleges.setDropDownViewResource(R.layout.custom_spinner);
-        collegeSpinner.setAdapter(colleges);
+        collegeAdapter = ArrayAdapter.createFromResource(this, R.array.All_ANU_colleges, R.layout.custom_spinner);
+        collegeAdapter.setDropDownViewResource(R.layout.custom_spinner);
+        collegeSpinner.setAdapter(collegeAdapter);
 
-        degreeSpinner = findViewById(R.id.info_degree_spinner);
-        //degreeSpinner.setOnItemSelectedListener(this);
+        degreeEdit = findViewById(R.id.info_degree_edit);
+        degreeAdapter = ArrayAdapter.createFromResource(this, R.array.degrees, R.layout.custom_autocomplete);
+        degreeEdit.setAdapter(degreeAdapter);
 
 
         //add a course
@@ -56,10 +59,10 @@ public class ManualinputActivity extends AppCompatActivity implements
         takenCourses = CoursesFileHelper.readData(this, 0);
         itemsList = findViewById(R.id.added_courses);
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, takenCourses);
+        itemAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, takenCourses);
 
         //individual takenCourses
-        itemsList.setAdapter(adapter);
+        itemsList.setAdapter(itemAdapter);
         itemsList.setLongClickable(true);
         setDeleteIndividual();
         setDeleteAll();
@@ -102,7 +105,7 @@ public class ManualinputActivity extends AppCompatActivity implements
         int id = view.getId();
         if(id == R.id.addCourse_btn){
             String itemEntered = itemET.getText().toString();
-            adapter.add(itemEntered);
+            itemAdapter.add(itemEntered);
             itemET.setText("");
 
             //file_helper
@@ -143,7 +146,7 @@ public class ManualinputActivity extends AppCompatActivity implements
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         takenCourses.remove(position);
-                        adapter.notifyDataSetChanged();
+                        itemAdapter.notifyDataSetChanged();
 
                         //file_helper
                         CoursesFileHelper.writeData(takenCourses, getApplicationContext(), 0);
