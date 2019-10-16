@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="cs.anu.edu.au.comp2100.weiming">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -11,8 +12,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".ConflictActivity"></activity>
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ConflictActivity"/>
         <activity
             android:name=".AppintroActivity"
             android:label="App_Intro"
@@ -20,18 +22,19 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".TutorialActivity" />
+        <activity
+            android:name=".TutorialActivity"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".CourseActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".AboutActivity" />
         <activity
-            android:name=".ManualinputActivity"
+            android:name=".InfoActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.login.ANULogin"
             android:label="@string/title_activity_anulogin" />
-        <activity android:name=".LoginActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"

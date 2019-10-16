@@ -12,19 +12,9 @@ import java.util.ArrayList;
 
 
 //Hint by github.com/BradTeachesCode/TodoList
-public class CoursesFileHelper {
+public class CoursesFileHelper {//save courses in the locality
 
-    public static final String COURSE_TAKEN = "courseTakenInfo.dat";
-    public static final String COURSE_SELECTED = "courseSelected.dat";
-
-    public static void writeData(ArrayList<String> items, Context context, int mode){
-        String fileName = null;
-        if(mode == 0){
-            fileName = COURSE_TAKEN;
-        }
-        if(mode == 1){
-            fileName = COURSE_SELECTED;
-        }
+    public static void writeData(ArrayList<String> items, Context context, String fileName){
         try {
             FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -39,14 +29,7 @@ public class CoursesFileHelper {
     }
 
 
-    public static ArrayList<String> readData(Context context, int mode){
-        String fileName = null;
-        if(mode == 0){
-            fileName = COURSE_TAKEN;
-        }
-        if(mode == 1){
-            fileName = COURSE_SELECTED;
-        }
+    public static ArrayList<String> readData(Context context, String fileName){
         ArrayList<String> itemsList = null;
         try {
             FileInputStream fis = context.openFileInput(fileName);

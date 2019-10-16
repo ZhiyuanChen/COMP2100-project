@@ -41,7 +41,7 @@ import java.util.Locale;
 
 import petrov.kristiyan.colorpicker.ColorPicker;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity //home page
         implements NavigationView.OnNavigationItemSelectedListener,
         MonthLoader.MonthChangeListener,
         WeekView.EventClickListener,
@@ -152,8 +152,6 @@ public class MainActivity extends AppCompatActivity
             return new ArrayList<>();
         }
     }
-
-
 
     // Event Handling
 
@@ -534,7 +532,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_edit) {
-            Intent infoIntent = new Intent(this, LoginActivity.class);
+            Intent infoIntent = new Intent(this, InfoActivity.class);
             startActivity(infoIntent);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         } else if (id == R.id.nav_course) {
@@ -570,7 +568,7 @@ public class MainActivity extends AppCompatActivity
 
 
     public void imgbtnPress(View view){
-        Intent infoIntent = new Intent(this, LoginActivity.class);
+        Intent infoIntent = new Intent(this, InfoActivity.class);
         startActivity(infoIntent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }

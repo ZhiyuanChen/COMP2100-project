@@ -27,10 +27,10 @@ public class JSON {
     private static final String DAY ="day";
 
     private static String absolutePath = new File("").getAbsolutePath();
-    private static String nidpath = absolutePath + "/app/src/main/java/cs/anu/edu/au/comp2100/weiming/object/nid.json";
-    private static String iidpath = absolutePath + "/app/src/main/java/cs/anu/edu/au/comp2100/weiming/object/iid.json";
-    private static String lidpath = absolutePath + "/app/src/main/java/cs/anu/edu/au/comp2100/weiming/object/lid.json";
-    private static String evnpath = absolutePath + "/app/src/main/java/cs/anu/edu/au/comp2100/weiming/object/events.json";
+    private static String nidpath = absolutePath + "/src/main/java/cs/anu/edu/au/comp2100/weiming/object/nid.json";
+    private static String iidpath = absolutePath + "/src/main/java/cs/anu/edu/au/comp2100/weiming/object/iid.json";
+    private static String lidpath = absolutePath + "/src/main/java/cs/anu/edu/au/comp2100/weiming/object/lid.json";
+    private static String evnpath = absolutePath + "/src/main/java/cs/anu/edu/au/comp2100/weiming/object/events.json";
 
 
     //nid (course)

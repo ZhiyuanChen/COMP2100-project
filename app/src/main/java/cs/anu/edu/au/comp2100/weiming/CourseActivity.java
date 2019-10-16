@@ -156,7 +156,7 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
                             selectedCourses.add(course);
                             selectAdapter.notifyDataSetChanged();
                             //file_helper
-                            CoursesFileHelper.writeData(selectedCourses, getApplicationContext(), 1);
+                            CoursesFileHelper.writeData(selectedCourses, getApplicationContext(), "courseSelected.dat");
                             Toast toast = Toast.makeText(getApplicationContext(), "Course Selected", Toast.LENGTH_SHORT);
 
                             //Add to weekView
@@ -178,7 +178,7 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
 
 
         //selected courses
-        selectedCourses = CoursesFileHelper.readData(this, 1);
+        selectedCourses = CoursesFileHelper.readData(this, "courseSelected.dat");
         selectAdapter = new ArrayAdapter<>(this, R.layout.custom_listview, selectedCourses);
         selectedCoursesView.setAdapter(selectAdapter);
         selectedCoursesView.setLongClickable(true);
@@ -211,7 +211,8 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
                         selectAdapter.notifyDataSetChanged();
 
                         //file_helper
-                        CoursesFileHelper.writeData(selectedCourses, getApplicationContext(), 1);
+                        CoursesFileHelper.writeData(new ArrayList<String>(), getApplicationContext(), course+".dat");
+                        CoursesFileHelper.writeData(selectedCourses, getApplicationContext(), "courseSelected.dat");
                         Toast toast = Toast.makeText(getApplicationContext(), "Course Deleted", Toast.LENGTH_SHORT);
                         View toastView = toast.getView();
                         toastView.getBackground().setColorFilter(getResources().getColor(R.color.pink), PorterDuff.Mode.SRC_IN);
