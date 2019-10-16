@@ -7,7 +7,7 @@ import java.util.List;
 
 import cs.anu.edu.au.comp2100.weiming.object.Course;
 
-public class ISISImpl {
+public class IsisImpl {
 
     List<Course> getCourseList() {
 
