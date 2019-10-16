@@ -1,18 +1,40 @@
 package cs.anu.edu.au.comp2100.weiming.object;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Map;
 
 abstract class Subject {
-  private String code;
+
+  @SerializedName("Name")
+  @Expose
   private String name;
-  private Career career;
-  private int unit;
-  private int year;
+
+  @SerializedName("Units")
+  @Expose
+  private Double unit;
+
+  @SerializedName("SubPlanCode")
+  @Expose
+  private String code;
+
+  @SerializedName("SubplanType")
+  @Expose
+  private String type;
+
+  @SerializedName("Year")
+  @Expose
+  private Integer year;
+
+  @SerializedName("Career")
+  @Expose
+  private String career;
+
   private String description;
   private Map<String, List> requirementMap;
 
-  Subject(String code, String name, Career career, int unit, int year) {
+  Subject(String code, String name, String career, double unit, int year) {
     this.code = code;
     this.name = name;
     this.career = career;
@@ -36,19 +58,19 @@ abstract class Subject {
     this.name = name;
   }
 
-  public Career getCareer() {
+  public String getCareer() {
     return career;
   }
 
-  public void setCareer(Career career) {
+  public void setCareer(String career) {
     this.career = career;
   }
 
-  public int getUnit() {
+  public double getUnit() {
     return unit;
   }
 
-  public void setUnit(int unit) {
+  public void setUnit(double unit) {
     this.unit = unit;
   }
 
