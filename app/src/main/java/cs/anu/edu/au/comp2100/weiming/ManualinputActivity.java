@@ -48,7 +48,7 @@ public class ManualinputActivity extends AppCompatActivity implements
         collegeSpinner.setAdapter(collegeAdapter);
 
         degreeEdit = findViewById(R.id.info_degree_edit);
-        degreeAdapter = ArrayAdapter.createFromResource(this, R.array.degrees, R.layout.custom_autocomplete);
+        degreeAdapter = ArrayAdapter.createFromResource(this, R.array.degrees, R.layout.custom_listview);
         degreeEdit.setAdapter(degreeAdapter);
 
 
@@ -56,7 +56,7 @@ public class ManualinputActivity extends AppCompatActivity implements
         itemET = findViewById(R.id.input_courses);
         btn = findViewById(R.id.addCourse_btn);
 
-        takenCourses = CoursesFileHelper.readData(this, 0);
+        takenCourses = CoursesFileHelper.readData(this, "courseTakenInfo.dat");
         itemsList = findViewById(R.id.added_courses);
 
         itemAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, takenCourses);
@@ -109,7 +109,7 @@ public class ManualinputActivity extends AppCompatActivity implements
             itemET.setText("");
 
             //file_helper
-            CoursesFileHelper.writeData(takenCourses, this, 0);
+            CoursesFileHelper.writeData(takenCourses, this, "courseTakenInfo.dat");
             Toast toast = Toast.makeText(getApplicationContext(), "Course Added", Toast.LENGTH_SHORT);
             View toastView = toast.getView();
             toastView.getBackground().setColorFilter(getResources().getColor(R.color.green), PorterDuff.Mode.SRC_IN);
@@ -149,7 +149,7 @@ public class ManualinputActivity extends AppCompatActivity implements
                         itemAdapter.notifyDataSetChanged();
 
                         //file_helper
-                        CoursesFileHelper.writeData(takenCourses, getApplicationContext(), 0);
+                        CoursesFileHelper.writeData(takenCourses, getApplicationContext(), "courseTakenInfo.dat");
                         Toast toast = Toast.makeText(getApplicationContext(), "Course Deleted", Toast.LENGTH_SHORT);
                         View toastView = toast.getView();
                         toastView.getBackground().setColorFilter(getResources().getColor(R.color.pink), PorterDuff.Mode.SRC_IN);
