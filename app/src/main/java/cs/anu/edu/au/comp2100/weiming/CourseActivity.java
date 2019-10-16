@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -32,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import cs.anu.edu.au.comp2100.weiming.object.JSON;
@@ -45,6 +47,7 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
     public LinearLayout layout;
     public ArrayList<String> selectedCourses;
     public ArrayList<String> courseOptions;
+    public ArrayList<String> takenCourses;
     public String currentCollege;
     public String currentField;
     public ListView courseOptionsView;
@@ -61,6 +64,7 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
         layout = findViewById(R.id.course_layout);
         courseOptionsView = findViewById(R.id.course_options);
         selectedCoursesView = findViewById(R.id.selected_courses);
+        takenCourses = CoursesFileHelper.readData(this, "courseTakenInfo.dat");
 
         //select college
         collegeSpinner = findViewById(R.id.input_college_spinner);
@@ -234,6 +238,65 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
+    //Basic suggestion according to course taken and selected field from spinner
+    public String getSuggestions() throws JSONException {
+        String result = "";
+
+        //based on taken courses
+        HashMap<Integer, Integer> fields = new HashMap<>();
+        for(String takenCourse : takenCourses){
+            if(takenCourse.substring(0, 4).equals(currentField)){
+                int year = Integer.parseInt(takenCourse.substring(4, 5));
+                if(fields.containsKey(year)){
+                    int number = fields.get(year);
+                    fields.put(year, number+1);
+                }
+                else{
+                    fields.put(year, 1);
+                }
+            }
+        }
+
+        int maxNum = 0;
+        int year = 0;
+        for(int yr : fields.keySet()){
+            int number = fields.get(yr);
+            if(number > maxNum){
+                maxNum = number;
+                year = yr;
+            }
+        }
+
+        int suggestYr = year + 1;
+        String suggest = currentField + suggestYr;
+        Log.d("suggest", suggest);
+
+        ArrayList<String> tips = new ArrayList<>();
+        JSONArray array = new JSONArray(loadJSONFromAsset("nid.json"));
+        for (int i = 0; i < array.length();i ++) {
+            String str = (String) array.get(i);
+            String[] split = str.split("_S2 ");
+            String courseName = split[0];
+            String field = courseName.substring(0, 5);
+            if(field.equals(suggest)){
+                Log.d("match", field);
+                if(!selectedCourses.contains(courseName) && !takenCourses.contains(courseName)){
+                    tips.add(courseName);
+                }
+            }
+        }
+        for(String string : tips){
+            result = result + string + "\n";
+        }
+
+        if(result.isEmpty()){
+            return "No 1000-level course for " + currentField;
+        }
+        return result;
+    }
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -241,16 +304,27 @@ public class CourseActivity extends AppCompatActivity implements View.OnClickLis
             case (android.R.id.home):
                 finish();
                 return true;
-            case (R.id.home):
+            case (R.id.home1):
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
+                return true;
+            case (R.id.suggestion):
+                AlertDialog.Builder builder = new AlertDialog.Builder(CourseActivity.this);
+                builder.setCancelable(true);
+                builder.setTitle("Suggestion");
+                try {
+                    builder.setMessage(getSuggestions());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                builder.show();
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.bar_home, menu);
+        getMenuInflater().inflate(R.menu.bar_course, menu);
         return true;
     }
 
