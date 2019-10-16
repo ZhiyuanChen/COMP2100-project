@@ -1,4 +1,4 @@
-package cs.anu.edu.au.comp2100.weiming.server;
+package cs.anu.edu.au.comp2100.weiming.server.ProgramCourse;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +15,7 @@ public class ProgramCourseImpl implements ProgramCourse {
   }
 
   @Override
-  public List<Program> getDegreeList(String query, Career career) {
+  public List<Program> getDegreeList(String query, String career) {
     return null;
   }
 
@@ -25,7 +25,7 @@ public class ProgramCourseImpl implements ProgramCourse {
   }
 
   @Override
-  public List<Program> getDegreeList(String query, Career career, int year) {
+  public List<Program> getDegreeList(String query, String career, int year) {
     return null;
   }
 
@@ -35,7 +35,7 @@ public class ProgramCourseImpl implements ProgramCourse {
   }
 
   @Override
-  public List<Specialisation> getSpecificationList(String query, Career career) {
+  public List<Specialisation> getSpecificationList(String query, String career) {
     return null;
   }
 
@@ -45,7 +45,7 @@ public class ProgramCourseImpl implements ProgramCourse {
   }
 
   @Override
-  public List<Specialisation> getSpecificationList(String query, Career career, int year) {
+  public List<Specialisation> getSpecificationList(String query, String career, int year) {
     return null;
   }
 
@@ -55,7 +55,7 @@ public class ProgramCourseImpl implements ProgramCourse {
   }
 
   @Override
-  public List<Minor> getMinorList(String query, Career career) {
+  public List<Minor> getMinorList(String query, String career) {
     return null;
   }
 
@@ -65,7 +65,7 @@ public class ProgramCourseImpl implements ProgramCourse {
   }
 
   @Override
-  public List<Minor> getMinorList(String query, Career career, int year) {
+  public List<Minor> getMinorList(String query, String career, int year) {
     return null;
   }
 
@@ -75,7 +75,7 @@ public class ProgramCourseImpl implements ProgramCourse {
   }
 
   @Override
-  public List<Major> getMajorList(String query, Career career) {
+  public List<Major> getMajorList(String query, String career) {
     return null;
   }
 
@@ -85,7 +85,7 @@ public class ProgramCourseImpl implements ProgramCourse {
   }
 
   @Override
-  public List<Major> getMajorList(String query, Career career, int year) {
+  public List<Major> getMajorList(String query, String career, int year) {
     return null;
   }
 

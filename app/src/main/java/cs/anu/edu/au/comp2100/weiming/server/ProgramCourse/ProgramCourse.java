@@ -1,4 +1,4 @@
-package cs.anu.edu.au.comp2100.weiming.server;
+package cs.anu.edu.au.comp2100.weiming.server.ProgramCourse;
 
 import cs.anu.edu.au.comp2100.weiming.object.*;
 
@@ -9,35 +9,35 @@ public interface ProgramCourse {
 
   List<Program> getDegreeList(String query);
 
-  List<Program> getDegreeList(String query, Career career);
+  List<Program> getDegreeList(String query, String career);
 
   List<Program> getDegreeList(String query, int year);
 
-  List<Program> getDegreeList(String query, Career career, int year);
+  List<Program> getDegreeList(String query, String career, int year);
 
   List<Specialisation> getSpecificationList(String query);
 
-  List<Specialisation> getSpecificationList(String query, Career career);
+  List<Specialisation> getSpecificationList(String query, String career);
 
   List<Specialisation> getSpecificationList(String query, int year);
 
-  List<Specialisation> getSpecificationList(String query, Career career, int year);
+  List<Specialisation> getSpecificationList(String query, String career, int year);
 
   List<Minor> getMinorList(String query);
 
-  List<Minor> getMinorList(String query, Career career);
+  List<Minor> getMinorList(String query, String career);
 
   List<Minor> getMinorList(String query, int year);
 
-  List<Minor> getMinorList(String query, Career career, int year);
+  List<Minor> getMinorList(String query, String career, int year);
 
   List<Major> getMajorList(String query);
 
-  List<Major> getMajorList(String query, Career career);
+  List<Major> getMajorList(String query, String career);
 
   List<Major> getMajorList(String query, int year);
 
-  List<Major> getMajorList(String query, Career career, int year);
+  List<Major> getMajorList(String query, String career, int year);
 
   Map<String, List> getRequirementMap(Program program);
 
