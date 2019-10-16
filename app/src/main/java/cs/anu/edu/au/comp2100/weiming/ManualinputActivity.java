@@ -48,7 +48,7 @@ public class ManualinputActivity extends AppCompatActivity implements
         collegeSpinner.setAdapter(collegeAdapter);
 
         degreeEdit = findViewById(R.id.info_degree_edit);
-        degreeAdapter = ArrayAdapter.createFromResource(this, R.array.degrees, R.layout.custom_autocomplete);
+        degreeAdapter = ArrayAdapter.createFromResource(this, R.array.degrees, R.layout.custom_listview);
         degreeEdit.setAdapter(degreeAdapter);
 
 
