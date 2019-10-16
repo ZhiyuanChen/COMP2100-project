@@ -1,15 +1,65 @@
 package cs.anu.edu.au.comp2100.weiming.object;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 import java.util.Map;
 
 public class Program {
+
+  @SerializedName("AcademicPlanCode")
+  @Expose
   private String code;
+
+  @SerializedName("ProgramName")
+  @Expose
   private String name;
+
+  @SerializedName("ShortProgramName")
+  @Expose
   private String shortName;
+
+  @SerializedName("CareerText")
+  @Expose
+  private String careerText;
+
+  @SerializedName("AcademicCareer")
+  @Expose
   private String career;
-  private int year;
-  private int duration;
+
+  @SerializedName("ProgramAcademicYear")
+  @Expose
+  private String year;
+
+  @SerializedName("DegreeIdentifiers")
+  @Expose
+  private List<String> degreeIdentifiers = null;
+
+  @SerializedName("Duration")
+  @Expose
+  private Double duration;
+
+  @SerializedName("Categories")
+  @Expose
+  private Object categories;
+
+  @SerializedName("AnchorDegree")
+  @Expose
+  private Object anchorDegree;
+
+  @SerializedName("ModeOfDelivery")
+  @Expose
+
+  private String modeOfDelivery;
+  @SerializedName("CanCombine")
+  @Expose
+  private Boolean flexible;
+
+  @SerializedName("CanCombineVertical")
+  @Expose
+  private Boolean vertical;
+
   private String description;
   private List<Specialisation> specializationList;
   private List<Minor> minorList;
@@ -17,12 +67,12 @@ public class Program {
   private Map<String, List> requirementMap;
 
   public Program(
-      String code, String name, String shortName, String career, int year, int duration) {
+      String code, String name, String shortName, String career, int year, double duration) {
     this.code = code;
     this.name = name;
     this.shortName = shortName;
     this.career = career;
-    this.year = year;
+    this.year = String.valueOf(year);
     this.duration = duration;
   }
 
@@ -59,18 +109,18 @@ public class Program {
   }
 
   public int getYear() {
-    return year;
+    return Integer.parseInt(year);
   }
 
   public void setYear(int year) {
-    this.year = year;
+    this.year = String.valueOf(year);
   }
 
-  public int getDuration() {
+  public double getDuration() {
     return duration;
   }
 
-  public void setDuration(int duration) {
+  public void setDuration(double duration) {
     this.duration = duration;
   }
 

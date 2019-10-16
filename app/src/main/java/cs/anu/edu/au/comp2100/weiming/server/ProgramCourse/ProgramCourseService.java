@@ -1,6 +1,7 @@
 package cs.anu.edu.au.comp2100.weiming.server.ProgramCourse;
 
 import cs.anu.edu.au.comp2100.weiming.object.CourseResult;
+import cs.anu.edu.au.comp2100.weiming.object.ProgramResult;
 import cs.anu.edu.au.comp2100.weiming.object.SubjectResult;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import retrofit2.http.Query;
 
 public interface ProgramCourseService {
 
+  // Course Result
   @GET("/data/SpecialisationSearch/GetSpecialisations?ShowAll=true")
   Call<List<CourseResult>> getCourseList();
 
@@ -57,6 +59,7 @@ public interface ProgramCourseService {
       @Query("CollegeName") String collegeCode,
       @Query("ModeOfDelivery") String modeOfDelivery);
 
+  // Subject Result
   @GET("/data/SpecialisationSearch/GetSpecialisations?ShowAll=true")
   Call<List<SubjectResult>> getSubjectList();
 
@@ -98,6 +101,54 @@ public interface ProgramCourseService {
 
   @GET("/data/SpecialisationSearch/GetSpecialisations?ShowAll=true")
   Call<List<SubjectResult>> getSubjectListByTextYearCareerCollegeMOD(
+      @Query("SearchText") String text,
+      @Query("SelectedYear") String year,
+      @Query("Careers%5B0%5D") String careers,
+      @Query("CollegeName") String collegeCode,
+      @Query("ModeOfDelivery") String modeOfDelivery);
+
+  // Program Result
+  @GET("/data/SpecialisationSearch/GetSpecialisations?ShowAll=true")
+  Call<List<ProgramResult>> getProgramList();
+
+  @GET("/data/SpecialisationSearch/GetSpecialisations?ShowAll=true")
+  Call<List<ProgramResult>> getProgramList(@Query("SearchText") String text);
+
+  @GET("/data/SpecialisationSearch/GetSpecialisations?ShowAll=true")
+  Call<List<ProgramResult>> getProgramListByTextYear(
+      @Query("SearchText") String text, @Query("SelectedYear") String year);
+
+  @GET("/data/SpecialisationSearch/GetSpecialisations?ShowAll=true")
+  Call<List<ProgramResult>> getProgramListByTextCareer(
+      @Query("SearchText") String text,
+      @Query("Careers%5B0%5D") String career);
+
+  @GET("/data/SpecialisationSearch/GetSpecialisations?ShowAll=true")
+  Call<List<ProgramResult>> getProgramListByTextCollege(
+      @Query("SearchText") String text,
+      @Query("CollegeName") String collegeCode);
+
+  @GET("/data/SpecialisationSearch/GetSpecialisations?ShowAll=true")
+  Call<List<ProgramResult>> getProgramListByTextYearCareer(
+      @Query("SearchText") String text,
+      @Query("SelectedYear") String year,
+      @Query("Careers%5B0%5D") String career);
+
+  @GET("/data/SpecialisationSearch/GetSpecialisations?ShowAll=true")
+  Call<List<ProgramResult>> getProgramListByTextYearCollege(
+      @Query("SearchText") String text,
+      @Query("SelectedYear") String year,
+      @Query("CollegeName") String collegeCode);
+
+  @GET("/data/SpecialisationSearch/GetSpecialisations?ShowAll=true")
+  Call<List<ProgramResult>> getProgramListByTextYearCareerCollege(
+      @Query("SearchText") String text,
+      @Query("SelectedYear") String year,
+      @Query("Careers%5B0%5D") String careers,
+      @Query("CollegeName") String collegeCode);
+
+  @GET("/data/SpecialisationSearch/GetSpecialisations?ShowAll=true")
+  Call<List<ProgramResult>> getProgramListByTextYearCareerCollegeMOD(
       @Query("SearchText") String text,
       @Query("SelectedYear") String year,
       @Query("Careers%5B0%5D") String careers,
