@@ -22,7 +22,9 @@ public class EventsFileHelper {
     public static ArrayList<String> eventsProperties(ArrayList<WeekViewEvent> events){
         ArrayList<String> properties = new ArrayList<>();
         for(WeekViewEvent event : events){
-            String property = event.getName() + "," +
+            String property =
+                    event.getId() + "," +
+                    event.getName() + "," +
                     event.getLocation() + "," +
                     event.getColor() + "," +
                     event.getStartTime().get(Calendar.YEAR) + "," +
@@ -59,7 +61,7 @@ public class EventsFileHelper {
 
     public static ArrayList<WeekViewEvent> readData(Context context){
         ArrayList<WeekViewEvent> events = new ArrayList<>();
-        ArrayList<String> eventsProperties = null;
+        ArrayList<String> eventsProperties;
         try {
             FileInputStream fis = context.openFileInput(FILENAME);
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -67,16 +69,17 @@ public class EventsFileHelper {
             for(String eventProperty : eventsProperties){
                 WeekViewEvent event = new WeekViewEvent();
                 String[] properties = eventProperty.split(",");
-                event.setName(properties[0]);
-                event.setLocation(properties[1]);
-                event.setColor(Integer.parseInt(properties[2]));
+                event.setId(Integer.parseInt(properties[0]));
+                event.setName(properties[1]);
+                event.setLocation(properties[2]);
+                event.setColor(Integer.parseInt(properties[3]));
                 Calendar start = Calendar.getInstance();
-                start.set(Integer.parseInt(properties[3]), Integer.parseInt(properties[4]),
-                        Integer.parseInt(properties[5]), Integer.parseInt(properties[6]), Integer.parseInt(properties[7]));
+                start.set(Integer.parseInt(properties[4]), Integer.parseInt(properties[5]),
+                        Integer.parseInt(properties[6]), Integer.parseInt(properties[7]), Integer.parseInt(properties[8]));
                 event.setStartTime(start);
                 Calendar end = Calendar.getInstance();
-                end.set(Integer.parseInt(properties[8]), Integer.parseInt(properties[9]),
-                        Integer.parseInt(properties[10]), Integer.parseInt(properties[11]), Integer.parseInt(properties[12]));
+                end.set(Integer.parseInt(properties[9]), Integer.parseInt(properties[10]),
+                        Integer.parseInt(properties[11]), Integer.parseInt(properties[12]), Integer.parseInt(properties[13]));
                 event.setEndTime(end);
                 events.add(event);
             }

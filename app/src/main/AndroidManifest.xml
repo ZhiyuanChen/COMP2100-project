@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ConflictActivity"></activity>
         <activity
             android:name=".AppintroActivity"
             android:label="App_Intro"
@@ -19,7 +20,7 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".ManageActivity" />
+        <activity android:name=".TutorialActivity" />
         <activity
             android:name=".CourseActivity"
             android:theme="@style/AppTheme" />
