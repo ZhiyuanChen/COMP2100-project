@@ -8,37 +8,37 @@ public class CourseSchedule extends Schedule {
 
   private Course course;
   private String category;
-  private Calendar start_time;
-  private Calendar end_time;
+  private Calendar startTime;
+  private Calendar endTime;
   private String location;
 
   // constructor with all
   public CourseSchedule(
-      Course course, String category, Calendar start_time, Calendar end_time, String location) {
-    super(start_time, end_time);
+      Course course, String category, Calendar startTime, Calendar endTime, String location) {
+    super(startTime, endTime);
     this.course = course;
     this.category = category;
     this.location = location;
   }
 
   // constructor without location
-  public CourseSchedule(Course course, String category, Calendar start_time, Calendar end_time) {
-    super(start_time, end_time);
+  public CourseSchedule(Course course, String category, Calendar startTime, Calendar endTime) {
+    super(startTime, endTime);
     this.course = course;
     this.category = category;
   }
 
   // constructor with interval with location
   public CourseSchedule(
-      Course course, String category, Calendar start_time, int interval, String location) {
-    super(start_time, interval, location);
+      Course course, String category, Calendar startTime, int interval, String location) {
+    super(startTime, interval, location);
     this.course = course;
     this.category = category;
   }
 
   // constructor with interval without location
-  public CourseSchedule(Course course, String category, Calendar start_time, int interval) {
-    super(start_time, interval);
+  public CourseSchedule(Course course, String category, Calendar startTime, int interval) {
+    super(startTime, interval);
     this.course = course;
     this.category = category;
   }

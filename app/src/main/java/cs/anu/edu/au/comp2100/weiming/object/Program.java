@@ -6,21 +6,21 @@ import java.util.Map;
 public class Program {
   private String code;
   private String name;
-  private String short_name;
+  private String shortName;
   private Career career;
   private int year;
   private int duration;
   private String description;
-  private List<Specialisation> specialization_list;
-  private List<Minor> minor_list;
-  private List<Major> major_list;
-  private Map<String, List> requirement_map;
+  private List<Specialisation> specializationList;
+  private List<Minor> minorList;
+  private List<Major> majorList;
+  private Map<String, List> requirementMap;
 
   public Program(
-      String code, String name, String short_name, Career career, int year, int duration) {
+      String code, String name, String shortName, Career career, int year, int duration) {
     this.code = code;
     this.name = name;
-    this.short_name = short_name;
+    this.shortName = shortName;
     this.career = career;
     this.year = year;
     this.duration = duration;
@@ -43,11 +43,11 @@ public class Program {
   }
 
   public String getShortName() {
-    return short_name;
+    return shortName;
   }
 
-  public void setShortName(String short_name) {
-    this.short_name = short_name;
+  public void setShortName(String shortName) {
+    this.shortName = shortName;
   }
 
   public Career getCareer() {
@@ -83,47 +83,47 @@ public class Program {
   }
 
   public List<Specialisation> getSpecializationList() {
-    return specialization_list;
+    return specializationList;
   }
 
-  public void setSpecializationList(List<Specialisation> specialization_list) {
-    this.specialization_list = specialization_list;
+  public void setSpecializationList(List<Specialisation> specializationList) {
+    this.specializationList = specializationList;
   }
 
   public List<Minor> getMinorList() {
-    return minor_list;
+    return minorList;
   }
 
-  public void setMinorList(List<Minor> minor_list) {
-    this.minor_list = minor_list;
+  public void setMinorList(List<Minor> minorList) {
+    this.minorList = minorList;
   }
 
   public List<Major> getMajorList() {
-    return major_list;
+    return majorList;
   }
 
-  public void setMajorList(List<Major> major_list) {
-    this.major_list = major_list;
+  public void setMajorList(List<Major> majorList) {
+    this.majorList = majorList;
   }
 
   public Map<String, List> getRequirementMap() {
-    return requirement_map;
+    return requirementMap;
   }
 
-  public void setRequirementMap(Map<String, List> requirement_map) {
-    this.requirement_map = requirement_map;
+  public void setRequirementMap(Map<String, List> requirementMap) {
+    this.requirementMap = requirementMap;
   }
 
   public void update(
       String description,
-      List<Specialisation> specialization_list,
-      List<Minor> minor_list,
-      List<Major> major_list,
-      Map<String, List> requirement_map) {
+      List<Specialisation> specializationList,
+      List<Minor> minorList,
+      List<Major> majorList,
+      Map<String, List> requirementMap) {
     setDescription(description);
-    setSpecializationList(specialization_list);
-    setMinorList(minor_list);
-    setMajorList(major_list);
-    setRequirementMap(requirement_map);
+    setSpecializationList(specializationList);
+    setMinorList(minorList);
+    setMajorList(majorList);
+    setRequirementMap(requirementMap);
   }
 }

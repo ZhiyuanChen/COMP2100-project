@@ -10,7 +10,7 @@ abstract class Subject {
   private int unit;
   private int year;
   private String description;
-  private Map<String, List> requirement_map;
+  private Map<String, List> requirementMap;
 
   Subject(String code, String name, Career career, int unit, int year) {
     this.code = code;
@@ -69,15 +69,15 @@ abstract class Subject {
   }
 
   public Map<String, List> getRequirementMap() {
-    return requirement_map;
+    return requirementMap;
   }
 
-  public void setRequirementMap(Map<String, List> requirement_map) {
-    this.requirement_map = requirement_map;
+  public void setRequirementMap(Map<String, List> requirementMap) {
+    this.requirementMap = requirementMap;
   }
 
-  public void update(String description, Map<String, List> requirement_map) {
+  public void update(String description, Map<String, List> requirementMap) {
     setDescription(description);
-    setRequirementMap(requirement_map);
+    setRequirementMap(requirementMap);
   }
 }

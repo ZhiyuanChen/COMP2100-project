@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ANU {
-  private List college_list;
+  private List collegeList;
   public ANU() {
-    this.college_list = new ArrayList<>();
+    this.collegeList = new ArrayList<>();
     this.init();
   }
   private void init() {

@@ -10,7 +10,7 @@ public class Course {
   private int unit;
   private int year;
   private String description;
-  private List<Course> prerequisite_list;
+  private List<Course> prerequisiteList;
 
   public Course(String code, String name, Career career, Session session, int unit, int year) {
     this.code = code;
@@ -84,17 +84,17 @@ public class Course {
     this.description = description;
   }
 
-  public List<Course> getPrerequisite_list() {
-    return prerequisite_list;
+  public List<Course> getPrerequisiteList() {
+    return prerequisiteList;
   }
 
-  public void setPrerequisite_list(List<Course> prerequisite_list) {
-    this.prerequisite_list = prerequisite_list;
+  public void setPrerequisiteList(List<Course> prerequisiteList) {
+    this.prerequisiteList = prerequisiteList;
   }
 
-  public void update(String description, List<Course> prerequisite_list) {
+  public void update(String description, List<Course> prerequisiteList) {
     setDescription(description);
-    setPrerequisite_list(prerequisite_list);
+    setPrerequisiteList(prerequisiteList);
   }
 }
 
