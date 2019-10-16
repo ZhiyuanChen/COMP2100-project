@@ -60,6 +60,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="4"
+                android:singleLine="true"
+                android:ems="10"
+                android:completionThreshold="1"
                 android:hint="Enter course taken" />
 
             <Button
