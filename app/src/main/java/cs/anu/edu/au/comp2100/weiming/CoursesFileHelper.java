@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 
 //Hint by github.com/BradTeachesCode/TodoList
-public class CoursesFileHelper {
+public class CoursesFileHelper {//save courses in the locality
 
     public static final String COURSE_TAKEN = "courseTakenInfo.dat";
     public static final String COURSE_SELECTED = "courseSelected.dat";

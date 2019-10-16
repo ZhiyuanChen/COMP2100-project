@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#22F0DF20"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/FAQ"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:fontFamily="sans-serif-medium"
+        android:lineSpacingExtra="10sp"
+        android:text="    FAQ"
+        android:textAllCaps="false"
+        android:textColor="@color/slide4"
+        android:textSize="30sp"
+
+        android:typeface="normal" />
+
+
+    <TextView
+        android:id="@+id/Q1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text="Q1 How can I delete a course from the timetable? "
+        android:textColor="#152368"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="83dp"
+        android:text="There are two ways. The first one is to go to the menu, select the manage function  and then choose and right click the course in an enrolled coourse list. The second way is to clong press the course in the timetable shown inthe home page." />
+
+    <TextView
+        android:id="@+id/Q2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text="Q2 I don't like the default timetable style. Can I design my own style of the timetable?"
+        android:textColor="#152368"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text='Yes! You can change the color and  other aspects of the timetable by clicking into "settings" in the menu.' />
+
+    <TextView
+        android:id="@+id/Q3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text="Q3 Where can I choose my courses/tutorials?"
+        android:textColor="#152368"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        android:text='Select the "manage" in the menu, then you will see a long list of available ANU courses. Click the desired course for adding. After you successfully enrolled in a course, a list of available tutorials(with start time, location) will be presented under the enrolled course. Just choose and add what you want!' />
+
+    <TextView
+        android:id="@+id/Q4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text="Q4 I am not an ANU student, can I use this app?"
+        android:textColor="#152368"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Yes! By clicking the add button in the calendar page, you can input your course name, start time and other informations of this new-added course." />
+
+</LinearLayout>

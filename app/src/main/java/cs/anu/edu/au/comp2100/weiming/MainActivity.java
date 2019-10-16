@@ -41,7 +41,7 @@ import java.util.Locale;
 
 import petrov.kristiyan.colorpicker.ColorPicker;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity //home page
         implements NavigationView.OnNavigationItemSelectedListener,
         MonthLoader.MonthChangeListener,
         WeekView.EventClickListener,
