@@ -30,7 +30,7 @@ public class CoursesFileHelper {
 
 
     public static ArrayList<String> readData(Context context, String fileName){
-        ArrayList<String> itemsList = null;
+        ArrayList<String> itemsList = new ArrayList<>();
         try {
             FileInputStream fis = context.openFileInput(fileName);
             ObjectInputStream ois = new ObjectInputStream(fis);
